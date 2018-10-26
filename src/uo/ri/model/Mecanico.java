@@ -6,16 +6,18 @@ import java.util.Set;
 
 public class Mecanico {
 
-	private String dni;
-	private String apellidos;
-	private String nombre;
+    private String dni;
+    private String apellidos;
+    private String nombre;
 
     //Atributos accidentales
     private Set<Averia> averias = new HashSet<>();
+    private Set<Intervencion> intervenciones = new HashSet<>();
 
-	public Mecanico(String dni) {
-		this.dni = dni;
-	}
+
+    public Mecanico(String dni) {
+        this.dni = dni;
+    }
 
     public Mecanico(String dni, String nombre, String apellidos) {
 
@@ -24,44 +26,53 @@ public class Mecanico {
         this.apellidos = apellidos;
     }
 
+    protected Set<Intervencion> _getIntervenciones() {
+        return intervenciones;
+    }
+
+    public Set<Intervencion> getIntervenciones() {
+        return new HashSet<>(intervenciones);
+    }
+
     protected Set<Averia> _getAverias() {
         return averias;
     }
-    public Set<Averia> getAverias() {
+
+    public Set<Averia> getAsignadas() {
         return new HashSet<>(averias);
     }
 
     public String getDni() {
-		return dni;
-	}
+        return dni;
+    }
 
-	public String getApellidos() {
-		return apellidos;
-	}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Mecanico mecanico = (Mecanico) o;
-		return Objects.equals(dni, mecanico.dni);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mecanico mecanico = (Mecanico) o;
+        return Objects.equals(dni, mecanico.dni);
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(dni);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(dni);
+    }
 
-	@Override
-	public String toString() {
-		return "Mecanico{" +
-				"dni='" + dni + '\'' +
-				", apellidos='" + apellidos + '\'' +
-				", nombre='" + nombre + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Mecanico{" +
+                "dni='" + dni + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

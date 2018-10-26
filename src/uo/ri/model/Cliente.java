@@ -16,7 +16,8 @@ public class Cliente {
     private Address address;
 
     //Atributos accidentales
-    private Set<Vehiculo> veiVehiculos = new HashSet<>();
+    private Set<Vehiculo> vehiculos = new HashSet<>();
+    private Set<MedioPago> mediosPago = new HashSet<>();
 
     public Cliente(String dni) {
         this.dni = dni;
@@ -29,12 +30,20 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
+    protected Set<MedioPago> _getMediosPago() {
+        return mediosPago;
+    }
+
+    public Set<MedioPago> getMediosPago() {
+        return new HashSet<>(mediosPago);
+    }
+
     public Set<Vehiculo> getVehiculos() {
-        return new HashSet<>(veiVehiculos);
+        return new HashSet<>(vehiculos);
     }
 
     protected Set<Vehiculo> _getVehiculos() {
-        return veiVehiculos;
+        return vehiculos;
     }
 
     public String getDni() {

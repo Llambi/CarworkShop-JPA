@@ -24,7 +24,6 @@ import uo.ri.model.Vehiculo;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
-
 public class FacturaTest {
 	
 	private Mecanico mecanico;
@@ -75,7 +74,7 @@ public class FacturaTest {
 	 * La averia se añade por asociación  
 	 */
 	@Test
-	public void testImporteFacturaAddAveria() {
+	public void testImporteFacturaAddAveria() throws uo.ri.util.exception.IllegalStateException {
 		Factura factura = new Factura( 0L ); // 0L es el numero de factura
 		factura.addAveria(averia);
 		
@@ -100,7 +99,7 @@ public class FacturaTest {
 	 * Dos averias añadidas a la factura por asociación
 	 */
 	@Test
-	public void testImporteFacturaAddDosAverias() {
+	public void testImporteFacturaAddDosAverias() throws uo.ri.util.exception.IllegalStateException {
 		Factura factura = new Factura( 0L );
 		factura.addAveria( averia );
 		factura.addAveria( crearOtraAveria() );
@@ -152,7 +151,7 @@ public class FacturaTest {
 	 * añadirla por asociación
 	 */
 	@Test
-	public void testAveriasFacturadasAddAveria() {
+	public void testAveriasFacturadasAddAveria() throws uo.ri.util.exception.IllegalStateException {
 		new Factura( 0L ).addAveria( averia );
 		
 		assertTrue( averia.getStatus() == AveriaStatus.FACTURADA );
@@ -162,7 +161,7 @@ public class FacturaTest {
 	 * Varias averias al añadirlas a una factura cambian su estado a FACTURADA
 	 */
 	@Test
-	public void testDosAveriasFacturadasAddAveria() {
+	public void testDosAveriasFacturadasAddAveria() throws uo.ri.util.exception.IllegalStateException {
 		Averia otraAveria = crearOtraAveria();
 		
 		Factura f = new Factura( 0L );

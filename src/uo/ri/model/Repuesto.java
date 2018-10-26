@@ -1,15 +1,32 @@
 package uo.ri.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Repuesto {
 
     private String codigo;
     private String descripcion;
     private double precio;
+    private Set<Sustitucion> sustituciones = new HashSet<>();
 
     public Repuesto(String codigo) {
         this.codigo = codigo;
+    }
+
+    public Repuesto(String codigo, String descripcion, double precio) {
+        this(codigo);
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
+    protected Set<Sustitucion> _getSustituciones() {
+        return sustituciones;
+    }
+
+    public Set<Sustitucion> getSustituciones() {
+        return new HashSet<>(sustituciones);
     }
 
     public String getCodigo() {

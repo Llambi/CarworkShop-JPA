@@ -17,15 +17,33 @@ public class Averia {
     //Atributos accidentales
     private Vehiculo vehiculo;
     private Mecanico mecanico;
+    private Factura factura;
+    private Set<Intervencion> intervenciones = new HashSet<>();
 
     public Averia(Vehiculo vehiculo) {
-        Association.Averiar.link(vehiculo, this);
         this.fecha = new Date();
+        Association.Averiar.link(vehiculo, this);
     }
 
     public Averia(Vehiculo vehiculo, String descripcion) {
         this(vehiculo);
         this.descripcion = descripcion;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    protected void _setFactura(Factura factura) {
+        this.factura = factura;
+    }
+
+    protected Set<Intervencion> _getIntervenciones() {
+        return intervenciones;
+    }
+
+    public Set<Intervencion> getIntervenciones() {
+        return new HashSet<>(intervenciones);
     }
 
     public Mecanico getMecanico() {
@@ -49,7 +67,7 @@ public class Averia {
     }
 
     public Date getFecha() {
-        return fecha;
+        return new Date(fecha.getTime());
     }
 
     public double getImporte() {
@@ -70,7 +88,7 @@ public class Averia {
 
     @Override
     public int hashCode() {
-        return Objects.hash(vehiculo);
+        return Objects.hash(fecha, vehiculo);
     }
 
     @Override
@@ -94,9 +112,15 @@ public class Averia {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void assignTo(Mecanico mecanico) {
-        // Solo se puede asignar una averia que está ABIERTA
-        // linkado de averia y mecanico
-        // la averia pasa a ASIGNADA
+        if (getStatus() != AveriaStatus.ABIERTA) {
+            throw new IllegalStateException("La averia no esta abierta.");
+        }
+        if (getMecanico() != null) {
+            throw new IllegalStateException("La averia esta enlazada con otro mecanico.");
+        }
+        Association.Asignar.link(mecanico, this);
+        status = AveriaStatus.ASIGNADA;
+
     }
 
     /**
@@ -109,6 +133,19 @@ public class Averia {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void markAsFinished() {
+        if (getStatus() != AveriaStatus.ASIGNADA) {
+            throw new IllegalStateException("La averia no esta en estado asignada.");
+        }
+        if (getMecanico() == null) {
+            throw new IllegalStateException("La averia no tiene enlazado un mecanico.");
+        }
+        importe = 0.0;
+        for (Intervencion inter : intervenciones) {
+            importe += inter.getImporte();
+        }
+        Association.Asignar.unlink(getMecanico(), this);
+        this.status = AveriaStatus.TERMINADA;
+
     }
 
     /**
@@ -121,8 +158,11 @@ public class Averia {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void reopen() {
-        // Se verifica que está en estado TERMINADA
-        // Se pasa la averia a ABIERTA
+        if (getStatus() != AveriaStatus.TERMINADA) {
+            throw new IllegalStateException("La averia no esta en estado terminada.");
+        }
+        this.status = AveriaStatus.ABIERTA;
+
     }
 
     /**
@@ -135,6 +175,14 @@ public class Averia {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void markBackToFinished() {
+        if (getStatus() != AveriaStatus.FACTURADA) {
+            throw new IllegalStateException("La averia no esta en estado facturada.");
+        }
+        if (getFactura() == null) {
+            throw new IllegalStateException("La averia no esta enlazada con una factura.");
+        }
+        this.status = AveriaStatus.TERMINADA;
+
     }
 
     /**
@@ -147,6 +195,14 @@ public class Averia {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void markAsInvoiced() {
+        if (getStatus() != AveriaStatus.TERMINADA) {
+            throw new IllegalStateException("La averia no esta en estado terminada.");
+        }
+        if (getFactura() == null) {
+            throw new IllegalStateException("La averia no esta en estado facturada.");
+        }
+        this.status = AveriaStatus.FACTURADA;
+
     }
 
     /**
@@ -157,6 +213,11 @@ public class Averia {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void desassign() {
+        if (getStatus() != AveriaStatus.ASIGNADA) {
+            throw new IllegalStateException("La averia no esta en estado asignada.");
+        }
+        Association.Asignar.unlink(getMecanico(), this);
+        this.status = AveriaStatus.ABIERTA;
     }
 
 }

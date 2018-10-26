@@ -32,7 +32,7 @@ public class FacturarTest {
 	private Factura factura;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws uo.ri.util.exception.IllegalStateException {
 		cliente = new Cliente("dni-cliente", "nombre", "apellidos");
 		vehiculo = new Vehiculo("1234 GJI", "seat", "ibiza");
 		Association.Poseer.link(cliente, vehiculo );
