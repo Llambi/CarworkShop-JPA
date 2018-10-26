@@ -1,6 +1,7 @@
 package uo.ri.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 import uo.ri.model.types.FacturaStatus;
 
@@ -11,8 +12,12 @@ public class Factura {
 	private double importe;
 	private double iva;
 	private FacturaStatus status = FacturaStatus.SIN_ABONAR;
-	
-	/**
+
+    public Factura(Long numero) {
+        this.numero = numero;
+    }
+
+    /**
 	 * Añade la averia a la factura y actualiza el importe e iva de la factura
 	 * @param averia
 	 * @see Diagramas de estados en el enunciado de referencia
@@ -60,4 +65,47 @@ public class Factura {
 	public void settle() {
 	}
 
+    public Long getNumero() {
+        return numero;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public double getImporte() {
+        return importe;
+    }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public FacturaStatus getStatus() {
+        return status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Factura factura = (Factura) o;
+        return Objects.equals(numero, factura.numero);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numero);
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "numero=" + numero +
+                ", fecha=" + fecha +
+                ", importe=" + importe +
+                ", iva=" + iva +
+                ", status=" + status +
+                '}';
+    }
 }
