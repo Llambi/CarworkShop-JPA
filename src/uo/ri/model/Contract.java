@@ -27,6 +27,7 @@ public class Contract {
         this.startDate = new Date(Dates.firstDayOfMonth(startDate).getTime());
         this.baseSalaryPerYear = baseSalary;
         this.compensation = 0D;
+        this.status = ContractStatus.ACTIVE;
         Association.Contratar.link(mecanico, this);
     }
 

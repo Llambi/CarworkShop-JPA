@@ -1,5 +1,8 @@
 package uo.ri.model;
 
+import alb.util.date.Dates;
+import uo.ri.model.types.ContractStatus;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -83,5 +86,23 @@ public class Mecanico {
                 ", apellidos='" + apellidos + '\'' +
                 ", nombre='" + nombre + '\'' +
                 '}';
+    }
+
+    /**
+     * Metodo que devuelve el contrato activo del mecanico con fecha de inicio posterior.
+     *
+     * @return Contract seleccionado o null si no hay ninguno activo
+     */
+    public Contract getActiveContract() {
+        Contract selectedContract = null;
+
+        for (Contract contract : contracts) {
+            if (selectedContract == null && contract.getStatus().equals(ContractStatus.ACTIVE)) {
+                selectedContract = contract;
+            } else if (contract.getStatus().equals(ContractStatus.ACTIVE) && Dates.isAfter(contract.getStartDate(), selectedContract.getStartDate())) {
+                selectedContract = contract;
+            }
+        }
+        return selectedContract;
     }
 }
