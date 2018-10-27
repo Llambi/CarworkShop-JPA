@@ -13,6 +13,7 @@ public class Mecanico {
     //Atributos accidentales
     private Set<Averia> averias = new HashSet<>();
     private Set<Intervencion> intervenciones = new HashSet<>();
+    private Set<Contract> contracts = new HashSet<>();
 
 
     public Mecanico(String dni) {
@@ -26,6 +27,14 @@ public class Mecanico {
         this.apellidos = apellidos;
     }
 
+    protected Set<Contract> _getContracts() {
+        return contracts;
+    }
+
+    public Set<Contract> getContracts() {
+        return new HashSet<>(contracts);
+    }
+
     protected Set<Intervencion> _getIntervenciones() {
         return intervenciones;
     }
@@ -34,7 +43,7 @@ public class Mecanico {
         return new HashSet<>(intervenciones);
     }
 
-    protected Set<Averia> _getAverias() {
+    protected Set<Averia> _getAsignadas() {
         return averias;
     }
 
