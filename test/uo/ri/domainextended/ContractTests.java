@@ -124,7 +124,8 @@ public class ContractTests {
 		endDate = Dates.subDays(endDate, 10);
 		
 		contract.markAsFinished(endDate);
-		
+
+		assertEquals(0.0, contract.getCompensation(), 0.01);
 		assertTrue( contract.getCompensation() == 0.0 );
 		assertTrue( contract.isFinished() );
 	}
@@ -149,7 +150,6 @@ public class ContractTests {
 			* contract.getContractType().getCompensationDays();
 		
 		contract.markAsFinished(endDate);
-		
 		assertEquals( expected, contract.getCompensation(), 0.01 );
 		assertTrue( contract.isFinished() );
 	}

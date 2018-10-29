@@ -6,16 +6,21 @@ import java.util.Set;
 public class ContractType {
     //TODO: hash, equals, toString
     private String name;
-    private Double compensationDays;
+    private int compensationDays;
 
     //Atributos accidentales
     private Set<Contract> contracts = new HashSet<>();
+
+    public ContractType(String name, int compensationDays) {
+        this.name = name;
+        this.compensationDays = compensationDays;
+    }
 
     public String getName() {
         return name;
     }
 
-    public Double getCompensationDays() {
+    public int getCompensationDays() {
         return compensationDays;
     }
 

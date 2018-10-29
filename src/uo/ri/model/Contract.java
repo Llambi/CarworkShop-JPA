@@ -18,11 +18,12 @@ public class Contract {
     //Atributos accidentales
     private Mecanico mecanico;
     private ContractType contractType;
+    private ContractCategory contractCategory;
     private Set<Payroll> payrolls = new HashSet<>();
 
     public Contract(Mecanico mecanico, Date startDate, double baseSalary) {
         if (baseSalary <= 0) {
-            throw new IllegalStateException("el salario base debe ser positivo.");
+            throw new IllegalArgumentException("el salario base debe ser positivo.");
         }
         this.startDate = new Date(Dates.firstDayOfMonth(startDate).getTime());
         this.baseSalaryPerYear = baseSalary;
@@ -33,14 +34,21 @@ public class Contract {
 
     public Contract(Mecanico mecanico, Date startDate, double baseSalary, ContractType contractType) {
         this(mecanico, startDate, baseSalary);
-        Association.Tipificar.link(contractType, this);
+        Association.Typefy.link(this, contractType);
     }
 
-    public Contract(Mecanico mechanic, Date today, Date ldom, int baseSalary) {
-        this(mechanic, today, baseSalary);
-        this.endDate = new Date(Dates.lastDayOfMonth(endDate).getTime());
+    public Contract(Mecanico mechanic, Date startDate, Date endDate, double baseSalary) {
+        this(mechanic, startDate, baseSalary);
+        this.endDate = endDate == null ? null : new Date(Dates.lastDayOfMonth(endDate).getTime());
     }
 
+    protected void _setContractCategory(ContractCategory contractCategory) {
+        this.contractCategory = contractCategory;
+    }
+
+    public ContractCategory getContractCategory() {
+        return contractCategory;
+    }
 
     protected void _setContractType(ContractType contractType) {
         this.contractType = contractType;
@@ -106,9 +114,21 @@ public class Contract {
         if (this.status.equals(ContractStatus.FINISHED)) {
             throw new IllegalStateException("Un contrato ya finalizado no se puede volver a finalizar.");
         }
+        this.status = ContractStatus.FINISHED;
+
         this.endDate = Dates.lastDayOfMonth(endDate);
 
-        this.compensation = this.baseSalaryPerYear / 365 * getContractType().getCompensationDays();
+        double months = _monthsWorked();
+        if (months >= 12D) {
+            this.compensation = this.baseSalaryPerYear / 365 * getContractType().getCompensationDays();
+        }
+
+    }
+
+    protected double _monthsWorked() {
+        if (this.status.equals(ContractStatus.FINISHED))
+            return Dates.diffDays(this.endDate, this.startDate) / 30D;
+        return 0D;
     }
 
     /**
@@ -135,9 +155,17 @@ public class Contract {
 
     /**
      * Metodo que devuelve el porcentaje de irpf correcto.
-     * @return
+     *
+     * @return POrcentaje de irpf segun el tramo de sueldo en el que te encuentres.
      */
     public double getIrpfPercent() {
-        return 0;
+        double percent;
+        if (this.baseSalaryPerYear < 12000) percent = 0;
+        else if (this.baseSalaryPerYear < 30000) percent = 0.1;
+        else if (this.baseSalaryPerYear < 40000) percent = 0.15;
+        else if (this.baseSalaryPerYear < 50000) percent = 0.20;
+        else if (this.baseSalaryPerYear < 60000) percent = 0.30;
+        else percent = 0.4;
+        return percent;
     }
 }

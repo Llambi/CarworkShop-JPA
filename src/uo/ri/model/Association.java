@@ -149,13 +149,39 @@ public class Association {
         }
     }
 
-    public static class Tipificar {
-        public static void link(ContractType contractType, Contract contract) {
+    public static class Typefy {
+        public static void link(Contract contract, ContractType contractType) {
             contract._setContractType(contractType);
             contractType._getContracts().add(contract);
-        }public static void unlink(ContractType contractType, Contract contract) {
+        }
+
+        public static void unlink(ContractType contractType, Contract contract) {
             contractType._getContracts().remove(contract);
             contract._setContractType(null);
+        }
+    }
+
+    public static class Nominalizar {
+        public static void link(Contract contract, Payroll payroll) {
+            payroll._setContract(contract);
+            contract._getPayrolls().add(payroll);
+        }
+
+        public static void unlink(Contract contract, Payroll payroll) {
+            contract._getPayrolls().remove(payroll);
+            payroll._setContract(null);
+        }
+    }
+
+    public static class Categorize {
+        public static void link(Contract contract, ContractCategory category) {
+            contract._setContractCategory(category);
+            category._getContracts().add(contract);
+        }
+
+        public static void unlink(Contract contract, ContractCategory category) {
+            category._getContracts().remove(contract);
+            contract._setContractCategory(null);
         }
     }
 }
