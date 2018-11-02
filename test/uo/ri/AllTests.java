@@ -6,11 +6,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-	
-        uo.ri.associations.AllTests.class,
-        uo.ri.domain.AllTests.class,
-        uo.ri.domainextended.AllTests.class
-	uo.ri.persistence.PersistenceTest.class
+@SuiteClasses({
+	uo.ri.associations.AllTests.class,
+	uo.ri.domain.AllTests.class,
+	uo.ri.persistence.PersistenceTest.class,
+	uo.ri.domainextended.AllTests.class
 })
-public class AllTests {
-}
+public class AllTests { }
