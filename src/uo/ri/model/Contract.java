@@ -118,14 +118,13 @@ public class Contract {
 
         this.endDate = Dates.lastDayOfMonth(endDate);
 
-        double months = _monthsWorked();
-        if (months >= 12D) {
+        if (monthsWorked() >= 12) {
             this.compensation = this.baseSalaryPerYear / 365 * getContractType().getCompensationDays();
         }
 
     }
 
-    protected double _monthsWorked() {
+    private double monthsWorked() {
         if (this.status.equals(ContractStatus.FINISHED))
             return Dates.diffDays(this.endDate, this.startDate) / 30D;
         return 0D;
@@ -156,7 +155,7 @@ public class Contract {
     /**
      * Metodo que devuelve el porcentaje de irpf correcto.
      *
-     * @return POrcentaje de irpf segun el tramo de sueldo en el que te encuentres.
+     * @return Porcentaje de irpf segun el tramo de sueldo en el que te encuentres.
      */
     public double getIrpfPercent() {
         double percent;
