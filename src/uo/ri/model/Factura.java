@@ -4,6 +4,8 @@ import alb.util.math.Round;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,6 +16,7 @@ public class Factura {
     private Date fecha;
     private double importe;
     private double iva;
+//    @Enumerated(EnumType.STRING)
     private FacturaStatus status = FacturaStatus.SIN_ABONAR;
 
     //Atributos accidentales

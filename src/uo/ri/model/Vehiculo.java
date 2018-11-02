@@ -1,22 +1,35 @@
 package uo.ri.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.Set;
 
+@Entity
+@Table(name = "TVehiculos")
 public class Vehiculo {
 
     private String marca;
+    @Column(unique = true)
     private String matricula;
     private String modelo;
+    @Column(name = "num_averia")
+    private int numAverias = 0;
 
     //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
     private Cliente cliente;
+    @Transient
     private TipoVehiculo tipoVehiculo;
+    @Transient
     private Set<Averia> averias = new HashSet<>();
 
-    private int numAverias = 0;
+    public Vehiculo() {
+    }
 
     public Vehiculo(String matricula) {
         this.matricula = matricula;

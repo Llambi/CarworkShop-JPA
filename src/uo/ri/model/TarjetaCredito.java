@@ -2,14 +2,27 @@ package uo.ri.model;
 
 import uo.ri.util.Check;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class TarjetaCredito extends MedioPago {
 
     private String numero;
     private String tipo;
     private Date validez;
+
+    //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public TarjetaCredito() {
+    }
 
     public TarjetaCredito(String numero) {
         this.numero = numero;

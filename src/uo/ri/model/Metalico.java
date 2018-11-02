@@ -1,6 +1,17 @@
 package uo.ri.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Metalico extends MedioPago {
+
+    //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public Metalico() {
+    }
 
     public Metalico(Cliente cliente) {
         Association.Pagar.link(cliente, this);

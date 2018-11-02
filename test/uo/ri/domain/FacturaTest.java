@@ -24,6 +24,7 @@ import uo.ri.model.Vehiculo;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
+
 public class FacturaTest {
 	
 	private Mecanico mecanico;
@@ -57,7 +58,7 @@ public class FacturaTest {
 	}
 	
 	/**
-	 * Cálculo del importe de factura con una avería de 260€ + IVA 21%
+	 * Calculo del importe de factura con una avería de 260€ + IVA 21%
 	 * La averia se añade en el constructor  
 	 */
 	@Test
@@ -70,11 +71,11 @@ public class FacturaTest {
 	}
 
 	/**
-	 * Cálculo del importe de factura con una avería de 260€ + IVA 21%
+	 * Calculo del importe de factura con una avería de 260€ + IVA 21%
 	 * La averia se añade por asociación  
 	 */
 	@Test
-	public void testImporteFacturaAddAveria() throws uo.ri.util.exception.IllegalStateException {
+	public void testImporteFacturaAddAveria() {
 		Factura factura = new Factura( 0L ); // 0L es el numero de factura
 		factura.addAveria(averia);
 		
@@ -86,7 +87,7 @@ public class FacturaTest {
 	 */
 	@Test
 	public void testImporteFacturadDosAverias() {
-		List<Averia> averias = new ArrayList<>();
+		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
 		averias.add( crearOtraAveria() );
 		Factura factura = new Factura( 0L, averias );
@@ -99,7 +100,7 @@ public class FacturaTest {
 	 * Dos averias añadidas a la factura por asociación
 	 */
 	@Test
-	public void testImporteFacturaAddDosAverias() throws uo.ri.util.exception.IllegalStateException {
+	public void testImporteFacturaAddDosAverias() {
 		Factura factura = new Factura( 0L );
 		factura.addAveria( averia );
 		factura.addAveria( crearOtraAveria() );
@@ -112,7 +113,7 @@ public class FacturaTest {
 	 */
 	@Test
 	public void testFacturaCreadaSinAbonar() {
-		List<Averia> averias = new ArrayList<>();
+		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
 		Factura factura = new Factura( 0L, averias );
 		
@@ -127,7 +128,7 @@ public class FacturaTest {
 	public void testImporteFacturaAntesDeJulio() {
 		Date JUNE_6_2012 = Dates.fromString("15/6/2012");
 		
-		List<Averia> averias = new ArrayList<>();
+		List<Averia> averias = new ArrayList<Averia>();
 		averias.add( averia );
 		Factura factura = new Factura( 0L, JUNE_6_2012, averias ); // iva 18%
 		
@@ -151,7 +152,7 @@ public class FacturaTest {
 	 * añadirla por asociación
 	 */
 	@Test
-	public void testAveriasFacturadasAddAveria() throws uo.ri.util.exception.IllegalStateException {
+	public void testAveriasFacturadasAddAveria() {
 		new Factura( 0L ).addAveria( averia );
 		
 		assertTrue( averia.getStatus() == AveriaStatus.FACTURADA );
@@ -161,7 +162,7 @@ public class FacturaTest {
 	 * Varias averias al añadirlas a una factura cambian su estado a FACTURADA
 	 */
 	@Test
-	public void testDosAveriasFacturadasAddAveria() throws uo.ri.util.exception.IllegalStateException {
+	public void testDosAveriasFacturadasAddAveria() {
 		Averia otraAveria = crearOtraAveria();
 		
 		Factura f = new Factura( 0L );

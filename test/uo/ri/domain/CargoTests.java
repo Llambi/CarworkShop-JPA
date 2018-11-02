@@ -1,13 +1,19 @@
 package uo.ri.domain;
 
-import alb.util.date.Dates;
-import org.junit.Before;
-import org.junit.Test;
-import uo.ri.model.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+
+import alb.util.date.Dates;
+import uo.ri.model.Bono;
+import uo.ri.model.Cargo;
+import uo.ri.model.Cliente;
+import uo.ri.model.Factura;
+import uo.ri.model.Metalico;
+import uo.ri.model.TarjetaCredito;
 
 public class CargoTests {
 
