@@ -37,7 +37,7 @@ public class IntervenirTest {
 
 		mecanico = new Mecanico("dni-mecanico", "nombre", "apellidos");
 	
-		intervencion = new Intervencion(averia, mecanico);
+		intervencion = new Intervencion(mecanico, averia);
 		intervencion.setMinutos(60);
 	}
 	
