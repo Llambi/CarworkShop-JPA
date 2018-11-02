@@ -4,24 +4,35 @@ import alb.util.math.Round;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Entity
+@Table(name = "TFacturas")
 public class Factura {
 
+    @Column(unique = true)
     private Long numero;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     private double importe;
     private double iva;
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private FacturaStatus status = FacturaStatus.SIN_ABONAR;
 
     //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "factura")
     private Set<Cargo> cargos = new HashSet<>();
+    @OneToMany(mappedBy = "factura")
     private Set<Averia> averias = new HashSet<>();
+
+    public Factura() {
+    }
 
     public Factura(Long numero) {
         this.numero = numero;

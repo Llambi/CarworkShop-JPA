@@ -1,12 +1,27 @@
 package uo.ri.model;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "TSustituciones")
 public class Sustitucion {
-	
+
+    @ManyToOne
 	private Repuesto repuesto;
+    @ManyToOne
 	private Intervencion intervencion;
 	private int cantidad;
 
-	public Sustitucion(Repuesto repuesto, Intervencion intervencion, int cantidad) {
+    //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public Sustitucion() {
+    }
+
+    public Sustitucion(Repuesto repuesto, Intervencion intervencion, int cantidad) {
 	    if(cantidad<=0){
 	        throw new IllegalArgumentException("Las sustituciones deben tener al menos un repuesto.");
         }
@@ -34,10 +49,30 @@ public class Sustitucion {
         return intervencion;
     }
 
-
     public int getCantidad() {
         return cantidad;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sustitucion that = (Sustitucion) o;
+        return Objects.equals(repuesto, that.repuesto) &&
+                Objects.equals(intervencion, that.intervencion);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(repuesto, intervencion);
+    }
+
+    @Override
+    public String toString() {
+        return "Sustitucion{" +
+                "repuesto=" + repuesto +
+                ", intervencion=" + intervencion +
+                ", cantidad=" + cantidad +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "TMecanicos")
 public class Mecanico {
     @Column(unique = true)
     private String dni;

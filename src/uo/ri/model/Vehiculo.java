@@ -23,9 +23,9 @@ public class Vehiculo {
     private Long id;
     @ManyToOne
     private Cliente cliente;
-    @Transient
+    @ManyToOne
     private TipoVehiculo tipoVehiculo;
-    @Transient
+    @OneToMany(mappedBy = "vehiculo")
     private Set<Averia> averias = new HashSet<>();
 
     public Vehiculo() {
@@ -81,6 +81,10 @@ public class Vehiculo {
     public int getNumAverias() {
         this.numAverias = averias.size();
         return numAverias;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

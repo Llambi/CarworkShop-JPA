@@ -19,7 +19,7 @@ public class Intervencion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Transient
+    @OneToMany(mappedBy = "intervencion")
     private Set<Sustitucion> sustituciones = new HashSet<>();
 
 

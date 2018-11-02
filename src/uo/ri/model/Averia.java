@@ -28,7 +28,7 @@ public class Averia {
     private Vehiculo vehiculo;
     @ManyToOne
     private Mecanico mecanico;
-    @Transient
+    @ManyToOne
     private Factura factura;
     @OneToMany(mappedBy = "averia")
     private Set<Intervencion> intervenciones = new HashSet<>();

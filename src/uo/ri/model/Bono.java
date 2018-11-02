@@ -1,14 +1,12 @@
 package uo.ri.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "TBonos")
 public class Bono extends MedioPago {
-
+    @Column(unique = true)
     private String codigo;
     private double disponible = 0.0;
     private String descripcion;
@@ -32,6 +30,11 @@ public class Bono extends MedioPago {
         this.descripcion = descripcion;
     }
 
+    public Bono(String codigo, double disponible) {
+        this(codigo);
+        this.disponible = disponible;
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -44,6 +47,10 @@ public class Bono extends MedioPago {
         return descripcion;
     }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     @Override
     public void pagar(double cantidad) {
         if (cantidad > disponible)
@@ -54,6 +61,7 @@ public class Bono extends MedioPago {
     }
 
     @Override
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

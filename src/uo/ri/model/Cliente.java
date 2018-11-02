@@ -24,7 +24,7 @@ public class Cliente {
     private Long id;
     @OneToMany(mappedBy = "cliente")
     private Set<Vehiculo> vehiculos = new HashSet<>();
-    @Transient
+    @OneToMany(mappedBy = "cliente")
     private Set<MedioPago> mediosPago = new HashSet<>();
 
     public Cliente() {
@@ -79,6 +79,14 @@ public class Cliente {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
