@@ -110,7 +110,7 @@ public class Payroll {
         return Period.between(
                 this.contract.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                 this.date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
-                .getMonths();
+                .getYears();
     }
 
 }
