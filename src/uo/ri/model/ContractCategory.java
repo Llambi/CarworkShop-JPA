@@ -1,16 +1,27 @@
 package uo.ri.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "TCategoriasContrato")
 public class ContractCategory {
-    //TODO: hash, equals, toString
+    @Column(unique = true)
     private String name;
     private double trienniumSalary;
     private double productivityPlus;
 
     //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "contractCategory")
     private Set<Contract> contracts = new HashSet<>();
+
+    public ContractCategory() {
+    }
 
     public ContractCategory(String name) {
         this.name = name;
@@ -40,5 +51,27 @@ public class ContractCategory {
 
     public double getProductivityPlus() {
         return productivityPlus;
+    }
+
+    @Override
+    public String toString() {
+        return "ContractCategory{" +
+                "name='" + name + '\'' +
+                ", trienniumSalary=" + trienniumSalary +
+                ", productivityPlus=" + productivityPlus +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContractCategory that = (ContractCategory) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

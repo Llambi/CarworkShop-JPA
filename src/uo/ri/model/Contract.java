@@ -3,23 +3,39 @@ package uo.ri.model;
 import alb.util.date.Dates;
 import uo.ri.model.types.ContractStatus;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "TContratos", uniqueConstraints = {@UniqueConstraint(columnNames = "STARTDATE, MECANICO_ID")})
 public class Contract {
-    //TODO: hash, equals, toString
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     private double baseSalaryPerYear;
     private double compensation;
+    @Enumerated(EnumType.STRING)
     private ContractStatus status;
 
     //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
     private Mecanico mecanico;
+    @ManyToOne
     private ContractType contractType;
+    @ManyToOne
     private ContractCategory contractCategory;
+    @OneToMany(mappedBy = "contract")
     private Set<Payroll> payrolls = new HashSet<>();
+
+    public Contract() {
+    }
 
     public Contract(Mecanico mecanico, Date startDate, double baseSalary) {
         if (baseSalary <= 0) {
@@ -98,6 +114,33 @@ public class Contract {
         return mecanico;
     }
 
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", baseSalaryPerYear=" + baseSalaryPerYear +
+                ", compensation=" + compensation +
+                ", status=" + status +
+                ", mecanico=" + mecanico +
+                ", contractType=" + contractType +
+                ", contractCategory=" + contractCategory +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contract contract = (Contract) o;
+        return Objects.equals(startDate, contract.startDate) &&
+                Objects.equals(mecanico, contract.mecanico);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(startDate, mecanico);
+    }
 
     /**
      * Metodo que fija la fecha de finalizacion de un contrato, calcula la compensacion del contrato

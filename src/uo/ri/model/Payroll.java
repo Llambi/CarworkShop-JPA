@@ -5,14 +5,17 @@ import alb.util.date.Dates;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.ContractStatus;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
-
+import java.util.Objects;
+@Entity
+@Table(name = "TNominas", uniqueConstraints = {@UniqueConstraint(columnNames = "FECHA, CONTRATO_ID")})
 public class Payroll {
-    //TODO: hash, equals, toString
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private double baseSalary;
     private double extraSalary;
@@ -22,8 +25,14 @@ public class Payroll {
     private double socialSecurity;
 
     //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
     private Contract contract;
 
+    public Payroll() {
+    }
 
     public Payroll(Contract contract, Date date, double productivityTimes) {
 
@@ -52,6 +61,33 @@ public class Payroll {
         this.irpf = contract.getIrpfPercent() * getGrossTotal();
 
         this.socialSecurity = (this.contract.getBaseSalaryPerYear() / 12) * 0.05;
+    }
+
+    @Override
+    public String toString() {
+        return "Payroll{" +
+                "date=" + date +
+                ", baseSalary=" + baseSalary +
+                ", extraSalary=" + extraSalary +
+                ", productivity=" + productivity +
+                ", trieniums=" + trieniums +
+                ", irpf=" + irpf +
+                ", socialSecurity=" + socialSecurity +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payroll payroll = (Payroll) o;
+        return Objects.equals(date, payroll.date) &&
+                Objects.equals(contract, payroll.contract);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, contract);
     }
 
     protected void _setContract(Contract contract) {
