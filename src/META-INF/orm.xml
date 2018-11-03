@@ -5,7 +5,9 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
         version="2.0">
 
-    <!-- CLASES A MAPEAR-->
+    <!-- CLASES MAPEADAS-->
+
+    <!--AVERIA-->
     <package>uo.ri.model</package>
     <entity class="Averia" name="Averia">
         <table name="TAverias">
@@ -13,7 +15,7 @@
                 <column-name>FECHA</column-name>
                 <column-name>VEHICULO_ID</column-name>
             </unique-constraint>
-        </table>       
+        </table>
         <attributes>
             <id name="id">
                 <generated-value strategy="IDENTITY"/>
@@ -31,41 +33,16 @@
                 <map-key name="averia"/>
             </one-to-many>
         </attributes>
-        
+        <named-query name="Averia.findByIds">
+            <query>select a from Averia a where a.id in (?1)</query>
+        </named-query>
+        <named-query name="Averia.findNoFacturadasByDni">
+            <query>
+                select a
+                from Averia a
+                where a.vehiculo.cliente.dni = ?1
+                and a.status = uo.ri.model.types.AveriaStatus.TERMINADA
+            </query>
+        </named-query>
     </entity>
-
-    <!-- QUERIES -->
-
-        <!-- Averia queries -->
-
-    <named-query name="Averia.findByIds">
-        <query>select a from Averia a where a.id in (?1)</query>
-    </named-query>
-
-    <named-query name="Averia.findNoFacturadasByDni">
-        <query>
-            select a
-            from Averia a
-            where a.vehiculo.cliente.dni = ?1
-            and a.status = uo.ri.model.types.AveriaStatus.TERMINADA
-        </query>
-    </named-query>
-
-<!--    Use this format if your query has
-    numeric comparisons greater than less than, etc.,
-    as the one in this example-->
-
-    <!--<named-query name="findItemsOnSaleByCategoryId">
-        <query>
-            <![CDATA[
-			select i
-				from Item i join i.categories c
-				where c.id = ?2
-					and i.startDate <= ?1
-					and i.endDate >= ?1
-			]]>
-        </query>
-    </named-query>-->
-
-
 </entity-mappings>
