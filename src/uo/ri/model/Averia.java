@@ -9,28 +9,18 @@ import uo.ri.model.types.AveriaStatus;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "TAverias", uniqueConstraints = {@UniqueConstraint(columnNames = "FECHA, VEHICULO_ID")})
 public class Averia {
 
     private String descripcion;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     private double importe = 0.0;
-    @Enumerated(EnumType.STRING)
     private AveriaStatus status = AveriaStatus.ABIERTA;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
     private Vehiculo vehiculo;
-    @ManyToOne
     private Mecanico mecanico;
-    @ManyToOne
     private Factura factura;
-    @OneToMany(mappedBy = "averia")
     private Set<Intervencion> intervenciones = new HashSet<>();
 
     public Averia() {
