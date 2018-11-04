@@ -202,7 +202,7 @@
 
     <!--MEDIO_PAGO-->
     <entity class="MedioPago">
-        <table name="TMediosPago" />
+        <table name="TMediosPago"/>
         <inheritance strategy="JOINED"/>
         <attributes>
             <id name="id">
@@ -317,4 +317,7 @@
             <one-to-many name="averias" mapped-by="vehiculo"/>
         </attributes>
     </entity>
+
+    <!--ADDRESS-->
+    <embeddable class="Address"/>
 </entity-mappings>
