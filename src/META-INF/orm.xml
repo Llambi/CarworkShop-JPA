@@ -319,5 +319,5 @@
     </entity>
 
     <!--ADDRESS-->
-    <embeddable class="Address"/>
+    <embeddable class="uo.ri.model.types.Address"/>
 </entity-mappings>
