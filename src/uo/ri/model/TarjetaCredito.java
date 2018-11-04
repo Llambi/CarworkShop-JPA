@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TTajetaCredito")
+@Table(name = "TTarjetaCredito")
 public class TarjetaCredito extends MedioPago {
 
     @Column(unique = true)
