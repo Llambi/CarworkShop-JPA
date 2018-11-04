@@ -5,19 +5,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "TCategoriasContrato")
 public class ContractCategory {
-    @Column(unique = true)
     private String name;
     private double trienniumSalary;
     private double productivityPlus;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "contractCategory")
     private Set<Contract> contracts = new HashSet<>();
 
     public ContractCategory() {

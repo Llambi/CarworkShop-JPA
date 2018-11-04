@@ -7,10 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "TClientes")
 public class Cliente {
-    @Column(unique = true)
     private String dni;
     private String nombre;
     private String apellidos;
@@ -19,12 +16,8 @@ public class Cliente {
     private Address address;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "cliente")
     private Set<Vehiculo> vehiculos = new HashSet<>();
-    @OneToMany(mappedBy = "cliente")
     private Set<MedioPago> mediosPago = new HashSet<>();
 
     public Cliente() {

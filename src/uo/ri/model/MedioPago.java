@@ -5,22 +5,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "TMediosPago")
 public abstract class MedioPago {
 
     protected double acumulado = 0.0;
 
-    @ManyToOne
-    private Cliente cliente;
-    @OneToMany(mappedBy = "medioPago")
-    private Set<Cargo> cargos = new HashSet<>();
-
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Cliente cliente;
+    private Set<Cargo> cargos = new HashSet<>();
 
     public Cliente getCliente() {
         return cliente;

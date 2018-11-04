@@ -9,29 +9,18 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "TContratos", uniqueConstraints = {@UniqueConstraint(columnNames = "STARTDATE, MECANICO_ID")})
 public class Contract {
-    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     private double baseSalaryPerYear;
     private double compensation;
-    @Enumerated(EnumType.STRING)
     private ContractStatus status;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
     private Mecanico mecanico;
-    @ManyToOne
     private ContractType contractType;
-    @ManyToOne
     private ContractCategory contractCategory;
-    @OneToMany(mappedBy = "contract")
     private Set<Payroll> payrolls = new HashSet<>();
 
     public Contract() {

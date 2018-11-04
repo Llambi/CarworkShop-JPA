@@ -5,18 +5,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "TTiposContrato")
 public class ContractType {
-    @Column(unique = true)
     private String name;
     private int compensationDays;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "contractType")
     private Set<Contract> contracts = new HashSet<>();
 
     public ContractType() {

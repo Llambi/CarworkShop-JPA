@@ -12,10 +12,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
-@Entity
-@Table(name = "TNominas", uniqueConstraints = {@UniqueConstraint(columnNames = "FECHA, CONTRATO_ID")})
 public class Payroll {
-    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private double baseSalary;
     private double extraSalary;
@@ -25,10 +22,7 @@ public class Payroll {
     private double socialSecurity;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
     private Contract contract;
 
     public Payroll() {
