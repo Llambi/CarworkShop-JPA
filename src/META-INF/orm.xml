@@ -191,14 +191,9 @@
 
     <!--METALICO-->
     <entity class="Metalico">
-        <table name="TMetalicos">
-            <unique-constraint>
-                <column-name>CLIENTE_ID</column-name>
-            </unique-constraint>
-        </table>
+        <table name="TMetalicos"/>
         <attributes>
             <id name="id"/>
-            <many-to-one name="cliente"/>
         </attributes>
     </entity>
 
@@ -210,7 +205,6 @@
             <basic name="numero">
                 <column unique="true"/>
             </basic>
-            <many-to-one name="cliente"/>
         </attributes>
     </entity>
 
@@ -222,7 +216,6 @@
             <basic name="codigo">
                 <column unique="true"/>
             </basic>
-            <many-to-one name="cliente"/>
         </attributes>
     </entity>
 
