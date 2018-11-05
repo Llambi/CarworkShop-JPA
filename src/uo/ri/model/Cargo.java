@@ -2,11 +2,26 @@ package uo.ri.model;
 
 import uo.ri.model.types.FacturaStatus;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "TCargos", uniqueConstraints = {@UniqueConstraint(columnNames = "FACTURA_ID, MEDIOPAGO_ID")})
 public class Cargo {
 
+    @ManyToOne
     private Factura factura;
+    @ManyToOne
     private MedioPago medioPago;
     private double importe = 0.0;
+
+    //Atributos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public Cargo() {
+    }
 
     public Cargo(Factura factura, MedioPago medioPago) {
         Association.Cargar.link(factura, this, medioPago);
@@ -48,6 +63,29 @@ public class Cargo {
 
     public double getImporte() {
         return importe;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cargo cargo = (Cargo) o;
+        return Objects.equals(factura, cargo.factura) &&
+                Objects.equals(medioPago, cargo.medioPago);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(factura, medioPago);
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "factura=" + factura +
+                ", medioPago=" + medioPago +
+                ", importe=" + importe +
+                '}';
     }
 
     /**

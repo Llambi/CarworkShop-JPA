@@ -1,17 +1,30 @@
 package uo.ri.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "AVERIA_ID, MECANICO_ID")})
 public class Intervencion {
 
+    @ManyToOne
     private Averia averia;
+    @ManyToOne
     private Mecanico mecanico;
     private int minutos;
 
     //Atriburos accidentales
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "intervencion")
     private Set<Sustitucion> sustituciones = new HashSet<>();
+
+
+    public Intervencion() {
+    }
 
     public Intervencion(Averia averia, Mecanico mecanico) {
         Association.Intervenir.link(averia, this, mecanico);
