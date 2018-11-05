@@ -2,22 +2,15 @@ package uo.ri.model;
 
 import uo.ri.model.types.FacturaStatus;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "TCargos", uniqueConstraints = {@UniqueConstraint(columnNames = "FACTURA_ID, MEDIOPAGO_ID")})
 public class Cargo {
 
-    @ManyToOne
     private Factura factura;
-    @ManyToOne
     private MedioPago medioPago;
     private double importe = 0.0;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Cargo() {

@@ -1,25 +1,17 @@
 package uo.ri.model;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "TMecanicos")
 public class Mecanico {
-    @Column(unique = true)
     private String dni;
     private String apellidos;
     private String nombre;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "mecanico")
     private Set<Averia> averias = new HashSet<>();
-    @OneToMany(mappedBy = "mecanico")
     private Set<Intervencion> intervenciones = new HashSet<>();
 
     public Mecanico() {

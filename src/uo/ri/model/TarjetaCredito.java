@@ -2,22 +2,16 @@ package uo.ri.model;
 
 import uo.ri.util.Check;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "TTajetaCredito")
 public class TarjetaCredito extends MedioPago {
 
-    @Column(unique = true)
     private String numero;
     private String tipo;
     private Date validez;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public TarjetaCredito() {

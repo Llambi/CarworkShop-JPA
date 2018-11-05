@@ -1,19 +1,13 @@
 package uo.ri.model;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "TBonos")
 public class Bono extends MedioPago {
-    @Column(unique = true)
     private String codigo;
     private double disponible = 0.0;
     private String descripcion;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Bono() {
