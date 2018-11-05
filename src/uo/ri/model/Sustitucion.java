@@ -1,21 +1,14 @@
 package uo.ri.model;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "TSustituciones")
 public class Sustitucion {
 
-    @ManyToOne
 	private Repuesto repuesto;
-    @ManyToOne
 	private Intervencion intervencion;
 	private int cantidad;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Sustitucion() {

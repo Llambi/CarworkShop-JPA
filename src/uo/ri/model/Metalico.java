@@ -1,14 +1,8 @@
 package uo.ri.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "TMetalico")
 public class Metalico extends MedioPago {
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Metalico() {

@@ -1,24 +1,17 @@
 package uo.ri.model;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "TRepuestos")
 public class Repuesto {
 
-    @Column(unique = true)
     private String codigo;
     private String descripcion;
     private double precio;
 
     //Atributos accidentales
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "repuesto")
     private Set<Sustitucion> sustituciones = new HashSet<>();
 
     public Repuesto() {
