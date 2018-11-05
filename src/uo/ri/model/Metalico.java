@@ -3,7 +3,7 @@ package uo.ri.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TMetalico", uniqueConstraints = {@UniqueConstraint(columnNames = "CLIENTE_ID")})
+@Table(name = "TMetalico")
 public class Metalico extends MedioPago {
 
     //Atributos accidentales
