@@ -1,13 +1,11 @@
 package uo.ri.model;
 
+import uo.ri.model.types.AveriaStatus;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import uo.ri.model.types.AveriaStatus;
-
-import javax.persistence.*;
 
 public class Averia {
 

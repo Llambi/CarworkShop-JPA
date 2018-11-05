@@ -4,7 +4,6 @@ import alb.util.math.Round;
 import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.FacturaStatus;
 
-import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;

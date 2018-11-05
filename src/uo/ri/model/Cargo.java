@@ -2,7 +2,6 @@ package uo.ri.model;
 
 import uo.ri.model.types.FacturaStatus;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 public class Cargo {

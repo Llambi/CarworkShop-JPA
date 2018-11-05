@@ -2,7 +2,6 @@ package uo.ri.model;
 
 import uo.ri.util.Check;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 

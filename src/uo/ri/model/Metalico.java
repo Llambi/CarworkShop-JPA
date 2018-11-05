@@ -1,7 +1,5 @@
 package uo.ri.model;
 
-import javax.persistence.*;
-
 public class Metalico extends MedioPago {
 
     //Atributos accidentales

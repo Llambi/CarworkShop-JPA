@@ -1,13 +1,7 @@
 package uo.ri.model;
 
-import alb.util.console.Console;
 import alb.util.date.Dates;
-import uo.ri.model.types.AveriaStatus;
-import uo.ri.model.types.ContractStatus;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;

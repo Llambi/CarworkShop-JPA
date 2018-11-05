@@ -3,7 +3,6 @@ package uo.ri.model;
 import alb.util.date.Dates;
 import uo.ri.model.types.ContractStatus;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;

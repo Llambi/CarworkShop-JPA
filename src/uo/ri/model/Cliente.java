@@ -2,7 +2,6 @@ package uo.ri.model;
 
 import uo.ri.model.types.Address;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

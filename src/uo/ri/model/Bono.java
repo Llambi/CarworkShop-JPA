@@ -1,6 +1,5 @@
 package uo.ri.model;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 public class Bono extends MedioPago {
