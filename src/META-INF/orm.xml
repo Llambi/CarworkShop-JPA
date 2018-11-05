@@ -31,30 +31,6 @@
             <many-to-one name="factura"/>
             <one-to-many name="intervenciones" mapped-by="averia"/>
         </attributes>
-        <named-query name="Averia.findByIds">
-            <query>select a from Averia a where a.id in (?1)</query>
-        </named-query>
-        <named-query name="Averia.findNoFacturadasByDni">
-            <query>
-                select a
-                from Averia a
-                where a.vehiculo.cliente.dni = ?1
-                and a.status = uo.ri.model.types.AveriaStatus.TERMINADA
-            </query>
-        </named-query>
-    </entity>
-
-    <!--BONO-->
-    <entity class="Bono">
-        <table name="TBonos"/>
-        <attributes>
-            <id name="id">
-                <generated-value strategy="IDENTITY"/>
-            </id>
-            <basic name="codigo">
-                <column unique="true"/>
-            </basic>
-        </attributes>
     </entity>
 
     <!--CARGO-->
@@ -215,15 +191,38 @@
 
     <!--METALICO-->
     <entity class="Metalico">
-        <table name="TMetalico">
+        <table name="TMetalicos">
             <unique-constraint>
                 <column-name>CLIENTE_ID</column-name>
             </unique-constraint>
         </table>
         <attributes>
-            <id name="id">
-                <generated-value strategy="IDENTITY"/>
-            </id>
+            <id name="id"/>
+            <many-to-one name="cliente"/>
+        </attributes>
+    </entity>
+
+    <!--TAJETA_CREDITO-->
+    <entity class="TarjetaCredito">
+        <table name="TTarjetasCredito"/>
+        <attributes>
+            <id name="id"/>
+            <basic name="numero">
+                <column unique="true"/>
+            </basic>
+            <many-to-one name="cliente"/>
+        </attributes>
+    </entity>
+
+    <!--BONO-->
+    <entity class="Bono">
+        <table name="TBonos"/>
+        <attributes>
+            <id name="id"/>
+            <basic name="codigo">
+                <column unique="true"/>
+            </basic>
+            <many-to-one name="cliente"/>
         </attributes>
     </entity>
 
@@ -272,19 +271,6 @@
         </attributes>
     </entity>
 
-    <!--TAJETA_CREDITO-->
-    <entity class="TarjetaCredito">
-        <table name="TTarjetaCredito"/>
-        <attributes>
-            <id name="id">
-                <generated-value strategy="IDENTITY"/>
-            </id>
-            <basic name="numero">
-                <column unique="true"/>
-            </basic>
-        </attributes>
-    </entity>
-
     <!--TIPO_VEHICULO-->
     <entity class="TipoVehiculo">
         <table name="TTipoVehiculo"/>
@@ -320,4 +306,18 @@
 
     <!--ADDRESS-->
     <embeddable class="uo.ri.model.types.Address"/>
+
+    <!--QUERIES-->
+    <named-query name="Averia.findByIds">
+        <query>select a from Averia a where a.id in (?1)</query>
+    </named-query>
+    <named-query name="Averia.findNoFacturadasByDni">
+        <query>
+            select a
+            from Averia a
+            where a.vehiculo.cliente.dni = ?1
+            and a.status = uo.ri.model.types.AveriaStatus.TERMINADA
+        </query>
+    </named-query>
+
 </entity-mappings>
