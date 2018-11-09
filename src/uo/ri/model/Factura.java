@@ -42,6 +42,7 @@ public class Factura {
     public Factura(long numero, Date fecha, List<Averia> averias) {
         this(numero, fecha);
         fillAverias(averias);
+        calcularImporte();
     }
 
     /**
@@ -198,6 +199,10 @@ public class Factura {
 
     public FacturaStatus getStatus() {
         return status;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     @Override

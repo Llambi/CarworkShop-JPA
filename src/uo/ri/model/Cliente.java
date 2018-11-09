@@ -65,20 +65,28 @@ public class Cliente {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhone() {
         return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Address getAddress() {
         return address;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

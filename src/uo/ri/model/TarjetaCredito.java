@@ -1,6 +1,6 @@
 package uo.ri.model;
 
-import uo.ri.util.Check;
+import uo.ri.model.util.Check;
 
 import java.util.Date;
 import java.util.Objects;
@@ -48,9 +48,9 @@ public class TarjetaCredito extends MedioPago {
     /**
      * Método que comprueba si la fecha de caducidad de la tarjeta es válida
      *
-     * @throws uo.ri.util.exception.IllegalStateException
+     * @throws uo.ri.model.util.exception.IllegalStateException
      */
-    public void comprobarFecha() throws uo.ri.util.exception.IllegalStateException {
+    public void comprobarFecha() throws uo.ri.model.util.exception.IllegalStateException {
         boolean comprobar = new Date().after(getValidez());
         Check.isFalse(comprobar, "La fecha de validez de la tarjeta ha caducado");
     }
