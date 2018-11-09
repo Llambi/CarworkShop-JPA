@@ -1,4 +1,4 @@
-package uo.ri.util;
+package uo.ri.model.util;
 
 public class Check {
 

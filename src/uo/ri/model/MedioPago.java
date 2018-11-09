@@ -33,6 +33,10 @@ public abstract class MedioPago {
         return acumulado;
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
     /**
      * Método para los tests
      */

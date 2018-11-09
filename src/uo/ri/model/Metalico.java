@@ -12,6 +12,8 @@ public class Metalico extends MedioPago {
         Association.Pagar.link(this, cliente);
     }
 
+
+    @Override
     public void pagar(double cantidad) {
         acumulado += cantidad;
     }
