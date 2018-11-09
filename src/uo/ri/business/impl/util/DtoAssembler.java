@@ -1,25 +1,11 @@
 package uo.ri.business.impl.util;
 
+import uo.ri.business.dto.*;
+import uo.ri.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import uo.ri.business.dto.BreakdownDto;
-import uo.ri.business.dto.CardDto;
-import uo.ri.business.dto.CashDto;
-import uo.ri.business.dto.ClientDto;
-import uo.ri.business.dto.InvoiceDto;
-import uo.ri.business.dto.MechanicDto;
-import uo.ri.business.dto.PaymentMeanDto;
-import uo.ri.business.dto.VoucherDto;
-import uo.ri.model.Averia;
-import uo.ri.model.Bono;
-import uo.ri.model.Cliente;
-import uo.ri.model.Factura;
-import uo.ri.model.Mecanico;
-import uo.ri.model.MedioPago;
-import uo.ri.model.Metalico;
-import uo.ri.model.TarjetaCredito;
 
 public class DtoAssembler {
 

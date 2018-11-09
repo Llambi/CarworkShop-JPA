@@ -1,4 +1,4 @@
-package uo.ri.util.exception;
+package uo.ri.model.util.exception;
 
 public class IllegalStateException extends Exception {
 	private static final long serialVersionUID = 4001710687990554589L;

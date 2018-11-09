@@ -56,6 +56,14 @@ public class Mecanico {
         return nombre;
     }
 
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,5 +84,9 @@ public class Mecanico {
                 ", apellidos='" + apellidos + '\'' +
                 ", nombre='" + nombre + '\'' +
                 '}';
+    }
+
+    public Long getId() {
+        return this.id;
     }
 }

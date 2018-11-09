@@ -1,8 +1,8 @@
 package uo.ri.business.repository;
 
-import java.util.List;
-
 import uo.ri.model.Averia;
+
+import java.util.List;
 
 public interface AveriaRepository extends Repository<Averia>{
 

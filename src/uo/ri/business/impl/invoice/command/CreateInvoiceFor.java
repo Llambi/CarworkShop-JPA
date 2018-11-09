@@ -1,10 +1,10 @@
 package uo.ri.business.impl.invoice.command;
 
-import java.util.List;
-
 import uo.ri.business.dto.InvoiceDto;
 import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.Command;
+
+import java.util.List;
 
 public class CreateInvoiceFor implements Command<InvoiceDto>{
 

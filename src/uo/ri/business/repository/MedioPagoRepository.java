@@ -1,8 +1,8 @@
 package uo.ri.business.repository;
 
-import java.util.List;
-
 import uo.ri.model.MedioPago;
+
+import java.util.List;
 
 public interface MedioPagoRepository extends Repository<MedioPago> {
 	
