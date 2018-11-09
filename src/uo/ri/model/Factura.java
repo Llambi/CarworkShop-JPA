@@ -42,6 +42,7 @@ public class Factura {
     public Factura(long numero, Date fecha, List<Averia> averias) {
         this(numero, fecha);
         fillAverias(averias);
+        calcularImporte();
     }
 
     /**

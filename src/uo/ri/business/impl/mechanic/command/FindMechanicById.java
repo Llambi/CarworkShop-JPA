@@ -1,11 +1,13 @@
 package uo.ri.business.impl.mechanic.command;
 
 import uo.ri.business.dto.MechanicDto;
+import uo.ri.business.exception.BusinessCheck;
 import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.Command;
 import uo.ri.business.impl.util.DtoAssembler;
 import uo.ri.business.repository.MecanicoRepository;
 import uo.ri.conf.Factory;
+import uo.ri.model.Mecanico;
 
 public class FindMechanicById implements Command<MechanicDto> {
 
@@ -17,7 +19,9 @@ public class FindMechanicById implements Command<MechanicDto> {
     }
 
     public MechanicDto execute() throws BusinessException {
-        return DtoAssembler.toDto(repo.findById(this.id));
+        Mecanico m = repo.findById(this.id);
+        BusinessCheck.isNotNull(m,"El mecanico no existe.");
+        return DtoAssembler.toDto(m);
     }
 
 }

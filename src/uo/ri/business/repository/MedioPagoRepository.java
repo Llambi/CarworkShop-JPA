@@ -11,4 +11,11 @@ public interface MedioPagoRepository extends Repository<MedioPago> {
 	 * @return a list with all the payment means owned by the client
 	 */
 	List<MedioPago> findPaymentMeansByClientId(Long id);
+
+	/**
+	 * @param id of the Invoice
+	 * @return a list with all the payment means owned by the client
+	 */
+	List<MedioPago> findPaymentMeansByInvoiceId(Long id);
 }
+

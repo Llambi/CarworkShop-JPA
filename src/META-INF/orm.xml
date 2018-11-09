@@ -253,6 +253,13 @@
             where f.id = ?1
         </query>
     </named-query>
+    <named-query name="MedioPago.findByClientId">
+        <query>
+            select m
+            from MedioPago mp
+            where mp.cliente_id = ?1
+        </query>
+    </named-query>
 
     <!-- Mecanico queries -->
     <named-query name="Mecanico.findByDni">
@@ -295,17 +302,4 @@
             </query>
         </named-query>
      -->
-
-    <named-query name="Averia.findByIds">
-        <query>select a from Averia a where a.id in (?1)</query>
-    </named-query>
-    <named-query name="Averia.findNoFacturadasByDni">
-        <query>
-            select a
-            from Averia a
-            where a.vehiculo.cliente.dni = ?1
-            and a.status = uo.ri.model.types.AveriaStatus.TERMINADA
-        </query>
-    </named-query>
-
 </entity-mappings>

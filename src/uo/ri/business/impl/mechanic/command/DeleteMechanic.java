@@ -25,8 +25,8 @@ public class DeleteMechanic implements Command<Void> {
 
     private void check(Mecanico m) throws BusinessException {
         BusinessCheck.isNotNull(m, "El mecanico no existe.");
-        BusinessCheck.isTrue(m.getIntervenciones().isEmpty(), "El mecanico tiene intervenciones asignadas.");
-        BusinessCheck.isTrue(m.getAsignadas().isEmpty(),"El mecanico tiene averias asignadas.");
+        BusinessCheck.isFalse(m.getIntervenciones().isEmpty(), "El mecanico tiene intervenciones asignadas.");
+        BusinessCheck.isFalse(m.getAsignadas().isEmpty(),"El mecanico tiene averias asignadas.");
     }
 
 }
