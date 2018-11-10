@@ -1,9 +1,9 @@
 package uo.ri.business;
 
+import java.util.List;
+
 import uo.ri.business.dto.MechanicDto;
 import uo.ri.business.exception.BusinessException;
-
-import java.util.List;
 
 public interface MechanicCrudService {
 
@@ -46,4 +46,10 @@ public interface MechanicCrudService {
 	 */
 	List<MechanicDto> findAllMechanics() throws BusinessException;
 	
+	/**
+	 * @return the list of mechanics with active contract, or an empty list
+	 * DO NOT @throws BusinessException
+	 */
+	List<MechanicDto> findActiveMechanics() throws BusinessException;
+
 }

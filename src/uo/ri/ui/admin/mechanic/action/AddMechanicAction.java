@@ -1,7 +1,6 @@
 package uo.ri.ui.admin.mechanic.action;
 
 import alb.util.console.Console;
-import alb.util.console.Printer;
 import alb.util.menu.Action;
 import uo.ri.business.MechanicCrudService;
 import uo.ri.business.dto.MechanicDto;
