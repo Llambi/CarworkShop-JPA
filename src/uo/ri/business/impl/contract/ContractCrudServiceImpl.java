@@ -5,6 +5,9 @@ import uo.ri.business.dto.ContractDto;
 import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.CommandExecutor;
 import uo.ri.business.impl.contract.command.AddContract;
+import uo.ri.business.impl.contract.command.DeleteContract;
+import uo.ri.business.impl.contract.command.FinishContract;
+import uo.ri.business.impl.contract.command.UpdateContract;
 import uo.ri.conf.Factory;
 
 import java.util.Date;
@@ -20,17 +23,17 @@ public class ContractCrudServiceImpl implements ContractCrudService {
 
     @Override
     public void updateContract(ContractDto dto) throws BusinessException {
-
+        executor.execute(new UpdateContract(dto));
     }
 
     @Override
     public void deleteContract(Long id) throws BusinessException {
-
+        executor.execute(new DeleteContract(id));
     }
 
     @Override
     public void finishContract(Long id, Date endDate) throws BusinessException {
-
+        executor.execute(new FinishContract(id, endDate));
     }
 
     @Override

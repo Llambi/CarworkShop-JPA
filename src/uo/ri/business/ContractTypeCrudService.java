@@ -1,9 +1,9 @@
 package uo.ri.business;
 
-import java.util.List;
-
 import uo.ri.business.dto.ContractTypeDto;
 import uo.ri.business.exception.BusinessException;
+
+import java.util.List;
 
 public interface ContractTypeCrudService {
 

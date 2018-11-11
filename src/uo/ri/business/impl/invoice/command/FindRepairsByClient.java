@@ -7,7 +7,6 @@ import uo.ri.business.impl.util.DtoAssembler;
 import uo.ri.business.repository.AveriaRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.Averia;
-import uo.ri.model.Factura;
 import uo.ri.model.util.Check;
 
 import java.util.List;

@@ -5,7 +5,6 @@ import uo.ri.business.exception.BusinessCheck;
 import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.Command;
 import uo.ri.business.impl.util.DtoAssembler;
-import uo.ri.business.impl.util.EntityAssembler;
 import uo.ri.business.repository.ContractTypeRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.ContractType;
