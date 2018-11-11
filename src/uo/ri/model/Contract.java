@@ -102,6 +102,10 @@ public class Contract {
         return mecanico;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Contract{" +

@@ -96,7 +96,7 @@ public class DtoAssembler {
 
     public static List<PaymentMeanDto> toPaymentMeanDtoList(List<MedioPago> list) {
         return list.stream()
-                .map(mp -> toDto(mp))
+                .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -114,7 +114,7 @@ public class DtoAssembler {
 
     public static List<BreakdownDto> toBreakdownDtoList(List<Averia> list) {
         return list.stream()
-                .map(a -> toDto(a))
+                .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -141,7 +141,7 @@ public class DtoAssembler {
 
     public static List<ContractCategoryDto> toContractCategoryDtoList(List<ContractCategory> list) {
         return list.stream()
-                .map(cc -> toDto(cc))
+                .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -155,7 +155,52 @@ public class DtoAssembler {
 
     public static List<ContractTypeDto> toContractTypeDtoList(List<ContractType> list) {
         return list.stream()
-                .map(ct -> toDto(ct))
+                .map(DtoAssembler::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public static ContractDto toDto(Contract c) {
+        ContractDto dto = new ContractDto();
+        dto.id = c.getId();
+        dto.status = c.getStatus().toString();
+        dto.compensation = c.getCompensation();
+        dto.typeId = c.getContractType().getId();
+        dto.endDate = c.getEndDate();
+        dto.yearBaseSalary = c.getBaseSalaryPerYear();
+        dto.mechanicId = c.getMechanic().getId();
+        dto.startDate = c.getStartDate();
+        dto.categoryId = c.getContractCategory().getId();
+        dto.categoryName = c.getContractCategory().getName();
+        dto.dni = c.getMechanic().getDni();
+        dto.typeName = c.getContractType().getName();
+        return dto;
+    }
+
+    public static List<ContractDto> toContractDtoList(List<Contract> list) {
+        return list.stream()
+                .map(DtoAssembler::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public static PayrollDto toDto(Payroll p){
+        PayrollDto dto = new PayrollDto();
+        dto.baseSalary = p.getBaseSalary();
+        dto.date = p.getDate();
+        dto.discountTotal = p.getDiscountTotal();
+        dto.extraSalary = p.getExtraSalary();
+        dto.grossTotal = p.getGrossTotal();
+        dto.id = p.getId();
+        dto.irpf = p.getIrpf();
+        dto.netTotal = p.getNetTotal();
+        dto.productivity = p.getProductivity();
+        dto.socialSecurity = p.getSocialSecurity();
+        dto.triennium = p.getTriennium();
+        return dto;
+    }
+
+    public static List<PayrollDto> toPayrollDtoList(List<Payroll> list) {
+        return list.stream()
+                .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());
     }
 }

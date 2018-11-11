@@ -130,6 +130,10 @@ public class Payroll {
         return getGrossTotal() - getDiscountTotal();
     }
 
+    public Long getId() {
+        return id;
+    }
+
     private int monthsWorked() {
         return Period.between(
                 this.contract.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
