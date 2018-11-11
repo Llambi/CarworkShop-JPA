@@ -14,5 +14,5 @@ public interface RepositoryFactory {
 	ContractTypeRepository forContractType();
 	ContractRepository forContract();
 	PayrollRepository forPayroll();
-	VehiculoRepository forvehiculo();
+	VehiculoReceptionRepository forVehiculoReception();
 }

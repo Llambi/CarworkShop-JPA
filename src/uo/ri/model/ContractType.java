@@ -36,6 +36,14 @@ public class ContractType {
         return new HashSet<>(contracts);
     }
 
+    public void setCompensationDays(int compensationDays) {
+        this.compensationDays = compensationDays;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "ContractType{" +

@@ -46,6 +46,18 @@ public class ContractCategory {
         return productivityPlus;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setTrienniumSalary(double trienniumSalary) {
+        this.trienniumSalary = trienniumSalary;
+    }
+
+    public void setProductivityPlus(double productivityPlus) {
+        this.productivityPlus = productivityPlus;
+    }
+
     @Override
     public String toString() {
         return "ContractCategory{" +

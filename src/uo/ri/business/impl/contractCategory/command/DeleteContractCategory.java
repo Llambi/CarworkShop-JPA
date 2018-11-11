@@ -17,7 +17,6 @@ public class DeleteContractCategory implements Command<Void> {
 
     @Override
     public Void execute() throws BusinessException {
-        //TODO: Borrar una categoria de contrato.
         ContractCategory c = repo.findById(this.id);
         check(c);
         repo.remove(c);
@@ -26,6 +25,6 @@ public class DeleteContractCategory implements Command<Void> {
 
     private void check(ContractCategory c) throws BusinessException {
         BusinessCheck.isNotNull(c,"La categoria de contrato no existe.");
-        // TODO: Comprobar que no haya contratos para esta categoria de contrato.
+        //TODO: Comprobar que no haya contratos para esta categoria de contrato.
     }
 }
