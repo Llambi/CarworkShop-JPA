@@ -9,5 +9,10 @@ public interface RepositoryFactory {
 	ClienteRepository forCliente();
 	RepuestoRepository forRepuesto();
 	IntervencionRepository forIntervencion();
-
+	// Repositorios de la ampliacion.
+	ContractCategoryRepository forContractCategory();
+	ContractTypeRepository forContractType();
+	ContractRepository forContract();
+	PayrollRepository forPayroll();
+	VehiculoRepository forvehiculo();
 }

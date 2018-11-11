@@ -1,6 +1,8 @@
 package uo.ri.business.impl.mechanic.command;
 
 import uo.ri.business.dto.MechanicDto;
+import uo.ri.business.exception.BusinessCheck;
+import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.Command;
 import uo.ri.business.impl.util.EntityAssembler;
 import uo.ri.business.repository.MecanicoRepository;
@@ -17,8 +19,9 @@ public class AddMechanic implements Command<Void> {
         this.dto = mecanico;
     }
 
-    public Void execute() {
+    public Void execute() throws BusinessException {
         Mecanico m = EntityAssembler.toEntity(this.dto);
+        BusinessCheck.isNotNull(m,"El mecanico a añadir no existe.");
         repo.add(m);
         return null;
     }
