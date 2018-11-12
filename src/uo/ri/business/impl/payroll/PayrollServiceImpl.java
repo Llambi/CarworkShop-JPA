@@ -4,8 +4,10 @@ import uo.ri.business.PayrollService;
 import uo.ri.business.dto.PayrollDto;
 import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.CommandExecutor;
+import uo.ri.business.impl.payroll.command.DeleteLastPayrollForMechanicId;
 import uo.ri.business.impl.payroll.command.FindAllPayrolls;
 import uo.ri.business.impl.payroll.command.FindPayrollById;
+import uo.ri.business.impl.payroll.command.FindPayrollsByMechanicId;
 import uo.ri.conf.Factory;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class PayrollServiceImpl implements PayrollService {
 
     @Override
     public List<PayrollDto> findPayrollsByMechanicId(Long id) throws BusinessException {
-        return null;
+        return executor.execute(new FindPayrollsByMechanicId(id));
     }
 
     @Override
@@ -30,16 +32,18 @@ public class PayrollServiceImpl implements PayrollService {
 
     @Override
     public void deleteLastPayrollForMechanicId(Long id) throws BusinessException {
-
+        executor.execute(new DeleteLastPayrollForMechanicId(id));
     }
 
     @Override
     public int deleteLastGenetaredPayrolls() throws BusinessException {
+        //TODO: Generar command para eliminar las ultimas nominas generadas
         return 0;
     }
 
     @Override
     public int generatePayrolls() throws BusinessException {
+        //TODO: Generar command para sacar las nominas que toquen
         return 0;
     }
 }
