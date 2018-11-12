@@ -10,7 +10,7 @@
 
 		<properties>
 			<!--Borrar lo siguiente para que regenere o no la BBDD-->
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+			<!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
 			<property name="eclipselink.logging.file" value="eclipselink.log"/>
 			<property name="eclipselink.logging.level.sql" value="FINE"/>
 						

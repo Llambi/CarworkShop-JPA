@@ -259,14 +259,18 @@
             <id name="id">
                 <generated-value strategy="IDENTITY"/>
             </id>
-            <many-to-one name="repuesto"/>
-            <many-to-one name="intervencion"/>
+            <many-to-one name="repuesto">
+                <join-column name="repuesto_id"/>
+            </many-to-one>
+            <many-to-one name="intervencion">
+                <join-column name="intervencion_id"/>
+            </many-to-one>
         </attributes>
     </entity>
 
     <!--TIPO_VEHICULO-->
     <entity class="TipoVehiculo">
-        <table name="TTipoVehiculo"/>
+        <table name="TTiposVehiculo"/>
         <attributes>
             <id name="id">
                 <generated-value strategy="IDENTITY"/>
@@ -328,9 +332,9 @@
     </named-query>
     <named-query name="MedioPago.findByClientId">
         <query>
-            select m
+            select mp
             from MedioPago mp
-            where mp.cliente_id = ?1
+            where mp.cliente.id = ?1
         </query>
     </named-query>
 
@@ -377,7 +381,7 @@
     <!--Contract queries-->
     <named-query name="Contract.getActiveContracts">
         <query>
-            selec c
+            select c
             from Contract c
             where c.status = uo.ri.model.types.ContractStatus.ACTIVE
                 or (c.status = uo.ri.model.types.ContractStatus.FINISHED and c.endDate=?1)

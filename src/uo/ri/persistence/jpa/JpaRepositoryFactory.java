@@ -1,13 +1,6 @@
 package uo.ri.persistence.jpa;
 
-import uo.ri.business.repository.AveriaRepository;
-import uo.ri.business.repository.ClienteRepository;
-import uo.ri.business.repository.FacturaRepository;
-import uo.ri.business.repository.IntervencionRepository;
-import uo.ri.business.repository.MecanicoRepository;
-import uo.ri.business.repository.MedioPagoRepository;
-import uo.ri.business.repository.RepositoryFactory;
-import uo.ri.business.repository.RepuestoRepository;
+import uo.ri.business.repository.*;
 
 public class JpaRepositoryFactory implements RepositoryFactory {
 
@@ -44,6 +37,31 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	@Override
 	public IntervencionRepository forIntervencion() {
 		return new InterventionJpaRepository();
+	}
+
+	@Override
+	public ContractCategoryRepository forContractCategory() {
+		return new ContractCategoryJpaRepository();
+	}
+
+	@Override
+	public ContractTypeRepository forContractType() {
+		return new ContractTypeJpaRepository();
+	}
+
+	@Override
+	public ContractRepository forContract() {
+		return new ContractJpaRepository();
+	}
+
+	@Override
+	public PayrollRepository forPayroll() {
+		return new PayrollJpaRepository();
+	}
+
+	@Override
+	public VehiculoReceptionRepository forVehiculoReception() {
+		return new VehiculoReceptionJpaRepository();
 	}
 
 }

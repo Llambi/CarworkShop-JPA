@@ -6,7 +6,6 @@ import uo.ri.model.Contract;
 import uo.ri.persistence.jpa.util.BaseRepository;
 import uo.ri.persistence.jpa.util.Jpa;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
