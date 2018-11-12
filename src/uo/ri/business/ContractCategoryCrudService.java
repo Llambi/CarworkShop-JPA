@@ -3,6 +3,8 @@ package uo.ri.business;
 import uo.ri.business.dto.ContractCategoryDto;
 import uo.ri.business.exception.BusinessException;
 
+import java.util.List;
+
 public interface ContractCategoryCrudService {
 
 	/**
@@ -48,6 +50,6 @@ public interface ContractCategoryCrudService {
 	 * 		an empty list if there is none
 	 * @throws BusinessException DOES NOT
 	 */
-	Object findAllContractCategories() throws BusinessException;
+	List<ContractCategoryDto> findAllContractCategories() throws BusinessException;
 
 }

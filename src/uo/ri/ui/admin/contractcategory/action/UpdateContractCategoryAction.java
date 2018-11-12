@@ -13,12 +13,11 @@ public class UpdateContractCategoryAction implements Action {
 	@Override
 	public void execute() throws BusinessException {
 
-		Long id = Console.readLong("Id de la categoría de contrato");
+		ContractCategoryDto dto = new ContractCategoryDto();
+		dto.id = Console.readLong("Id de la categoría de contrato");
 		
 		ContractCategoryCrudService service = Factory.service.forContractCategoryCrud();
-		ContractCategoryDto dto = service.findContractCategoryById( id );
-		BusinessCheck.isNotNull( dto, "No existe el tipo de contrato");
-		
+
 		dto.trieniumSalary = Console.readInt("Importe de trienio");		
 		dto.productivityPlus = Console.readInt("Plus de productividad");		
 		service.updateContractCategory( dto );
