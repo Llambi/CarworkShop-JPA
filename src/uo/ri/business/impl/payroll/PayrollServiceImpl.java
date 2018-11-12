@@ -39,7 +39,6 @@ public class PayrollServiceImpl implements PayrollService {
 
     @Override
     public int generatePayrolls() throws BusinessException {
-        //TODO: Generar command para sacar las nominas que toquen
         return executor.execute(new GeneratePayrolls());
     }
 }

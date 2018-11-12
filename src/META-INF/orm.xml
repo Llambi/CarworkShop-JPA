@@ -352,16 +352,36 @@
 
     <!-- Factura queries -->
     <named-query name="Factura.findByNumber">
-        <query>select f from Factura f where f.numero = ?1</query>
+        <query>
+            select f
+            from Factura f
+            where f.numero = ?1
+        </query>
     </named-query>
 
     <named-query name="Factura.getNextInvoiceNumber">
-        <query>select max(f.numero) + 1 from Factura f</query>
+        <query>
+            select max(f.numero) + 1
+            from Factura f
+        </query>
     </named-query>
 
     <!--Payrolls queries-->
     <named-query name="Factura.getLastDatePayroll">
-        <query>select max(p.date) from Payroll p</query>
+        <query>
+            select max(p.date)
+            from Payroll p
+        </query>
+    </named-query>
+
+    <!--Contract queries-->
+    <named-query name="Contract.getActiveContracts">
+        <query>
+            selec c
+            from Contract c
+            where c.status = uo.ri.model.types.ContractStatus.ACTIVE
+                or (c.status = uo.ri.model.types.ContractStatus.FINISHED and c.endDate=?1)
+        </query>
     </named-query>
 
     <!--

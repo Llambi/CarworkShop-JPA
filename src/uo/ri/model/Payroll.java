@@ -39,11 +39,6 @@ public class Payroll {
 
         this.productivity = productivityTimes * this.contract.getContractCategory().getProductivityPlus();
 
-        /*this.productivity = this.contract.getMechanic().getIntervenciones().stream()
-                .filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(), this.date)
-                        && inter.getAveria().getStatus().equals(AveriaStatus.ABIERTA))
-                .mapToDouble(Intervencion::getImporte)
-                .sum() * this.contract.getContractCategory().getProductivityPlus();*/
         this.trieniums = (monthsWorked() / 3) * this.contract.getContractCategory().getTrienniumSalary();
 
         this.irpf = contract.getIrpfPercent() * getGrossTotal();
