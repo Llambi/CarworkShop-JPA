@@ -359,6 +359,11 @@
         <query>select max(f.numero) + 1 from Factura f</query>
     </named-query>
 
+    <!--Payrolls queries-->
+    <named-query name="Factura.getLastDatePayroll">
+        <query>select max(p.date) from Payroll p</query>
+    </named-query>
+
     <!--
         Use this format if your query has
         numeric comparisons as the one in this example
