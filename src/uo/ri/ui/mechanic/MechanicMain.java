@@ -3,6 +3,10 @@ package uo.ri.ui.mechanic;
 import alb.util.console.Printer;
 import alb.util.menu.BaseMenu;
 import alb.util.menu.NotYetImplementedAction;
+import uo.ri.business.impl.BusinessFactory;
+import uo.ri.conf.Factory;
+import uo.ri.persistence.jpa.JpaRepositoryFactory;
+import uo.ri.persistence.jpa.executor.JpaExecutorFactory;
 
 public class MechanicMain {
 
@@ -28,6 +32,10 @@ public class MechanicMain {
 	}
 
 	private MechanicMain config() {
+		Factory.service = new BusinessFactory();
+		Factory.repository = new JpaRepositoryFactory();
+		Factory.executor = new JpaExecutorFactory();
+
 		return this;
 	}
 
