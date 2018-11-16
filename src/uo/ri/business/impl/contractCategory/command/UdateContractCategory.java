@@ -19,7 +19,7 @@ public class UdateContractCategory implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         ContractCategory c = repo.findById(this.dto.id);
-        BusinessCheck.isNotNull(c,"La categoria de contrato no existe.");
+        BusinessCheck.isNotNull(c, "La categoria de contrato no existe.");
         c.setTrienniumSalary(this.dto.trieniumSalary);
         c.setProductivityPlus(this.dto.productivityPlus);
         return null;

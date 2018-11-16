@@ -1,7 +1,5 @@
 package uo.ri.persistence.jpa;
 
-import java.util.List;
-
 import uo.ri.business.repository.MecanicoRepository;
 import uo.ri.model.Mecanico;
 import uo.ri.persistence.jpa.util.BaseRepository;

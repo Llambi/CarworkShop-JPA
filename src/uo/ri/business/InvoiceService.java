@@ -10,11 +10,14 @@ import java.util.Map;
 
 public interface InvoiceService {
 
-	InvoiceDto createInvoiceFor(List<Long> idsAveria) throws BusinessException;
-	InvoiceDto findInvoice(Long numeroFactura) throws BusinessException;
-	List<PaymentMeanDto> findPayMethodsForInvoice(Long idFactura) throws BusinessException;
-	void settleInvoice(Long idFactura, Map<Long, Double> cargos) throws BusinessException;
+    InvoiceDto createInvoiceFor(List<Long> idsAveria) throws BusinessException;
 
-	List<BreakdownDto> findRepairsByClient(String dni) throws BusinessException;
-	
+    InvoiceDto findInvoice(Long numeroFactura) throws BusinessException;
+
+    List<PaymentMeanDto> findPayMethodsForInvoice(Long idFactura) throws BusinessException;
+
+    void settleInvoice(Long idFactura, Map<Long, Double> cargos) throws BusinessException;
+
+    List<BreakdownDto> findRepairsByClient(String dni) throws BusinessException;
+
 }

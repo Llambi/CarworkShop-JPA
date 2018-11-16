@@ -27,23 +27,27 @@ public class Contract {
 
     public Contract(Mecanico mecanico, Date startDate, double baseSalary) {
         if (baseSalary <= 0) {
-            throw new IllegalArgumentException("el salario base debe ser positivo.");
+            throw new IllegalArgumentException
+                    ("el salario base debe ser positivo.");
         }
-        this.startDate = new Date(Dates.firstDayOfMonth(startDate).getTime());
-        this.baseSalaryPerYear = baseSalary;
-        this.compensation = 0D;
-        this.status = ContractStatus.ACTIVE;
+        this.setStartDate(startDate);
+        this.setBaseSalaryPerYear(baseSalary);
+        this.setCompensation(0D);
+        this.setStatus(ContractStatus.ACTIVE);
         Association.Contratar.link(mecanico, this);
     }
 
-    public Contract(Mecanico mecanico, Date startDate, double baseSalary, ContractType contractType) {
+    public Contract(Mecanico mecanico, Date startDate,
+                    double baseSalary, ContractType contractType) {
         this(mecanico, startDate, baseSalary);
         Association.Typefy.link(this, contractType);
     }
 
-    public Contract(Mecanico mechanic, Date startDate, Date endDate, double baseSalary) {
+    public Contract(Mecanico mechanic, Date startDate,
+                    Date endDate, double baseSalary) {
         this(mechanic, startDate, baseSalary);
-        this.endDate = endDate == null ? null : new Date(Dates.lastDayOfMonth(endDate).getTime());
+        this.endDate = endDate == null ?
+                null : new Date(Dates.lastDayOfMonth(endDate).getTime());
     }
 
     protected void _setContractCategory(ContractCategory contractCategory) {
@@ -78,6 +82,10 @@ public class Contract {
         return new Date(startDate.getTime());
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = new Date(Dates.firstDayOfMonth(startDate).getTime());
+    }
+
     public Date getEndDate() {
         return new Date(endDate.getTime());
     }
@@ -90,12 +98,24 @@ public class Contract {
         return baseSalaryPerYear;
     }
 
+    public void setBaseSalaryPerYear(double baseSalaryPerYear) {
+        this.baseSalaryPerYear = baseSalaryPerYear;
+    }
+
     public double getCompensation() {
         return compensation;
     }
 
+    public void setCompensation(double compensation) {
+        this.compensation = compensation;
+    }
+
     public ContractStatus getStatus() {
         return status;
+    }
+
+    public void setStatus(ContractStatus status) {
+        this.status = status;
     }
 
     public Mecanico getMechanic() {
@@ -135,26 +155,32 @@ public class Contract {
     }
 
     /**
-     * Metodo que fija la fecha de finalizacion de un contrato, calcula la compensacion del contrato
+     * Metodo que fija la fecha de finalizacion de un contrato, calcula la
+     * compensacion del contrato
      *
      * @param endDate
      * @throws IllegalArgumentException si:
-     *                                  - La fecha de finalizacion es anterior a la de inicio.
+     *                                  - La fecha de finalizacion es anterior
+     *                                  a la de inicio.
      *                                  - El contrato ya estaba finalizado.
      */
     public void markAsFinished(Date endDate) {
         if (Dates.isBefore(endDate, this.startDate)) {
-            throw new IllegalArgumentException("La fecha de finalizacion del contrato debe ser posterior a las del comienzo de este.");
+            throw new IllegalArgumentException
+                    ("La fecha de finalizacion del contrato debe ser " +
+                            "posterior a las del comienzo de este.");
         }
         if (this.status.equals(ContractStatus.FINISHED)) {
-            throw new IllegalStateException("Un contrato ya finalizado no se puede volver a finalizar.");
+            throw new IllegalStateException
+                    ("Un contrato ya finalizado no puede volver a finalizarse");
         }
         this.status = ContractStatus.FINISHED;
 
         this.endDate = Dates.lastDayOfMonth(endDate);
 
         if (monthsWorked() >= 12) {
-            this.compensation = this.baseSalaryPerYear / 365 * getContractType().getCompensationDays();
+            this.compensation = this.baseSalaryPerYear / 365
+                    * getContractType().getCompensationDays();
         }
 
     }
@@ -175,14 +201,16 @@ public class Contract {
     }
 
     /**
-     * Metodo que devuelve la ultima nomina del contrato o null si no hay nominas para el contrato.
+     * Metodo que devuelve la ultima nomina del contrato o null si no hay
+     * nominas para el contrato.
      *
      * @return Payroll con la ultima fecha o null si no hay.
      */
     public Payroll getLastPayroll() {
         Payroll selectedPayroll = null;
         for (Payroll payroll : payrolls)
-            if (selectedPayroll == null || Dates.isAfter(payroll.getDate(), selectedPayroll.getDate()))
+            if (selectedPayroll == null || Dates.isAfter(payroll.getDate(),
+                    selectedPayroll.getDate()))
                 selectedPayroll = payroll;
         return selectedPayroll;
     }
@@ -190,7 +218,8 @@ public class Contract {
     /**
      * Metodo que devuelve el porcentaje de irpf correcto.
      *
-     * @return Porcentaje de irpf segun el tramo de sueldo en el que te encuentres.
+     * @return Porcentaje de irpf segun el tramo de sueldo en el que te
+     * encuentres.
      */
     public double getIrpfPercent() {
         double percent;

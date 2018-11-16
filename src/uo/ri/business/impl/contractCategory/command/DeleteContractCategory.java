@@ -24,7 +24,7 @@ public class DeleteContractCategory implements Command<Void> {
     }
 
     private void check(ContractCategory c) throws BusinessException {
-        BusinessCheck.isNotNull(c,"La categoria de contrato no existe.");
+        BusinessCheck.isNotNull(c, "La categoria de contrato no existe.");
         //TODO: Comprobar que no haya contratos para esta categoria de contrato.
     }
 }

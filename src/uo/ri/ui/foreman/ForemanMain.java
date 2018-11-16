@@ -14,45 +14,44 @@ import uo.ri.ui.foreman.vehicle.VehiculosMenu;
 
 public class ForemanMain {
 
-	private static class MainMenu extends BaseMenu {
-		MainMenu() {
-			menuOptions = new Object[][] { 
-				{ "Jefe de Taller", null },
-				{ "Recepción en taller", 		RecepcionMenu.class }, 
-				{ "Gestión de clientes", 		ClientesMenu.class },
-				{ "Gestión de vehículos", 		VehiculosMenu.class },
-				{ "Revisar historial de un cliente", NotYetImplementedAction.class }, 
-			};
-		}
-	}
+    public static void main(String[] args) {
+        new ForemanMain()
+                .config()
+                .run()
+                .close();
+    }
 
-	public static void main(String[] args) {
-		new ForemanMain()
-			.config()
-			.run()
-			.close();
-	}
+    private ForemanMain config() {
+        Factory.service = new BusinessFactory();
+        Factory.repository = new JpaRepositoryFactory();
+        Factory.executor = new JpaExecutorFactory();
+        return this;
+    }
 
-	private ForemanMain config() {
-		Factory.service = new BusinessFactory();
-		Factory.repository = new JpaRepositoryFactory();
-		Factory.executor = new JpaExecutorFactory();
+    public ForemanMain run() {
+        try {
+            new MainMenu().execute();
 
-		return this;
-	}
+        } catch (RuntimeException rte) {
+            Printer.printRuntimeException(rte);
+        }
+        return this;
+    }
 
-	public ForemanMain run() {
-		try {
-			new MainMenu().execute();
+    private void close() {
+        Jpa.close();
+    }
 
-		} catch (RuntimeException rte) {
-			Printer.printRuntimeException(rte);
-		}
-		return this;
-	}
-
-	private void close() {
-		Jpa.close();
-	}
+    private static class MainMenu extends BaseMenu {
+        MainMenu() {
+            menuOptions = new Object[][]{
+                    {"Jefe de Taller", null},
+                    {"Recepción en taller", RecepcionMenu.class},
+                    {"Gestión de clientes", ClientesMenu.class},
+                    {"Gestión de vehículos", VehiculosMenu.class},
+                    {"Revisar historial de un cliente", NotYetImplementedAction.class},
+            };
+        }
+    }
 
 }

@@ -22,7 +22,7 @@ public class FindRepairsByClient implements Command<List<BreakdownDto>> {
     @Override
     public List<BreakdownDto> execute() throws BusinessException {
         List<Averia> a = repo.findNoFacturadasByDni(this.dni);
-        Check.isFalse(a.isEmpty(),"No hay averias sin facturar para el cliente.");
+        Check.isFalse(a.isEmpty(), "No hay averias sin facturar para el cliente.");
         return DtoAssembler.toBreakdownDtoList(a);
     }
 }

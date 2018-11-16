@@ -29,6 +29,6 @@ public class EntityAssembler {
     }
 
     public static Contract toEntity(ContractDto dto, Mecanico m) {
-        return new Contract(m,dto.startDate,dto.yearBaseSalary);
+        return new Contract(m, dto.startDate, dto.yearBaseSalary);
     }
 }

@@ -20,7 +20,7 @@ public class AddContractType implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         ContractType c = EntityAssembler.toEntity(this.dto);
-        BusinessCheck.isNotNull(c,"El tipo de contrato no existe.");
+        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
         repo.add(c);
         return null;
     }

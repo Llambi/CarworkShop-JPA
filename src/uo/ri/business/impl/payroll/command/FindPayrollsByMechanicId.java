@@ -24,7 +24,7 @@ public class FindPayrollsByMechanicId implements Command<List<PayrollDto>> {
     @Override
     public List<PayrollDto> execute() throws BusinessException {
         Mecanico m = mechanicRepo.findById(this.id);
-        BusinessCheck.isNotNull(m,"El mecanico no existe.");
+        BusinessCheck.isNotNull(m, "El mecanico no existe.");
         return m.getContracts().stream()
                 .flatMap((Contract contract) -> contract.getPayrolls().stream())
                 .map(DtoAssembler::toDto)

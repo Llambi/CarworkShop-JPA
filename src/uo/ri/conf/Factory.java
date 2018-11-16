@@ -6,8 +6,8 @@ import uo.ri.business.repository.RepositoryFactory;
 
 public class Factory {
 
-	public static RepositoryFactory repository;
-	public static ServiceFactory service;
-	public static ComandExecutorFactory executor;
+    public static RepositoryFactory repository;
+    public static ServiceFactory service;
+    public static ComandExecutorFactory executor;
 
 }

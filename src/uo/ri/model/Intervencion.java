@@ -27,7 +27,8 @@ public class Intervencion {
     }
 
     public double getImporte() {
-        double importe = (getMinutos() / 60.0) * getAveria().getVehiculo().getTipo().getPrecioHora();
+        double importe = (getMinutos() / 60.0) * getAveria().getVehiculo()
+                .getTipo().getPrecioHora();
         for (Sustitucion sust : sustituciones) {
             importe += sust.getImporte();
         }

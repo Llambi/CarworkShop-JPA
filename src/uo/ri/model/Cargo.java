@@ -29,12 +29,13 @@ public class Cargo {
         } else if (medioPago instanceof Bono) {
             Bono b = (Bono) medioPago;
             if (importe > b.getDisponible())
-                throw new IllegalStateException("No hay saldo suficiente en el bono");
+                throw new IllegalStateException
+                        ("No hay saldo suficiente en el bono");
             b.pagar(importe);
         } else
             medioPago.acumular(importe);
 
-        this.importe = importe;
+        this.setImporte(importe);
         Association.Cargar.link(factura, this, medioPago);
     }
 
@@ -56,6 +57,10 @@ public class Cargo {
 
     public double getImporte() {
         return importe;
+    }
+
+    public void setImporte(double importe) {
+        this.importe = importe;
     }
 
     @Override

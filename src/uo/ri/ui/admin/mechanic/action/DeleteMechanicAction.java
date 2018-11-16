@@ -8,15 +8,15 @@ import uo.ri.conf.Factory;
 
 public class DeleteMechanicAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
-		
-		Long idMecanico = Console.readLong("Id de mecánico"); 
-		
-		MechanicCrudService as = Factory.service.forMechanicCrudService();
-		as.deleteMechanic(idMecanico);
-		
-		Console.println("Se ha eliminado el mecánico");
-	}
+    @Override
+    public void execute() throws BusinessException {
+
+        Long idMecanico = Console.readLong("Id de mecánico");
+
+        MechanicCrudService as = Factory.service.forMechanicCrudService();
+        as.deleteMechanic(idMecanico);
+
+        Console.println("Se ha eliminado el mecánico");
+    }
 
 }

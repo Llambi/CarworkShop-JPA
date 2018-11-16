@@ -10,9 +10,9 @@ import java.util.Date;
 public class PayrollJpaRepository extends BaseRepository<Payroll> implements PayrollRepository {
     @Override
     public Date getLastDatePayroll() {
-        return Jpa.getManager().createNamedQuery("Factura.getLastDatePayroll",Date.class)
+        return Jpa.getManager().createNamedQuery("Factura.getLastDatePayroll", Date.class)
                 .getResultStream()
-                .reduce((first,second)->second)
+                .reduce((first, second) -> second)
                 .orElse(null);
     }
 }

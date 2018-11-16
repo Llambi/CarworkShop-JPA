@@ -27,7 +27,7 @@ public class Vehiculo {
     public Vehiculo(String matricula, String marca, String modelo) {
 
         this(matricula);
-        this.marca = marca;
+        this.setmarca(marca);
         this.modelo = modelo;
     }
 

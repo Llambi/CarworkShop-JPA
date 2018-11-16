@@ -20,10 +20,11 @@ public class ContractCategory {
         this.name = name;
     }
 
-    public ContractCategory(String name, double trienniumSalary, double productivityPlus) {
+    public ContractCategory(String name, double trienniumSalary,
+                            double productivityPlus) {
         this(name);
-        this.trienniumSalary = trienniumSalary;
-        this.productivityPlus = productivityPlus;
+        this.setTrienniumSalary(trienniumSalary);
+        this.setProductivityPlus(productivityPlus);
     }
 
     protected Set<Contract> _getContracts() {
@@ -42,20 +43,20 @@ public class ContractCategory {
         return trienniumSalary;
     }
 
-    public double getProductivityPlus() {
-        return productivityPlus;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
     public void setTrienniumSalary(double trienniumSalary) {
         this.trienniumSalary = trienniumSalary;
     }
 
+    public double getProductivityPlus() {
+        return productivityPlus;
+    }
+
     public void setProductivityPlus(double productivityPlus) {
         this.productivityPlus = productivityPlus;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

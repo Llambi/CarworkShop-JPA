@@ -21,7 +21,7 @@ public class AddMechanic implements Command<Void> {
 
     public Void execute() throws BusinessException {
         Mecanico m = EntityAssembler.toEntity(this.dto);
-        BusinessCheck.isNotNull(m,"El mecanico a añadir no existe.");
+        BusinessCheck.isNotNull(m, "El mecanico a añadir no existe.");
         repo.add(m);
         return null;
     }

@@ -23,8 +23,8 @@ public class Repuesto {
 
     public Repuesto(String codigo, String descripcion, double precio) {
         this(codigo);
-        this.descripcion = descripcion;
-        this.precio = precio;
+        this.setDescripcion(descripcion);
+        this.setPrecio(precio);
     }
 
     protected Set<Sustitucion> _getSustituciones() {
@@ -45,6 +45,14 @@ public class Repuesto {
 
     public double getPrecio() {
         return precio;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override

@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Sustitucion {
 
-	private Repuesto repuesto;
-	private Intervencion intervencion;
-	private int cantidad;
+    private Repuesto repuesto;
+    private Intervencion intervencion;
+    private int cantidad;
 
     //Atributos accidentales
     private Long id;
@@ -14,13 +14,15 @@ public class Sustitucion {
     public Sustitucion() {
     }
 
-    public Sustitucion(Repuesto repuesto, Intervencion intervencion, int cantidad) {
-	    if(cantidad<=0){
-	        throw new IllegalArgumentException("Las sustituciones deben tener al menos un repuesto.");
+    public Sustitucion(Repuesto repuesto, Intervencion intervencion,
+                       int cantidad) {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException
+                    ("Las sustituciones deben tener al menos un repuesto.");
         }
-		this.cantidad = cantidad;
-		Association.Sustituir.link(repuesto, this, intervencion);
-	}
+        this.cantidad = cantidad;
+        Association.Sustituir.link(repuesto, this, intervencion);
+    }
 
     public double getImporte() {
         return repuesto.getPrecio() * cantidad;

@@ -20,7 +20,7 @@ public class FindPayrollById implements Command<PayrollDto> {
     @Override
     public PayrollDto execute() throws BusinessException {
         Payroll p = repo.findById(this.id);
-        BusinessCheck.isNotNull(p,"La nomina no existe.");
+        BusinessCheck.isNotNull(p, "La nomina no existe.");
         return DtoAssembler.toDto(p);
     }
 }

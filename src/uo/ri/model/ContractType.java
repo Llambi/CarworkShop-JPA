@@ -28,16 +28,16 @@ public class ContractType {
         return compensationDays;
     }
 
+    public void setCompensationDays(int compensationDays) {
+        this.compensationDays = compensationDays;
+    }
+
     protected Set<Contract> _getContracts() {
         return contracts;
     }
 
     public Set<Contract> getContracts() {
         return new HashSet<>(contracts);
-    }
-
-    public void setCompensationDays(int compensationDays) {
-        this.compensationDays = compensationDays;
     }
 
     public Long getId() {

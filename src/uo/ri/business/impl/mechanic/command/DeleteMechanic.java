@@ -9,24 +9,24 @@ import uo.ri.model.Mecanico;
 
 public class DeleteMechanic implements Command<Void> {
 
-	private Long idMecanico;
+    private Long idMecanico;
     private MecanicoRepository repo = Factory.repository.forMechanic();
 
-	public DeleteMechanic(Long idMecanico) {
-		this.idMecanico = idMecanico;
-	}
+    public DeleteMechanic(Long idMecanico) {
+        this.idMecanico = idMecanico;
+    }
 
-	public Void execute() throws BusinessException {
-		Mecanico m = repo.findById(this.idMecanico);
+    public Void execute() throws BusinessException {
+        Mecanico m = repo.findById(this.idMecanico);
         check(m);
         repo.remove(m);
-		return null;
-	}
+        return null;
+    }
 
     private void check(Mecanico m) throws BusinessException {
         BusinessCheck.isNotNull(m, "El mecanico no existe.");
         BusinessCheck.isFalse(m.getIntervenciones().isEmpty(), "El mecanico tiene intervenciones asignadas.");
-        BusinessCheck.isFalse(m.getAsignadas().isEmpty(),"El mecanico tiene averias asignadas.");
+        BusinessCheck.isFalse(m.getAsignadas().isEmpty(), "El mecanico tiene averias asignadas.");
     }
 
 }

@@ -1,5 +1,6 @@
 package uo.ri.business.impl.contract.command;
 
+import alb.util.date.Dates;
 import uo.ri.business.dto.ContractDto;
 import uo.ri.business.exception.BusinessCheck;
 import uo.ri.business.exception.BusinessException;
@@ -11,6 +12,7 @@ import uo.ri.business.repository.ContractTypeRepository;
 import uo.ri.business.repository.MecanicoRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.*;
+import uo.ri.model.types.ContractStatus;
 
 public class AddContract implements Command<Void> {
     private ContractDto dto;
@@ -27,6 +29,11 @@ public class AddContract implements Command<Void> {
     public Void execute() throws BusinessException {
         Mecanico m = mecanicoRepo.findByDni(this.dto.dni);
         BusinessCheck.isNotNull(m, "El mecanico del contrato no existe.");
+
+        Contract lastContract = m.getContracts().stream().reduce((first, second) -> second).get();
+        if (lastContract.getStatus() == ContractStatus.ACTIVE) {
+            lastContract.markAsFinished(Dates.subMonths(Dates.today(), 1));
+        }
 
         Contract c = EntityAssembler.toEntity(this.dto, m);
         BusinessCheck.isNotNull(c, "El contrato a añadir no existe.");

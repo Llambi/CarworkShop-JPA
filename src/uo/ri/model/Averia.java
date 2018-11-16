@@ -31,7 +31,7 @@ public class Averia {
 
     public Averia(Vehiculo vehiculo, String descripcion) {
         this(vehiculo);
-        this.descripcion = descripcion;
+        this.setDescripcion(descripcion);
     }
 
     public Factura getFactura() {
@@ -84,6 +84,10 @@ public class Averia {
 
     public Long getId() {
         return this.id;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @Override
@@ -222,7 +226,8 @@ public class Averia {
      */
     public void desassign() {
         if (getStatus() != AveriaStatus.ASIGNADA) {
-            throw new IllegalStateException("La averia no esta en estado asignada.");
+            throw new IllegalStateException
+                    ("La averia no esta en estado asignada.");
         }
         Association.Asignar.unlink(getMecanico(), this);
         this.status = AveriaStatus.ABIERTA;

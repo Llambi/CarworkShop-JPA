@@ -23,7 +23,7 @@ public class TipoVehiculo {
     public TipoVehiculo(String nombre, double precioHora) {
 
         this(nombre);
-        this.precioHora = precioHora;
+        this.setPrecioHora(precioHora);
     }
 
     protected Set<Vehiculo> _getVehiculos() {
@@ -40,6 +40,10 @@ public class TipoVehiculo {
 
     public double getPrecioHora() {
         return precioHora;
+    }
+
+    public void setPrecioHora(double precioHora) {
+        this.precioHora = precioHora;
     }
 
     @Override

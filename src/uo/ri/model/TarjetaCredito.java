@@ -1,7 +1,5 @@
 package uo.ri.model;
 
-import uo.ri.model.util.Check;
-
 import java.util.Date;
 import java.util.Objects;
 
@@ -24,14 +22,23 @@ public class TarjetaCredito extends MedioPago {
     public TarjetaCredito(String numero, String tipo, Date validez) {
 
         this(numero);
+        this.setTipo(tipo);
+        this.setValidez(validez);
+    }
+
+    public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public void setValidez(Date validez) {
         this.validez = validez;
     }
 
     @Override
     public void pagar(double cantidad) {
         if (!isValidNow()) {
-            throw new java.lang.IllegalStateException("La tarjeta está caducada");
+            throw new java.lang.IllegalStateException
+                    ("La tarjeta está caducada");
         } else {
             acumulado += cantidad;
         }
@@ -50,9 +57,12 @@ public class TarjetaCredito extends MedioPago {
      *
      * @throws uo.ri.model.util.exception.IllegalStateException
      */
-    public void comprobarFecha() throws uo.ri.model.util.exception.IllegalStateException {
+    public void comprobarFecha()
+            throws uo.ri.model.util.exception.IllegalStateException{
         boolean comprobar = new Date().after(getValidez());
-        Check.isFalse(comprobar, "La fecha de validez de la tarjeta ha caducado");
+        if(!comprobar) throw
+                new uo.ri.model.util.exception.IllegalStateException
+                        ("La fecha de validez de la tarjeta ha caducado");
     }
 
     public String getNumero() {

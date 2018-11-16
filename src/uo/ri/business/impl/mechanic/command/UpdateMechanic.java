@@ -10,20 +10,20 @@ import uo.ri.model.Mecanico;
 
 public class UpdateMechanic implements Command<Void> {
 
-	private MechanicDto dto;
-	private MecanicoRepository repo = Factory.repository.forMechanic();
+    private MechanicDto dto;
+    private MecanicoRepository repo = Factory.repository.forMechanic();
 
-	public UpdateMechanic(MechanicDto dto) {
-		this.dto = dto;
-	}
+    public UpdateMechanic(MechanicDto dto) {
+        this.dto = dto;
+    }
 
-	public Void execute() throws BusinessException {
+    public Void execute() throws BusinessException {
         Mecanico m = repo.findById(this.dto.id);
-        BusinessCheck.isNotNull(m,"El mecanico no existe.");
+        BusinessCheck.isNotNull(m, "El mecanico no existe.");
         m.setApellidos(this.dto.surname);
         m.setNombre(this.dto.name);
 
-		return null;
-	}
+        return null;
+    }
 
 }

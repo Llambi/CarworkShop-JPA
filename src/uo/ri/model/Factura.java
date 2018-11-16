@@ -46,7 +46,8 @@ public class Factura {
     }
 
     /**
-     * Metodo que dada una lista de averias las pasa a nuestro Set comprobando que esten terminadas.
+     * Metodo que dada una lista de averias las pasa a nuestro Set comprobando
+     * que esten terminadas.
      *
      * @param averias Averias que se quieren añadir.
      * @throws IllegalStateException si alguna de las averias no esta terminada.
@@ -68,7 +69,8 @@ public class Factura {
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void addAveria(Averia averia) {
-        if (getStatus() == FacturaStatus.SIN_ABONAR && averia.getStatus() == AveriaStatus.TERMINADA) {
+        if (getStatus() == FacturaStatus.SIN_ABONAR &&
+                averia.getStatus() == AveriaStatus.TERMINADA) {
             Association.Facturar.link(this, averia);
             averia.markAsInvoiced();
             calcularImporte();
@@ -116,7 +118,8 @@ public class Factura {
             Association.Facturar.unlink(this, averia);
             calcularImporte();
         } else {
-            throw new IllegalStateException("La factura no esta en estado SIN ABONAR.");
+            throw new IllegalStateException
+                    ("La factura no esta en estado SIN ABONAR.");
         }
     }
 
@@ -125,13 +128,15 @@ public class Factura {
      *
      * @throws IllegalStateException if
      *                               - Is already settled, or
-     *                               - the amounts paid with charges to payment means does not cover
+     *                               - the amounts paid with charges to payment
+     *                               means does not cover
      *                               the total of the invoice
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void settle() {
         if (isSettled())
-            throw new IllegalStateException("No se puede liquidar una factura sin averias");
+            throw new IllegalStateException
+                    ("No se puede liquidar una factura sin averias");
         else if (importeCargos() > getImporte() + 0.01)
             throw new IllegalStateException("Los cargos no igualan el importe");
         else if (importeCargos() < getImporte() - 0.01)

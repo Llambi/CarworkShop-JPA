@@ -25,9 +25,9 @@ public class FindPayMethodsForInvoice implements Command<List<PaymentMeanDto>> {
     @Override
     public List<PaymentMeanDto> execute() throws BusinessException {
         Factura f = facturaRepository.findById(idInvoiceDto);
-        Check.isNotNull(f,"No existe la factura.");
-        List< MedioPago> mp = medioPagoRepo.findPaymentMeansByInvoiceId(f.getId());
-        Check.isFalse(mp.isEmpty(),"No hay medios de pago para la factura.");
+        Check.isNotNull(f, "No existe la factura.");
+        List<MedioPago> mp = medioPagoRepo.findPaymentMeansByInvoiceId(f.getId());
+        Check.isFalse(mp.isEmpty(), "No hay medios de pago para la factura.");
         return DtoAssembler.toPaymentMeanDtoList(mp);
     }
 }

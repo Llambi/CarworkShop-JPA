@@ -17,11 +17,11 @@ public class DeleteLastGenetaredPayrolls implements Command<Integer> {
     @Override
     public Integer execute() throws BusinessException {
         Date date = payrollRepo.getLastDatePayroll();
-        BusinessCheck.isNotNull(date,"No hay una ultima fecha de nominas");
-        int counter=0;
+        BusinessCheck.isNotNull(date, "No hay una ultima fecha de nominas");
+        int counter = 0;
         List<Payroll> payrolls = payrollRepo.findAll();
-        for (Payroll payroll : payrolls){
-            if(Dates.diffDays(payroll.getDate(),date)==0) {
+        for (Payroll payroll : payrolls) {
+            if (Dates.diffDays(payroll.getDate(), date) == 0) {
                 counter++;
                 payrolls.remove(payroll);
             }

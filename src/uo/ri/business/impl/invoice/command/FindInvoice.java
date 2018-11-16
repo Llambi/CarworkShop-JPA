@@ -21,7 +21,7 @@ public class FindInvoice implements Command<InvoiceDto> {
     @Override
     public InvoiceDto execute() throws BusinessException {
         Factura f = repo.findByNumber(this.numeroInvoiceDto);
-        Check.isNotNull(f,"La factura no existe.");
+        Check.isNotNull(f, "La factura no existe.");
         return DtoAssembler.toDto(f);
     }
 }

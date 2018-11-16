@@ -27,7 +27,7 @@ public class Association {
     }
 
     public static class Pagar {
-        public static void link(MedioPago medioPago, Cliente cliente) {
+        protected static void link(MedioPago medioPago, Cliente cliente) {
             medioPago._setCliente(cliente);
             cliente._getMediosPago().add(medioPago);
         }
@@ -96,7 +96,8 @@ public class Association {
     }
 
     public static class Intervenir {
-        public static void link(Averia averia, Intervencion intervencion, Mecanico mecanico) {
+        protected static void link(Averia averia, Intervencion intervencion,
+                           Mecanico mecanico) {
             intervencion._setAveria(averia);
             intervencion._setMecanico(mecanico);
 

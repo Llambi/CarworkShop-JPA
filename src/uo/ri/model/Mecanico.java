@@ -28,8 +28,8 @@ public class Mecanico {
     public Mecanico(String dni, String nombre, String apellidos) {
 
         this(dni);
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.setNombre(nombre);
+        this.setApellidos(apellidos);
     }
 
     protected Set<Contract> _getContracts() {
@@ -64,12 +64,12 @@ public class Mecanico {
         return apellidos;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
@@ -103,7 +103,8 @@ public class Mecanico {
     }
 
     /**
-     * Metodo que devuelve el contrato activo del mecanico con fecha de inicio posterior.
+     * Metodo que devuelve el contrato activo del mecanico con fecha de inicio
+     * posterior.
      *
      * @return Contract seleccionado o null si no hay ninguno activo
      */
@@ -111,9 +112,12 @@ public class Mecanico {
         Contract selectedContract = null;
 
         for (Contract contract : contracts) {
-            if (selectedContract == null && contract.getStatus().equals(ContractStatus.ACTIVE)) {
+            if (selectedContract == null && contract.getStatus()
+                    .equals(ContractStatus.ACTIVE)) {
                 selectedContract = contract;
-            } else if (contract.getStatus().equals(ContractStatus.ACTIVE) && Dates.isAfter(contract.getStartDate(), selectedContract.getStartDate())) {
+            } else if (contract.getStatus().equals(ContractStatus.ACTIVE) &&
+                    Dates.isAfter(contract.getStartDate(), selectedContract
+                            .getStartDate())) {
                 selectedContract = contract;
             }
         }

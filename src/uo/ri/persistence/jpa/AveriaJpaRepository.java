@@ -1,12 +1,12 @@
 package uo.ri.persistence.jpa;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import uo.ri.business.repository.AveriaRepository;
 import uo.ri.model.Averia;
 import uo.ri.persistence.jpa.util.BaseRepository;
 import uo.ri.persistence.jpa.util.Jpa;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AveriaJpaRepository extends BaseRepository<Averia> implements AveriaRepository {
 

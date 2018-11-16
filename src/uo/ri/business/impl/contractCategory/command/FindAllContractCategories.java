@@ -11,6 +11,7 @@ import java.util.List;
 
 public class FindAllContractCategories implements Command<List<ContractCategoryDto>> {
     private ContractCategoryRepository repo = Factory.repository.forContractCategory();
+
     @Override
     public List<ContractCategoryDto> execute() throws BusinessException {
         return DtoAssembler.toContractCategoryDtoList(repo.findAll());

@@ -18,8 +18,8 @@ public class SettleInvoice implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         Factura f = repo.findById(this.idInvoiceDto);
-        Check.isNotNull(f,"La factura no existe.");
-        Check.isFalse(f.isSettled(),"La factura ya esta abonada.");
+        Check.isNotNull(f, "La factura no existe.");
+        Check.isFalse(f.isSettled(), "La factura ya esta abonada.");
         f.settle();
         return null;
     }

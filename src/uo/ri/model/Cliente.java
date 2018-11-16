@@ -29,8 +29,8 @@ public class Cliente {
     public Cliente(String dni, String nombre, String apellidos) {
 
         this(dni);
-        this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.setNombre(nombre);
+        this.setApellidos(apellidos);
     }
 
     protected Set<MedioPago> _getMediosPago() {
@@ -87,6 +87,14 @@ public class Cliente {
 
     public Long getId() {
         return id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     @Override

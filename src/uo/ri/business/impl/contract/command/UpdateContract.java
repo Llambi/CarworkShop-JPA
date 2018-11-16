@@ -19,7 +19,7 @@ public class UpdateContract implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         Contract c = contractRepo.findById(this.dto.id);
-        BusinessCheck.isNotNull(c,"El contrato no existe.");
+        BusinessCheck.isNotNull(c, "El contrato no existe.");
         //TODO: Ver que se puede actualizar del contrato.
 
         return null;

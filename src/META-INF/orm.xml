@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings
-        xmlns="http://java.sun.com/xml/ns/persistence/orm"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
         version="2.0">
 
@@ -192,16 +192,12 @@
     <!--METALICO-->
     <entity class="Metalico">
         <table name="TMetalicos"/>
-        <attributes>
-            <id name="id"/>
-        </attributes>
     </entity>
 
     <!--TAJETA_CREDITO-->
     <entity class="TarjetaCredito">
         <table name="TTarjetasCredito"/>
         <attributes>
-            <id name="id"/>
             <basic name="numero">
                 <column unique="true"/>
             </basic>
@@ -212,7 +208,6 @@
     <entity class="Bono">
         <table name="TBonos"/>
         <attributes>
-            <id name="id"/>
             <basic name="codigo">
                 <column unique="true"/>
             </basic>
@@ -384,7 +379,8 @@
             select c
             from Contract c
             where c.status = uo.ri.model.types.ContractStatus.ACTIVE
-                or (c.status = uo.ri.model.types.ContractStatus.FINISHED and c.endDate=?1)
+            or (c.status = uo.ri.model.types.ContractStatus.FINISHED and
+            c.endDate=?1)
         </query>
     </named-query>
 

@@ -182,7 +182,7 @@ public class DtoAssembler {
                 .collect(Collectors.toList());
     }
 
-    public static PayrollDto toDto(Payroll p){
+    public static PayrollDto toDto(Payroll p) {
         PayrollDto dto = new PayrollDto();
         dto.baseSalary = p.getBaseSalary();
         dto.date = p.getDate();

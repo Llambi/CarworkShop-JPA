@@ -14,34 +14,34 @@ import java.util.Map;
 
 public class InvoiceServiceImpl implements InvoiceService {
 
-	private CommandExecutor executor = Factory.executor.forExecutor();
+    private CommandExecutor executor = Factory.executor.forExecutor();
 
-	@Override
-	public InvoiceDto createInvoiceFor(List<Long> idsAveria)
-			throws BusinessException {
-		return executor.execute( new CreateInvoiceFor( idsAveria ));
-	}
+    @Override
+    public InvoiceDto createInvoiceFor(List<Long> idsAveria)
+            throws BusinessException {
+        return executor.execute(new CreateInvoiceFor(idsAveria));
+    }
 
-	@Override
-	public InvoiceDto findInvoice(Long numeroInvoiceDto) throws BusinessException {
-		return executor.execute(new FindInvoice(numeroInvoiceDto));
-	}
+    @Override
+    public InvoiceDto findInvoice(Long numeroInvoiceDto) throws BusinessException {
+        return executor.execute(new FindInvoice(numeroInvoiceDto));
+    }
 
-	@Override
-	public List<PaymentMeanDto> findPayMethodsForInvoice(Long idInvoiceDto)
-			throws BusinessException {
-		return executor.execute(new FindPayMethodsForInvoice(idInvoiceDto));
-	}
+    @Override
+    public List<PaymentMeanDto> findPayMethodsForInvoice(Long idInvoiceDto)
+            throws BusinessException {
+        return executor.execute(new FindPayMethodsForInvoice(idInvoiceDto));
+    }
 
-	@Override
-	public void settleInvoice(Long idInvoiceDto, Map<Long, Double> cargos)
-			throws BusinessException {
-		executor.execute(new SettleInvoice(idInvoiceDto));
-	}
+    @Override
+    public void settleInvoice(Long idInvoiceDto, Map<Long, Double> cargos)
+            throws BusinessException {
+        executor.execute(new SettleInvoice(idInvoiceDto));
+    }
 
-	@Override
-	public List<BreakdownDto> findRepairsByClient(String dni) throws BusinessException {
-		return executor.execute(new FindRepairsByClient(dni));
-	}
+    @Override
+    public List<BreakdownDto> findRepairsByClient(String dni) throws BusinessException {
+        return executor.execute(new FindRepairsByClient(dni));
+    }
 
 }

@@ -24,7 +24,7 @@ public class DeleteContractType implements Command<Void> {
     }
 
     private void check(ContractType c) throws BusinessException {
-        BusinessCheck.isNotNull(c,"El tipo de contrato no existe.");
+        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
         //TODO: Comprobar que no haya contratos con el tipo de contrato.
     }
 }

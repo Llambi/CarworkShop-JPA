@@ -10,7 +10,7 @@ public class FacturaJpaRepository extends BaseRepository<Factura> implements Fac
     @Override
     public Factura findByNumber(Long numero) {
         return Jpa.getManager().createNamedQuery("Factura.findByNumber", Factura.class)
-                .setParameter(1,numero)
+                .setParameter(1, numero)
                 .getResultStream()
                 .findFirst()
                 .orElse(null);

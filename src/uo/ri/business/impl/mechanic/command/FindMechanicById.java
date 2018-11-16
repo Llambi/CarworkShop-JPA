@@ -20,7 +20,7 @@ public class FindMechanicById implements Command<MechanicDto> {
 
     public MechanicDto execute() throws BusinessException {
         Mecanico m = repo.findById(this.id);
-        BusinessCheck.isNotNull(m,"El mecanico no existe.");
+        BusinessCheck.isNotNull(m, "El mecanico no existe.");
         return DtoAssembler.toDto(m);
     }
 

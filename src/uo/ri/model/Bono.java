@@ -20,8 +20,8 @@ public class Bono extends MedioPago {
     public Bono(String codigo, double disponible, String descripcion) {
 
         this(codigo);
-        this.disponible = disponible;
-        this.descripcion = descripcion;
+        this.setDisponible(disponible);
+        this.setDescripcion(descripcion);
     }
 
     public Bono(String codigo, double disponible) {
@@ -45,10 +45,15 @@ public class Bono extends MedioPago {
         this.descripcion = descripcion;
     }
 
+    public void setDisponible(double disponible) {
+        this.disponible = disponible;
+    }
+
     @Override
     public void pagar(double cantidad) {
         if (cantidad > disponible)
-            throw new IllegalStateException("No hay suficiente dinero disponible");
+            throw new IllegalStateException
+                    ("No hay suficiente dinero disponible");
         disponible -= cantidad;
         acumulado += cantidad;
 

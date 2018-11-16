@@ -6,6 +6,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
+
 public class Payroll {
     private Date date;
     private double baseSalary;
@@ -24,26 +25,34 @@ public class Payroll {
 
     public Payroll(Contract contract, Date date, double productivityTimes) {
 
-        this.date = new Date(Dates.lastDayOfMonth(Dates.subMonths(date, 1)).getTime());
+        this.date = new Date(Dates.lastDayOfMonth(Dates
+                .subMonths(date, 1)).getTime());
         if (Dates.isBefore(this.date, contract.getStartDate())) {
-            throw new IllegalArgumentException("La fecha de la nomina debe ser posterior a la de comienzo del contrato.");
+            throw new IllegalArgumentException
+                    ("La fecha de la nomina debe ser posterior a la de " +
+                            "comienzo del contrato.");
         }
 
         Association.Nominalizar.link(contract, this);
 
         this.baseSalary = this.contract.getBaseSalaryPerYear() / 14;
 
-        if (Dates.isSameMonth(this.date, Dates.fromDdMmYyyy(01, 06, 2010))
-                || Dates.isSameMonth(this.date, Dates.fromDdMmYyyy(01, 12, 2010)))
+        if (Dates.isSameMonth(this.date, Dates
+                .fromDdMmYyyy(01, 06, 2010))
+                || Dates.isSameMonth(this.date,
+                Dates.fromDdMmYyyy(01, 12, 2010)))
             this.extraSalary = this.contract.getBaseSalaryPerYear() / 14;
 
-        this.productivity = productivityTimes * this.contract.getContractCategory().getProductivityPlus();
+        this.productivity = productivityTimes * this.contract
+                .getContractCategory().getProductivityPlus();
 
-        this.trieniums = (monthsWorked() / 3) * this.contract.getContractCategory().getTrienniumSalary();
+        this.trieniums = (monthsWorked() / 3) * this.contract
+                .getContractCategory().getTrienniumSalary();
 
         this.irpf = contract.getIrpfPercent() * getGrossTotal();
 
-        this.socialSecurity = (this.contract.getBaseSalaryPerYear() / 12) * 0.05;
+        this.socialSecurity =
+                (this.contract.getBaseSalaryPerYear() / 12) * 0.05;
     }
 
     @Override
@@ -114,7 +123,8 @@ public class Payroll {
     }
 
     public double getGrossTotal() {
-        return this.baseSalary + this.extraSalary + this.productivity + this.trieniums;
+        return this.baseSalary + this.extraSalary + this.productivity
+                + this.trieniums;
     }
 
     public double getDiscountTotal() {
@@ -130,9 +140,13 @@ public class Payroll {
     }
 
     private int monthsWorked() {
-        return Period.between(
-                this.contract.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-                this.date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+        return Period.between(this.contract.getStartDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate(),
+                this.date.toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate())
                 .getYears();
     }
 
