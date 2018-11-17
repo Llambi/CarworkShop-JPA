@@ -11,9 +11,14 @@ import java.util.List;
 
 public class FindContractsByMechanicId implements Command<List<ContractDto>> {
     private ContractRepository repo = Factory.repository.forContract();
+    private Long id;
+
+    public FindContractsByMechanicId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public List<ContractDto> execute() throws BusinessException {
-        return DtoAssembler.toContractDtoList(repo.findAll());
+        return DtoAssembler.toContractDtoList(repo.findByMechanicId(this.id));
     }
 }

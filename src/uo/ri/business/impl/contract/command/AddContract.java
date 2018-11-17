@@ -12,14 +12,15 @@ import uo.ri.business.repository.ContractTypeRepository;
 import uo.ri.business.repository.MecanicoRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.*;
-import uo.ri.model.types.ContractStatus;
 
 public class AddContract implements Command<Void> {
     private ContractDto dto;
     private ContractRepository contractRepo = Factory.repository.forContract();
     private MecanicoRepository mecanicoRepo = Factory.repository.forMechanic();
-    private ContractCategoryRepository contractCategoryRepo = Factory.repository.forContractCategory();
-    private ContractTypeRepository contractTypeRepo = Factory.repository.forContractType();
+    private ContractCategoryRepository contractCategoryRepo =
+            Factory.repository.forContractCategory();
+    private ContractTypeRepository contractTypeRepo =
+            Factory.repository.forContractType();
 
     public AddContract(ContractDto dto) {
         this.dto = dto;
@@ -30,8 +31,8 @@ public class AddContract implements Command<Void> {
         Mecanico m = mecanicoRepo.findByDni(this.dto.dni);
         BusinessCheck.isNotNull(m, "El mecanico del contrato no existe.");
 
-        Contract lastContract = m.getContracts().stream().reduce((first, second) -> second).get();
-        if (lastContract.getStatus() == ContractStatus.ACTIVE) {
+        Contract lastContract = m.getActiveContract();
+        if (!lastContract.isFinished()) {
             lastContract.markAsFinished(Dates.subMonths(Dates.today(), 1));
         }
 
@@ -45,8 +46,6 @@ public class AddContract implements Command<Void> {
         ContractType ct = contractTypeRepo.findById(this.dto.typeId);
         BusinessCheck.isNotNull(ct, "El tipo del contrato no existe.");
         Association.Typefy.link(c, ct);
-
-        c.setEndDate(this.dto.endDate);
 
         contractRepo.add(c);
         return null;

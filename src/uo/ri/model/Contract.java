@@ -47,8 +47,8 @@ public class Contract {
     public Contract(Mecanico mechanic, Date startDate,
                     Date endDate, double baseSalary) {
         this(mechanic, startDate, baseSalary);
-        this.endDate = endDate == null ?
-                null : new Date(Dates.lastDayOfMonth(endDate).getTime());
+        this.setEndDate(endDate == null ?
+                null : new Date(Dates.lastDayOfMonth(endDate).getTime()));
     }
 
     protected void _setContractCategory(ContractCategory contractCategory) {

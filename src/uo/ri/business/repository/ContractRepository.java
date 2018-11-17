@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ContractRepository extends Repository<Contract> {
     List<Contract> getContractsforPayroll();
+
+    List<Contract> findByMechanicId(Long id);
 }
