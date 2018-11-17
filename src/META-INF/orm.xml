@@ -374,10 +374,18 @@
     </named-query>
 
     <!--Payrolls queries-->
-    <named-query name="Factura.getLastDatePayroll">
+    <named-query name="Nomina.getLastDatePayroll">
         <query>
             select max(p.date)
             from Payroll p
+        </query>
+    </named-query>
+
+    <named-query name="Nomina.getNominaByMecanicoId">
+        <query>
+            select p
+            from Payroll p
+            where p.contract.mecanico.id = ?1
         </query>
     </named-query>
 

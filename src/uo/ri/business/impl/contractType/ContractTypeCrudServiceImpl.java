@@ -13,7 +13,8 @@ public class ContractTypeCrudServiceImpl implements ContractTypeCrudService {
     private CommandExecutor executor = Factory.executor.forExecutor();
 
     @Override
-    public void addContractType(ContractTypeDto dto) throws BusinessException {
+    public void addContractType(ContractTypeDto dto)
+            throws BusinessException {
         executor.execute(new AddContractType(dto));
     }
 
@@ -23,17 +24,20 @@ public class ContractTypeCrudServiceImpl implements ContractTypeCrudService {
     }
 
     @Override
-    public void updateContractType(ContractTypeDto dto) throws BusinessException {
+    public void updateContractType(ContractTypeDto dto)
+            throws BusinessException {
         executor.execute(new UpdateContractType(dto));
     }
 
     @Override
-    public ContractTypeDto findContractTypeById(Long id) throws BusinessException {
+    public ContractTypeDto findContractTypeById(Long id)
+            throws BusinessException {
         return executor.execute(new FindContractTypeById(id));
     }
 
     @Override
-    public List<ContractTypeDto> findAllContractTypes() throws BusinessException {
+    public List<ContractTypeDto> findAllContractTypes()
+            throws BusinessException {
         return executor.execute(new FindAllContractTypes());
     }
 }

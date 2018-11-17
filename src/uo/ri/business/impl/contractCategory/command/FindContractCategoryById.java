@@ -9,7 +9,8 @@ import uo.ri.conf.Factory;
 
 public class FindContractCategoryById implements Command<ContractCategoryDto> {
     private Long id;
-    private ContractCategoryRepository repo = Factory.repository.forContractCategory();
+    private ContractCategoryRepository repo =
+            Factory.repository.forContractCategory();
 
     public FindContractCategoryById(Long id) {
         this.id = id;

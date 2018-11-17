@@ -39,7 +39,8 @@ public class ContractCrudServiceImpl implements ContractCrudService {
     }
 
     @Override
-    public List<ContractDto> findContractsByMechanicId(Long id) throws BusinessException {
+    public List<ContractDto> findContractsByMechanicId(Long id)
+            throws BusinessException {
         return executor.execute(new FindContractsByMechanicId(id));
     }
 }

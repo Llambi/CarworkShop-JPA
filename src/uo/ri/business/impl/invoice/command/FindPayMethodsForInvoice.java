@@ -15,8 +15,10 @@ import java.util.List;
 
 public class FindPayMethodsForInvoice implements Command<List<PaymentMeanDto>> {
     private Long idInvoiceDto;
-    private MedioPagoRepository medioPagoRepo = Factory.repository.forMedioPago();
-    private FacturaRepository facturaRepository = Factory.repository.forFactura();
+    private MedioPagoRepository medioPagoRepo =
+            Factory.repository.forMedioPago();
+    private FacturaRepository facturaRepository =
+            Factory.repository.forFactura();
 
     public FindPayMethodsForInvoice(Long idInvoiceDto) {
         this.idInvoiceDto = idInvoiceDto;
@@ -27,7 +29,8 @@ public class FindPayMethodsForInvoice implements Command<List<PaymentMeanDto>> {
         Factura f = facturaRepository.findById(idInvoiceDto);
         Check.isNotNull(f, "No existe la factura.");
         List<MedioPago> mp = medioPagoRepo.findPaymentMeansByInvoiceId(f.getId());
-        Check.isFalse(mp.isEmpty(), "No hay medios de pago para la factura.");
+        Check.isFalse(mp.isEmpty(),
+                "No hay medios de pago para la factura.");
         return DtoAssembler.toPaymentMeanDtoList(mp);
     }
 }

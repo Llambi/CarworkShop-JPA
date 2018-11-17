@@ -6,16 +6,18 @@ import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.Command;
 import uo.ri.business.impl.util.DtoAssembler;
 import uo.ri.business.repository.MecanicoRepository;
+import uo.ri.business.repository.PayrollRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.Contract;
 import uo.ri.model.Mecanico;
+import uo.ri.model.Payroll;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FindPayrollsByMechanicId implements Command<List<PayrollDto>> {
     private Long id;
-    private MecanicoRepository mechanicRepo = Factory.repository.forMechanic();
+    private PayrollRepository repo = Factory.repository.forPayroll();
 
     public FindPayrollsByMechanicId(Long id) {
         this.id = id;
@@ -23,11 +25,6 @@ public class FindPayrollsByMechanicId implements Command<List<PayrollDto>> {
 
     @Override
     public List<PayrollDto> execute() throws BusinessException {
-        Mecanico m = mechanicRepo.findById(this.id);
-        BusinessCheck.isNotNull(m, "El mecanico no existe.");
-        return m.getContracts().stream()
-                .flatMap((Contract contract) -> contract.getPayrolls().stream())
-                .map(DtoAssembler::toDto)
-                .collect(Collectors.toList());
+        return DtoAssembler.toPayrollDtoList(repo.findByMechanicId(this.id));
     }
 }

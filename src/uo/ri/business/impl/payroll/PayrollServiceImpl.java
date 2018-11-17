@@ -18,7 +18,8 @@ public class PayrollServiceImpl implements PayrollService {
     }
 
     @Override
-    public List<PayrollDto> findPayrollsByMechanicId(Long id) throws BusinessException {
+    public List<PayrollDto> findPayrollsByMechanicId(Long id)
+            throws BusinessException {
         return executor.execute(new FindPayrollsByMechanicId(id));
     }
 
@@ -28,7 +29,8 @@ public class PayrollServiceImpl implements PayrollService {
     }
 
     @Override
-    public void deleteLastPayrollForMechanicId(Long id) throws BusinessException {
+    public void deleteLastPayrollForMechanicId(Long id)
+            throws BusinessException {
         executor.execute(new DeleteLastPayrollForMechanicId(id));
     }
 

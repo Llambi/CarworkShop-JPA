@@ -11,7 +11,8 @@ import uo.ri.model.ContractCategory;
 
 public class AddContractCategory implements Command<Void> {
     private ContractCategoryDto dto;
-    private ContractCategoryRepository repo = Factory.repository.forContractCategory();
+    private ContractCategoryRepository repo =
+            Factory.repository.forContractCategory();
 
     public AddContractCategory(ContractCategoryDto dto) {
         this.dto = dto;

@@ -23,7 +23,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public InvoiceDto findInvoice(Long numeroInvoiceDto) throws BusinessException {
+    public InvoiceDto findInvoice(Long numeroInvoiceDto)
+            throws BusinessException {
         return executor.execute(new FindInvoice(numeroInvoiceDto));
     }
 
@@ -40,7 +41,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<BreakdownDto> findRepairsByClient(String dni) throws BusinessException {
+    public List<BreakdownDto> findRepairsByClient(String dni)
+            throws BusinessException {
         return executor.execute(new FindRepairsByClient(dni));
     }
 

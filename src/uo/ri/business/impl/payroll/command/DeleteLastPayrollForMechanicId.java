@@ -22,9 +22,11 @@ public class DeleteLastPayrollForMechanicId implements Command<Void> {
         Mecanico m = mechanicRepo.findById(this.id);
         BusinessCheck.isNotNull(m, "El mecanico no existe.");
         Contract c = m.getActiveContract();
-        BusinessCheck.isNotNull(c, "No hay un contrato activo para el mecanico.");
+        BusinessCheck.isNotNull(c,
+                "No hay un contrato activo para el mecanico.");
         Payroll p = c.getLastPayroll();
-        BusinessCheck.isNotNull(p, "No hay nomina que eliminar para el mecanico.");
+        BusinessCheck.isNotNull(p,
+                "No hay nomina que eliminar para el mecanico.");
         c.getPayrolls().remove(p);
         return null;
     }

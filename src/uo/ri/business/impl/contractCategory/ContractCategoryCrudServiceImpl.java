@@ -9,12 +9,14 @@ import uo.ri.conf.Factory;
 
 import java.util.List;
 
-public class ContractCategoryCrudServiceImpl implements ContractCategoryCrudService {
+public class ContractCategoryCrudServiceImpl
+        implements ContractCategoryCrudService {
 
     private CommandExecutor executor = Factory.executor.forExecutor();
 
     @Override
-    public void addContractCategory(ContractCategoryDto dto) throws BusinessException {
+    public void addContractCategory(ContractCategoryDto dto)
+            throws BusinessException {
         executor.execute(new AddContractCategory(dto));
     }
 
@@ -24,17 +26,20 @@ public class ContractCategoryCrudServiceImpl implements ContractCategoryCrudServ
     }
 
     @Override
-    public void updateContractCategory(ContractCategoryDto dto) throws BusinessException {
+    public void updateContractCategory(ContractCategoryDto dto)
+            throws BusinessException {
         executor.execute(new UdateContractCategory(dto));
     }
 
     @Override
-    public ContractCategoryDto findContractCategoryById(Long id) throws BusinessException {
+    public ContractCategoryDto findContractCategoryById(Long id)
+            throws BusinessException {
         return executor.execute(new FindContractCategoryById(id));
     }
 
     @Override
-    public List<ContractCategoryDto> findAllContractCategories() throws BusinessException {
+    public List<ContractCategoryDto> findAllContractCategories()
+            throws BusinessException {
         return executor.execute(new FindAllContractCategories());
     }
 }
