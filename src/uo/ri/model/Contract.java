@@ -1,6 +1,7 @@
 package uo.ri.model;
 
 import alb.util.date.Dates;
+import uo.ri.model.types.AveriaStatus;
 import uo.ri.model.types.ContractStatus;
 
 import java.util.Date;
@@ -230,5 +231,13 @@ public class Contract {
         else if (this.baseSalaryPerYear < 60000) percent = 0.30;
         else percent = 0.4;
         return percent;
+    }
+
+    public double calculateProductivityTime() {
+        return this.getMechanic().getIntervenciones().stream()
+                .filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(), Dates.today())
+                        && inter.getAveria().getStatus().equals(AveriaStatus.ABIERTA))
+                .mapToDouble(Intervencion::getImporte)
+                .sum();
     }
 }

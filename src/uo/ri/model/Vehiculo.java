@@ -27,8 +27,8 @@ public class Vehiculo {
     public Vehiculo(String matricula, String marca, String modelo) {
 
         this(matricula);
-        this.setmarca(marca);
-        this.modelo = modelo;
+        this.setMarca(marca);
+        this.setModelo(modelo);
     }
 
     protected Set<Averia> _getAverias() {
@@ -59,12 +59,20 @@ public class Vehiculo {
         return marca;
     }
 
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public String getMatricula() {
         return matricula;
     }
 
     public String getModelo() {
         return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public int getNumAverias() {
