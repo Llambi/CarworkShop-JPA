@@ -35,8 +35,7 @@ public class MechanicCrudServiceImpl implements MechanicCrudService {
 
     @Override
     public List<MechanicDto> findActiveMechanics() throws BusinessException {
-        //TODO: Acabar CRUD Mecanicos.
-        return null;
+        return executor.execute(new FindActiveMechanics());
     }
 
     @Override

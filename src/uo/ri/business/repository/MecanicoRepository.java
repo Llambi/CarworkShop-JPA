@@ -2,6 +2,8 @@ package uo.ri.business.repository;
 
 import uo.ri.model.Mecanico;
 
+import java.util.List;
+
 public interface MecanicoRepository extends Repository<Mecanico> {
 
     /**
@@ -10,4 +12,5 @@ public interface MecanicoRepository extends Repository<Mecanico> {
      */
     Mecanico findByDni(String dni);
 
+    List<Mecanico> findActive();
 }
