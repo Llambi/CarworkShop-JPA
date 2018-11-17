@@ -94,7 +94,8 @@ public class DtoAssembler {
         return dto;
     }
 
-    public static List<PaymentMeanDto> toPaymentMeanDtoList(List<MedioPago> list) {
+    public static List<PaymentMeanDto>
+    toPaymentMeanDtoList(List<MedioPago> list) {
         return list.stream()
                 .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());
@@ -139,7 +140,8 @@ public class DtoAssembler {
         return dto;
     }
 
-    public static List<ContractCategoryDto> toContractCategoryDtoList(List<ContractCategory> list) {
+    public static List<ContractCategoryDto>
+    toContractCategoryDtoList(List<ContractCategory> list) {
         return list.stream()
                 .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());
@@ -153,7 +155,8 @@ public class DtoAssembler {
         return dto;
     }
 
-    public static List<ContractTypeDto> toContractTypeDtoList(List<ContractType> list) {
+    public static List<ContractTypeDto>
+    toContractTypeDtoList(List<ContractType> list) {
         return list.stream()
                 .map(DtoAssembler::toDto)
                 .collect(Collectors.toList());

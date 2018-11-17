@@ -92,7 +92,8 @@ public class Cargo {
      * Decrementar el acumulado del medio de pago
      * Desenlazar el cargo de la factura y el medio de pago
      *
-     * @throws java.lang.IllegalStateException if the invoice is already settled
+     * @throws java.lang.IllegalStateException if the invoice is already
+     * settled
      */
     public void rewind() {
         if (factura.getStatus() != FacturaStatus.ABONADA) {

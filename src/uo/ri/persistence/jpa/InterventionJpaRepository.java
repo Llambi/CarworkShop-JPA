@@ -19,7 +19,8 @@ public class InterventionJpaRepository
             Date endDate) {
 
         return Jpa.getManager()
-                .createNamedQuery("Intervencion.findByMechanicIdBetweenDates", Intervencion.class)
+                .createNamedQuery("Intervencion.findByMechanicIdBetweenDates",
+                        Intervencion.class)
                 .setParameter(1, id)
                 .setParameter(2, startDate)
                 .setParameter(3, endDate)

@@ -21,7 +21,8 @@ public class EntityAssembler {
     }
 
     public static ContractCategory toEntity(ContractCategoryDto dto) {
-        return new ContractCategory(dto.name, dto.trieniumSalary, dto.productivityPlus);
+        return new ContractCategory(dto.name, dto.trieniumSalary,
+                dto.productivityPlus);
     }
 
     public static ContractType toEntity(ContractTypeDto dto) {

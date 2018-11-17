@@ -88,7 +88,8 @@ public class Factura {
         for (Averia averia : averias) {
             importe += averia.getImporte();
         }
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat
+                ("yyyy-MM-dd");
         Date fechaAux = null;
         try {
             fechaAux = formatoDelTexto.parse("2012-07-01");

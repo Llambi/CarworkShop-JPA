@@ -14,7 +14,8 @@ public class MedioPagoJpaRepository
 
     @Override
     public List<MedioPago> findPaymentMeansByClientId(Long id) {
-        return Jpa.getManager().createNamedQuery("MedioPago.findByClientId", MedioPago.class)
+        return Jpa.getManager().createNamedQuery("MedioPago.findByClientId",
+                MedioPago.class)
                 .setParameter(1, id)
                 .getResultStream()
                 .collect(Collectors.toList());
@@ -22,7 +23,8 @@ public class MedioPagoJpaRepository
 
     @Override
     public List<MedioPago> findPaymentMeansByInvoiceId(Long id) {
-        return Jpa.getManager().createNamedQuery("MedioPago.findByInvoiceId", MedioPago.class)
+        return Jpa.getManager().createNamedQuery("MedioPago.findByInvoiceId",
+                MedioPago.class)
                 .setParameter(1, id)
                 .getResultStream()
                 .collect(Collectors.toList());

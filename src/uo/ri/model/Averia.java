@@ -70,6 +70,10 @@ public class Averia {
         return descripcion;
     }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Date getFecha() {
         return new Date(fecha.getTime());
     }
@@ -84,10 +88,6 @@ public class Averia {
 
     public Long getId() {
         return this.id;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     @Override
@@ -120,7 +120,8 @@ public class Averia {
      * @param mecanico
      * @throws IllegalStateException si
      *                               - La avería no está en estado ABIERTA, o
-     *                               - La avería ya está enlazada con otro mecánico
+     *                               - La avería ya está enlazada con otro
+     *                               mecánico
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void assignTo(Mecanico mecanico) {
@@ -128,7 +129,8 @@ public class Averia {
             throw new IllegalStateException("La averia no esta abierta.");
         }
         if (getMecanico() != null) {
-            throw new IllegalStateException("La averia esta enlazada con otro mecanico.");
+            throw new IllegalStateException
+                    ("La averia esta enlazada con otro mecanico.");
         }
         Association.Asignar.link(mecanico, this);
         status = AveriaStatus.ASIGNADA;
@@ -141,15 +143,18 @@ public class Averia {
      *
      * @throws IllegalStateException si
      *                               - La avería no está en estado ASIGNADA, o
-     *                               - La avería no está enlazada con un mecánico
+     *                               - La avería no está enlazada con un
+     *                               mecánico
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void markAsFinished() {
         if (getStatus() != AveriaStatus.ASIGNADA) {
-            throw new IllegalStateException("La averia no esta en estado asignada.");
+            throw new IllegalStateException
+                    ("La averia no esta en estado asignada.");
         }
         if (getMecanico() == null) {
-            throw new IllegalStateException("La averia no tiene enlazado un mecanico.");
+            throw new IllegalStateException
+                    ("La averia no tiene enlazado un mecanico.");
         }
         importe = 0.0;
         for (Intervencion inter : intervenciones) {
@@ -171,7 +176,8 @@ public class Averia {
      */
     public void reopen() {
         if (getStatus() != AveriaStatus.TERMINADA) {
-            throw new IllegalStateException("La averia no esta en estado terminada.");
+            throw new IllegalStateException
+                    ("La averia no esta en estado terminada.");
         }
         this.status = AveriaStatus.ABIERTA;
 
@@ -183,15 +189,18 @@ public class Averia {
      *
      * @throws IllegalStateException si
      *                               - La averia no está en estado FACTURADA, o
-     *                               - La avería aún está enlazada con la factura
+     *                               - La avería aún está enlazada con
+     *                               la factura
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void markBackToFinished() {
         if (getStatus() != AveriaStatus.FACTURADA) {
-            throw new IllegalStateException("La averia no esta en estado facturada.");
+            throw new IllegalStateException
+                    ("La averia no esta en estado facturada.");
         }
         if (getFactura() == null) {
-            throw new IllegalStateException("La averia no esta enlazada con una factura.");
+            throw new IllegalStateException
+                    ("La averia no esta enlazada con una factura.");
         }
         this.status = AveriaStatus.TERMINADA;
 
@@ -203,15 +212,18 @@ public class Averia {
      *
      * @throws IllegalStateException si
      *                               - La averia no está en estado TERMINADA, o
-     *                               - La avería no está enlazada con una factura
+     *                               - La avería no está enlazada con una
+     *                               factura
      * @see Diagramas de estados en el enunciado de referencia
      */
     public void markAsInvoiced() {
         if (getStatus() != AveriaStatus.TERMINADA) {
-            throw new IllegalStateException("La averia no esta en estado terminada.");
+            throw new IllegalStateException
+                    ("La averia no esta en estado terminada.");
         }
         if (getFactura() == null) {
-            throw new IllegalStateException("La averia no esta en estado facturada.");
+            throw new IllegalStateException
+                    ("La averia no esta en estado facturada.");
         }
         this.status = AveriaStatus.FACTURADA;
 

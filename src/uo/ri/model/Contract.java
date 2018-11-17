@@ -235,8 +235,10 @@ public class Contract {
 
     public double calculateProductivityTime() {
         return this.getMechanic().getIntervenciones().stream()
-                .filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(), Dates.today())
-                        && inter.getAveria().getStatus().equals(AveriaStatus.ABIERTA))
+                .filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(),
+                        Dates.today())
+                        && inter.getAveria().getStatus()
+                            .equals(AveriaStatus.ABIERTA))
                 .mapToDouble(Intervencion::getImporte)
                 .sum();
     }

@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PayrollJpaRepository extends BaseRepository<Payroll> implements PayrollRepository {
+public class PayrollJpaRepository extends BaseRepository<Payroll>
+        implements PayrollRepository {
     @Override
     public Date getLastDatePayroll() {
         return Jpa.getManager().createNamedQuery("Nomina.getLastDatePayroll",

@@ -5,11 +5,13 @@ import uo.ri.model.Factura;
 import uo.ri.persistence.jpa.util.BaseRepository;
 import uo.ri.persistence.jpa.util.Jpa;
 
-public class FacturaJpaRepository extends BaseRepository<Factura> implements FacturaRepository {
+public class FacturaJpaRepository extends BaseRepository<Factura>
+        implements FacturaRepository {
 
     @Override
     public Factura findByNumber(Long numero) {
-        return Jpa.getManager().createNamedQuery("Factura.findByNumber", Factura.class)
+        return Jpa.getManager().createNamedQuery("Factura.findByNumber",
+                Factura.class)
                 .setParameter(1, numero)
                 .getResultStream()
                 .findFirst()
@@ -18,7 +20,9 @@ public class FacturaJpaRepository extends BaseRepository<Factura> implements Fac
 
     @Override
     public Long getNextInvoiceNumber() {
-        return Jpa.getManager().createNamedQuery("Factura.getNextInvoiceNumber", Long.class)
+        return Jpa.getManager()
+                .createNamedQuery("Factura.getNextInvoiceNumber",
+                        Long.class)
                 .getSingleResult();
     }
 

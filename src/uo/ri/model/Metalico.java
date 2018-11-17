@@ -9,7 +9,8 @@ public class Metalico extends MedioPago {
     }
 
     public Metalico(Cliente cliente) {
-        Association.Pagar.link(this, cliente);
+        Association.Pagar.link(this,
+                cliente);
     }
 
 

@@ -20,7 +20,8 @@ public class Association {
             tipoVehiculo._getVehiculos().add(vehiculo);
         }
 
-        public static void unlink(TipoVehiculo tipoVehiculo, Vehiculo vehiculo) {
+        public static void unlink(TipoVehiculo tipoVehiculo,
+                                  Vehiculo vehiculo) {
             tipoVehiculo._getVehiculos().remove(vehiculo);
             vehiculo._setTipo(null);
         }
@@ -63,7 +64,8 @@ public class Association {
     }
 
     public static class Cargar {
-        public static void link(Factura factura, Cargo cargo, MedioPago medioPago) {
+        public static void link(Factura factura, Cargo cargo,
+                                MedioPago medioPago) {
             cargo._setFactura(factura);
             cargo._setMedioPago(medioPago);
 
@@ -97,7 +99,7 @@ public class Association {
 
     public static class Intervenir {
         protected static void link(Averia averia, Intervencion intervencion,
-                           Mecanico mecanico) {
+                                   Mecanico mecanico) {
             intervencion._setAveria(averia);
             intervencion._setMecanico(mecanico);
 
@@ -118,7 +120,8 @@ public class Association {
     }
 
     public static class Sustituir {
-        public static void link(Repuesto repuesto, Sustitucion sustitucion, Intervencion intervencion) {
+        public static void link(Repuesto repuesto, Sustitucion sustitucion,
+                                Intervencion intervencion) {
             sustitucion._setRepuesto(repuesto);
             sustitucion._setIntervencion(intervencion);
 
@@ -156,7 +159,8 @@ public class Association {
             contractType._getContracts().add(contract);
         }
 
-        public static void unlink(ContractType contractType, Contract contract) {
+        public static void unlink(ContractType contractType,
+                                  Contract contract) {
             contractType._getContracts().remove(contract);
             contract._setContractType(null);
         }
@@ -180,7 +184,8 @@ public class Association {
             category._getContracts().add(contract);
         }
 
-        public static void unlink(Contract contract, ContractCategory category) {
+        public static void unlink(Contract contract,
+                                  ContractCategory category) {
             category._getContracts().remove(contract);
             contract._setContractCategory(null);
         }
