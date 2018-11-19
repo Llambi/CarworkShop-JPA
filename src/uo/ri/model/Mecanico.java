@@ -3,6 +3,7 @@ package uo.ri.model;
 import alb.util.date.Dates;
 import uo.ri.model.types.ContractStatus;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -122,5 +123,26 @@ public class Mecanico {
             }
         }
         return selectedContract;
+    }
+
+    public boolean isContributionsOnDate(Date startDate, Date endDate){
+
+        boolean flag;
+        if(endDate!=null){
+            flag = getIntervenciones().stream()
+                    .anyMatch(intervencion ->
+                            Dates.isAfter(intervencion.getAveria().getFecha(),
+                                startDate)
+                                    &&
+                            Dates.isBefore(intervencion.getAveria().getFecha(),
+                                endDate));
+        }
+        else{
+            flag = getIntervenciones().stream()
+                    .anyMatch(intervencion ->
+                            Dates.isAfter(intervencion.getAveria().getFecha(),
+                                    startDate));
+        }
+        return flag;
     }
 }

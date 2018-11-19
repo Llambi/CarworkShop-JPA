@@ -17,9 +17,9 @@ public class AddContract implements Command<Void> {
     private ContractDto dto;
     private ContractRepository contractRepo = Factory.repository.forContract();
     private MecanicoRepository mecanicoRepo = Factory.repository.forMechanic();
-    private ContractCategoryRepository contractCategoryRepo =
+    private ContractCategoryRepository categoryRepo =
             Factory.repository.forContractCategory();
-    private ContractTypeRepository contractTypeRepo =
+    private ContractTypeRepository typeRepo =
             Factory.repository.forContractType();
 
     public AddContract(ContractDto dto) {
@@ -36,15 +36,14 @@ public class AddContract implements Command<Void> {
             lastContract.markAsFinished(Dates.subMonths(Dates.today(), 1));
         }
 
-        Contract c = EntityAssembler.toEntity(this.dto, m);
-        BusinessCheck.isNotNull(c, "El contrato a añadir no existe.");
-
-        ContractCategory cc = contractCategoryRepo.findById(this.dto.categoryId);
+        ContractCategory cc = categoryRepo.findById(this.dto.categoryId);
         BusinessCheck.isNotNull(cc, "La categoria del contrato no existe.");
-        Association.Categorize.link(c, cc);
 
-        ContractType ct = contractTypeRepo.findById(this.dto.typeId);
+        ContractType ct = typeRepo.findById(this.dto.typeId);
         BusinessCheck.isNotNull(ct, "El tipo del contrato no existe.");
+
+        Contract c = EntityAssembler.toEntity(this.dto, m);
+        Association.Categorize.link(c, cc);
         Association.Typefy.link(c, ct);
 
         contractRepo.add(c);

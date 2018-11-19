@@ -18,9 +18,18 @@ public class DeleteContract implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         Contract c = repo.findById(this.id);
-        BusinessCheck.isNotNull(c, "El contrato no existe.");
-        //TODO: Comprobaciones extra para el borrado de un contrato.
+        check(c);
+
         repo.remove(c);
         return null;
+    }
+
+    private void check(Contract c) throws BusinessException {
+        BusinessCheck.isNotNull(c, "El contrato no existe.");
+        BusinessCheck.isTrue(!c.getMechanic()
+                        .isContributionsOnDate(c.getStartDate(), c.getEndDate()),
+                "El mecanico ha tenido intervenciones durante el contrato");
+        BusinessCheck.isTrue(c.getPayrolls().isEmpty(),
+                "El contrato tiene nominas generadas");
     }
 }
