@@ -351,9 +351,9 @@
 
     <named-query name="Mecanico.findActive">
         <query>
-            select m
-            from Mecanico m
-            where m.contrato.status = uo.ri.model.types.ContractStatus.ACTIVE
+            select c.mecanico
+            from Contract c
+            where c.status = uo.ri.model.types.ContractStatus.ACTIVE
         </query>
     </named-query>
 
