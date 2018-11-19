@@ -19,8 +19,6 @@ public class FindContractTypeById implements Command<ContractTypeDto> {
 
     @Override
     public ContractTypeDto execute() throws BusinessException {
-        ContractType c = repo.findById(this.id);
-        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
-        return DtoAssembler.toDto(c);
+        return DtoAssembler.toDto(repo.findById(this.id));
     }
 }
