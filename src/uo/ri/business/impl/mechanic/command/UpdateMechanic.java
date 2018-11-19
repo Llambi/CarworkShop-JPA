@@ -19,11 +19,19 @@ public class UpdateMechanic implements Command<Void> {
 
     public Void execute() throws BusinessException {
         Mecanico m = repo.findById(this.dto.id);
-        BusinessCheck.isNotNull(m, "El mecanico no existe.");
+        check(m);
         m.setApellidos(this.dto.surname);
         m.setNombre(this.dto.name);
 
         return null;
+    }
+
+    private void check(Mecanico m) throws BusinessException {
+        BusinessCheck.isNotNull(m, "El mecanico no existe.");
+        BusinessCheck.isNotNull(this.dto.name,
+                "El nombre no existe.");
+        BusinessCheck.isNotNull(this.dto.surname,
+                "El apellido no existe.");
     }
 
 }
