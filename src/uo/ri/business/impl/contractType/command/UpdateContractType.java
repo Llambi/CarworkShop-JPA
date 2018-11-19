@@ -19,8 +19,15 @@ public class UpdateContractType implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         ContractType c = repo.findById(this.dto.id);
-        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
+        check(c);
         c.setCompensationDays(this.dto.compensationDays);
         return null;
+    }
+
+    private void check(ContractType c) throws BusinessException {
+        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
+        BusinessCheck.isTrue(c.getCompensationDays()>0,
+                "El tipo de contrato tiene una compensacion por dias" +
+                        "menor que 0.");
     }
 }
