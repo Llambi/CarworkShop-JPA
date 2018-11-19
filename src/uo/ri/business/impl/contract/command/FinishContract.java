@@ -23,10 +23,17 @@ public class FinishContract implements Command<Void> {
     @Override
     public Void execute() throws BusinessException {
         Contract c = repo.findById(this.id);
+        check(c);
+
+        c.markAsFinished(this.endDate);
+        return null;
+    }
+
+    private void check(Contract c) throws BusinessException {
         BusinessCheck.isNotNull(c, "El contrato no existe.");
         BusinessCheck.isNotNull(this.endDate,
                 "Debe haber un fecha de finalizacion.");
-        c.markAsFinished(this.endDate);
-        return null;
+        BusinessCheck.isTrue(!c.isFinished(),
+                "El contrato no esta activo");
     }
 }
