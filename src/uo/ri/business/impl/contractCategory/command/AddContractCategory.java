@@ -20,9 +20,18 @@ public class AddContractCategory implements Command<Void> {
 
     @Override
     public Void execute() throws BusinessException {
+        check();
         ContractCategory c = EntityAssembler.toEntity(this.dto);
-        BusinessCheck.isNotNull(c);
         repo.add(c);
         return null;
+    }
+
+    private void check() throws BusinessException {
+        BusinessCheck.isNotNull(repo.findById(this.dto.id),
+                "La categoria ya existe.");
+        BusinessCheck.isTrue(this.dto.trieniumSalary>0D,
+                "Trienium salary menor que 0");
+        BusinessCheck.isTrue(this.dto.productivityPlus>0D,
+                "Productivity plus menor que 0");
     }
 }
