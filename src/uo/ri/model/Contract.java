@@ -47,8 +47,7 @@ public class Contract {
     public Contract(Mecanico mechanic, Date startDate,
                     Date endDate, double baseSalary) {
         this(mechanic, startDate, baseSalary);
-        this.setEndDate(endDate == null ?
-                null : new Date(Dates.lastDayOfMonth(endDate).getTime()));
+        this.setEndDate(endDate);
     }
 
     protected void _setContractCategory(ContractCategory contractCategory) {
@@ -92,7 +91,8 @@ public class Contract {
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = new Date(endDate.getTime());
+        this.endDate = endDate == null ?
+                null : new Date(Dates.lastDayOfMonth(endDate).getTime());
     }
 
     public double getBaseSalaryPerYear() {
@@ -238,7 +238,7 @@ public class Contract {
                 .filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(),
                         Dates.today())
                         && inter.getAveria().getStatus()
-                            .equals(AveriaStatus.ABIERTA))
+                        .equals(AveriaStatus.ABIERTA))
                 .mapToDouble(Intervencion::getImporte)
                 .sum();
     }
