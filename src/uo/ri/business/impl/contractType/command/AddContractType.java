@@ -19,14 +19,13 @@ public class AddContractType implements Command<Void> {
 
     @Override
     public Void execute() throws BusinessException {
-        BusinessCheck.isNull(repo.findById(this.dto.id),
+        BusinessCheck.isNull(repo.findByName(this.dto.name),
                 "El tipo de contrato ya existe.");
-        ContractType c = EntityAssembler.toEntity(this.dto);
-        BusinessCheck.isTrue(c.getCompensationDays()>0,
+        BusinessCheck.isTrue(this.dto.compensationDays>0,
                 "El tipo de contrato tiene una compensacion por dias" +
                         "menor que 0.");
 
-        repo.add(c);
+        repo.add(EntityAssembler.toEntity(this.dto));
         return null;
     }
 }

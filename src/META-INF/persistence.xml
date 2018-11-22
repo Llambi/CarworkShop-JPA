@@ -13,7 +13,7 @@
             <!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
             <property name="eclipselink.logging.file" value="eclipselink.log"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
-
+            <property name="eclipselink.allow-zero-id" value="true"/>
             <property name="javax.persistence.jdbc.driver"
                       value="org.hsqldb.jdbcDriver"/>
             <property name="javax.persistence.jdbc.url"

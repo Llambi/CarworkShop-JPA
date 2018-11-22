@@ -408,4 +408,13 @@
         </query>
     </named-query>
 
+    <!--ContractType queries-->
+    <named-query name="ContractType.findByName">
+        <query>
+            select ct
+            from ContractType ct
+            where ct.name = ?1
+        </query>
+    </named-query>
+
 </entity-mappings>

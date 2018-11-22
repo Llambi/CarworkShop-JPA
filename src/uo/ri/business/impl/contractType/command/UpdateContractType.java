@@ -26,8 +26,8 @@ public class UpdateContractType implements Command<Void> {
 
     private void check(ContractType c) throws BusinessException {
         BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
-        BusinessCheck.isTrue(c.getCompensationDays()>0,
+        BusinessCheck.isTrue(this.dto.compensationDays>0,
                 "El tipo de contrato tiene una compensacion por dias" +
-                        "menor que 0.");
+                        " menor que 0.");
     }
 }
