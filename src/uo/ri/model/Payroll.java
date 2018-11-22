@@ -41,18 +41,37 @@ public class Payroll {
                 .fromDdMmYyyy(01, 06, 2010))
                 || Dates.isSameMonth(this.date,
                 Dates.fromDdMmYyyy(01, 12, 2010)))
-            this.extraSalary = this.contract.getBaseSalaryPerYear() / 14;
+            this.setExtraSalary(this.contract.getBaseSalaryPerYear());
 
-        this.productivity = productivityTimes * this.contract
+        this.setProductivity(productivityTimes);
+
+        this.setTrieniums(this.contract.getContractCategory()
+                .getTrieniumSalary());
+
+        this.setIrpf(contract.getIrpfPercent());
+
+        this.setSocialSecurity(this.contract.getBaseSalaryPerYear());
+    }
+
+    public void setExtraSalary(double extraSalary) {
+        this.extraSalary = extraSalary / 14;
+    }
+
+    public void setProductivity(double productivity) {
+        this.productivity = productivity * this.contract
                 .getContractCategory().getProductivityPlus();
+    }
 
-        this.trieniums = (monthsWorked() / 3) * this.contract
-                .getContractCategory().getTrieniumSalary();
+    public void setTrieniums(double trieniums) {
+        this.trieniums = (monthsWorked() / 3) * trieniums;
+    }
 
-        this.irpf = contract.getIrpfPercent() * getGrossTotal();
+    public void setIrpf(double irpf) {
+        this.irpf = irpf * getGrossTotal();
+    }
 
-        this.socialSecurity =
-                (this.contract.getBaseSalaryPerYear() / 12) * 0.05;
+    public void setSocialSecurity(double baseSalary) {
+        this.socialSecurity = (baseSalary / 12) * 0.05;
     }
 
     @Override
