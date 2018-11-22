@@ -11,27 +11,28 @@ import uo.ri.model.Mecanico;
 public class UpdateMechanic implements Command<Void> {
 
     private MechanicDto dto;
-    private MecanicoRepository repo = Factory.repository.forMechanic();
+    private MecanicoRepository repo = Factory.repository
+	    .forMechanic();
 
     public UpdateMechanic(MechanicDto dto) {
-        this.dto = dto;
+	this.dto = dto;
     }
 
     public Void execute() throws BusinessException {
-        Mecanico m = repo.findById(this.dto.id);
-        check(m);
-        m.setApellidos(this.dto.surname);
-        m.setNombre(this.dto.name);
+	Mecanico m = repo.findById(this.dto.id);
+	check(m);
+	m.setApellidos(this.dto.surname);
+	m.setNombre(this.dto.name);
 
-        return null;
+	return null;
     }
 
     private void check(Mecanico m) throws BusinessException {
-        BusinessCheck.isNotNull(m, "El mecanico no existe.");
-        BusinessCheck.isNotNull(this.dto.name,
-                "El nombre no existe.");
-        BusinessCheck.isNotNull(this.dto.surname,
-                "El apellido no existe.");
+	BusinessCheck.isNotNull(m, "El mecanico no existe.");
+	BusinessCheck.isNotNull(this.dto.name,
+		"El nombre no existe.");
+	BusinessCheck.isNotNull(this.dto.surname,
+		"El apellido no existe.");
     }
 
 }

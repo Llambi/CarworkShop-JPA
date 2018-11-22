@@ -11,13 +11,13 @@ public interface FacturaRepository extends Repository<Factura> {
     Factura findByNumber(Long numero);
 
     /**
-     * @return el siguiente número de factura a usar, es decir,
-     * el mayor número existente registrado + 1.
-     * <p>
-     * En un despliegue real esta forma de obtener el número
-     * puede dar problemas en concurrencia, ya que dos hilos
-     * simultáneos podrían llegar a obtener el mismo número.
-     * El código que use este método debería tener esto en cuenta.
+     * @return el siguiente número de factura a usar, es decir, el mayor número
+     *         existente registrado + 1.
+     *         <p>
+     *         En un despliegue real esta forma de obtener el número puede dar
+     *         problemas en concurrencia, ya que dos hilos simultáneos podrían
+     *         llegar a obtener el mismo número. El código que use este método
+     *         debería tener esto en cuenta.
      */
     Long getNextInvoiceNumber();
 }

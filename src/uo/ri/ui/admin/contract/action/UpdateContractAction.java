@@ -12,39 +12,38 @@ import uo.ri.conf.Factory;
 
 public class UpdateContractAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
-		ContractCrudService as = Factory.service.forContractCrud();
-		
-		// Pedir datos
-		ContractDto c = new ContractDto();
-		c.id = Console.readLong("Id del contarto");
+    @Override
+    public void execute() throws BusinessException {
+	ContractCrudService as = Factory.service.forContractCrud();
 
-		c.endDate = askOptionalForDate("Fecha de fin");
-		c.yearBaseSalary = Console.readLong("Salario base anual");
-	
-		// Procesar
-		as.updateContract( c );
-				
-		// Mostrar resultado
-		Console.println("Nuevo contrato añadido");
+	// Pedir datos
+	ContractDto c = new ContractDto();
+	c.id = Console.readLong("Id del contarto");
 
+	c.endDate = askOptionalForDate("Fecha de fin");
+	c.yearBaseSalary = Console.readLong("Salario base anual");
+
+	// Procesar
+	as.updateContract(c);
+
+	// Mostrar resultado
+	Console.println("Nuevo contrato añadido");
+
+    }
+
+    private Date askOptionalForDate(String msg) {
+	while (true) {
+	    try {
+		Console.print(msg + "[optional]: ");
+		String asString = Console.readString();
+
+		return ("".equals(asString)) ? null
+			: Dates.fromString(asString);
+
+	    } catch (NumberFormatException nfe) {
+		Console.println("--> Fecha inválida");
+	    }
 	}
+    }
 
-	private Date askOptionalForDate(String msg) {
-		while( true ) {
-			try {
-				Console.print( msg + "[optional]: ");
-				String asString = Console.readString();
-				
-				return ( "".equals(asString) )
-					? null
-					: Dates.fromString( asString );
-				
-			} catch (NumberFormatException nfe) {
-				Console.println("--> Fecha inválida");
-			}			
-		}
-	}
-	
 }

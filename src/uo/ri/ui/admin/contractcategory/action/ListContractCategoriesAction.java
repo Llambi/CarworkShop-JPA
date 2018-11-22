@@ -11,16 +11,18 @@ import uo.ri.ui.util.Printer;
 
 public class ListContractCategoriesAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		ContractCategoryCrudService service = Factory.service.forContractCategoryCrud();
-		List<ContractCategoryDto> cts = service.findAllContractCategories();
-		
-		for(ContractCategoryDto t: cts) {
-			Printer.printContractCategory( t );
-		}
+	ContractCategoryCrudService service = Factory.service
+		.forContractCategoryCrud();
+	List<ContractCategoryDto> cts = service
+		.findAllContractCategories();
 
+	for (ContractCategoryDto t : cts) {
+	    Printer.printContractCategory(t);
 	}
+
+    }
 
 }

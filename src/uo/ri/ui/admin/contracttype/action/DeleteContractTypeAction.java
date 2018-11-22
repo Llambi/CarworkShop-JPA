@@ -8,16 +8,17 @@ import uo.ri.conf.Factory;
 
 public class DeleteContractTypeAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		Long id = Console.readLong("Id de tipo contrato"); 
-		
-		ContractTypeCrudService service = Factory.service.forContractTypeCrud();
-		service.deleteContractType( id );
-		
-		Console.println("Se ha eliminado el tipo de contrato");
+	Long id = Console.readLong("Id de tipo contrato");
 
-	}
+	ContractTypeCrudService service = Factory.service
+		.forContractTypeCrud();
+	service.deleteContractType(id);
+
+	Console.println("Se ha eliminado el tipo de contrato");
+
+    }
 
 }

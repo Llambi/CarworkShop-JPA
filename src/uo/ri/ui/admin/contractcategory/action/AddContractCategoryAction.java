@@ -9,19 +9,21 @@ import uo.ri.conf.Factory;
 
 public class AddContractCategoryAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		ContractCategoryDto dto = new ContractCategoryDto();
-		dto.name = Console.readString("Nombre de la categoría");
-		dto.trieniumSalary = Console.readInt("Por tienio");
-		dto.productivityPlus = Console.readDouble("Por productividad");
-		
-		ContractCategoryCrudService service = Factory.service.forContractCategoryCrud();
-		service.addContractCategory( dto );
-		
-		Console.println("Nueva categoría de contrato añadida");
+	ContractCategoryDto dto = new ContractCategoryDto();
+	dto.name = Console.readString("Nombre de la categoría");
+	dto.trieniumSalary = Console.readInt("Por tienio");
+	dto.productivityPlus = Console
+		.readDouble("Por productividad");
 
-	}
+	ContractCategoryCrudService service = Factory.service
+		.forContractCategoryCrud();
+	service.addContractCategory(dto);
+
+	Console.println("Nueva categoría de contrato añadida");
+
+    }
 
 }

@@ -1,10 +1,10 @@
 package uo.ri.model;
 
-import uo.ri.model.types.Address;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import uo.ri.model.types.Address;
 
 public class Cliente {
     private String dni;
@@ -14,7 +14,7 @@ public class Cliente {
     private String phone;
     private Address address;
 
-    //Atributos accidentales
+    // Atributos accidentales
     private Long id;
     private Set<Vehiculo> vehiculos = new HashSet<>();
     private Set<MedioPago> mediosPago = new HashSet<>();
@@ -23,103 +23,100 @@ public class Cliente {
     }
 
     public Cliente(String dni) {
-        this.dni = dni;
+	this.dni = dni;
     }
 
     public Cliente(String dni, String nombre, String apellidos) {
 
-        this(dni);
-        this.setNombre(nombre);
-        this.setApellidos(apellidos);
+	this(dni);
+	this.setNombre(nombre);
+	this.setApellidos(apellidos);
     }
 
     protected Set<MedioPago> _getMediosPago() {
-        return mediosPago;
+	return mediosPago;
     }
 
     public Set<MedioPago> getMediosPago() {
-        return new HashSet<>(mediosPago);
+	return new HashSet<>(mediosPago);
     }
 
     public Set<Vehiculo> getVehiculos() {
-        return new HashSet<>(vehiculos);
+	return new HashSet<>(vehiculos);
     }
 
     protected Set<Vehiculo> _getVehiculos() {
-        return vehiculos;
+	return vehiculos;
     }
 
     public String getDni() {
-        return dni;
+	return dni;
     }
 
     public String getNombre() {
-        return nombre;
+	return nombre;
     }
 
     public String getApellidos() {
-        return apellidos;
+	return apellidos;
     }
 
     public String getEmail() {
-        return email;
+	return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+	this.email = email;
     }
 
     public String getPhone() {
-        return phone;
+	return phone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+	this.phone = phone;
     }
 
     public Address getAddress() {
-        return address;
+	return address;
     }
 
     public void setAddress(Address address) {
-        this.address = address;
+	this.address = address;
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+	this.nombre = nombre;
     }
 
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+	this.apellidos = apellidos;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(dni, cliente.dni);
+	if (this == o)
+	    return true;
+	if (o == null || getClass() != o.getClass())
+	    return false;
+	Cliente cliente = (Cliente) o;
+	return Objects.equals(dni, cliente.dni);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dni);
+	return Objects.hash(dni);
     }
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address=" + address +
-                '}';
+	return "Cliente{" + "dni='" + dni + '\'' + ", nombre='"
+		+ nombre + '\'' + ", apellidos='" + apellidos + '\''
+		+ ", email='" + email + '\'' + ", phone='" + phone
+		+ '\'' + ", address=" + address + '}';
     }
 }
-

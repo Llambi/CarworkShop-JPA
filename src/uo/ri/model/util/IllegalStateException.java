@@ -1,4 +1,4 @@
-package uo.ri.model.util.exception;
+package uo.ri.model.util;
 
 public class IllegalStateException extends Exception {
     private static final long serialVersionUID = 4001710687990554589L;
@@ -7,15 +7,15 @@ public class IllegalStateException extends Exception {
     }
 
     public IllegalStateException(String message) {
-        super(message);
+	super(message);
     }
 
     public IllegalStateException(Throwable cause) {
-        super(cause);
+	super(cause);
     }
 
     public IllegalStateException(String message, Throwable cause) {
-        super(message, cause);
+	super(message, cause);
     }
 
 }

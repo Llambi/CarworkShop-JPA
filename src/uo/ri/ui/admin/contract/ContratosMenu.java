@@ -10,17 +10,18 @@ import uo.ri.ui.admin.mechanic.action.ListMechanicsAction;
 
 public class ContratosMenu extends BaseMenu {
 
-	public ContratosMenu() {
-		menuOptions = new Object[][] { 
-			{"Administrador > Gestión de contratos", null},
-			
-			{ "Listar mecánicos", 				ListMechanicsAction.class },
-			{ "Añadir contrato", 				AddContractAction.class }, 
-			{ "Modificar contrato", 			UpdateContractAction.class }, 
-			{ "Eliminar contrato", 				DeleteContractAction.class }, 
-			{ "Finalizar un contrato", 			FinishContractAction.class }, 
-			{ "Listar contratos de un mecánico", 		ListContractsOfMechanicAction.class },
-		};
-	}
+    public ContratosMenu() {
+	menuOptions = new Object[][] {
+		{ "Administrador > Gestión de contratos", null },
+
+		{ "Listar mecánicos", ListMechanicsAction.class },
+		{ "Añadir contrato", AddContractAction.class },
+		{ "Modificar contrato", UpdateContractAction.class },
+		{ "Eliminar contrato", DeleteContractAction.class },
+		{ "Finalizar un contrato",
+			FinishContractAction.class },
+		{ "Listar contratos de un mecánico",
+			ListContractsOfMechanicAction.class }, };
+    }
 
 }

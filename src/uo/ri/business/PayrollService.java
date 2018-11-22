@@ -1,9 +1,9 @@
 package uo.ri.business;
 
+import java.util.List;
+
 import uo.ri.business.dto.PayrollDto;
 import uo.ri.business.exception.BusinessException;
-
-import java.util.List;
 
 public interface PayrollService {
 
@@ -15,16 +15,16 @@ public interface PayrollService {
 
     /**
      * @param id of the mechanic
-     * @return a list with PayrollDto of the mechanic, or
-     * an empty list if the mechanic has none
+     * @return a list with PayrollDto of the mechanic, or an empty list if the
+     *         mechanic has none
      * @throws BusinessException DOES NOT
      */
-    List<PayrollDto> findPayrollsByMechanicId(Long id) throws BusinessException;
+    List<PayrollDto> findPayrollsByMechanicId(Long id)
+	    throws BusinessException;
 
     /**
      * @param id of the payroll
-     * @return the PayrtolDto object for payroll, or
-     * null if does not exist
+     * @return the PayrtolDto object for payroll, or null if does not exist
      * @throws BusinessException DOES NOT
      */
     PayrollDto findPayrollById(Long id) throws BusinessException;
@@ -33,11 +33,12 @@ public interface PayrollService {
      * @param id
      * @throws BusinessException if there are no payroll with that id
      */
-    void deleteLastPayrollForMechanicId(Long id) throws BusinessException;
+    void deleteLastPayrollForMechanicId(Long id)
+	    throws BusinessException;
 
     /**
-     * Deletes all the payrolls generated the same day as the most recent
-     * payroll registered in the system
+     * Deletes all the payrolls generated the same day as the most recent payroll
+     * registered in the system
      *
      * @return the number of deleted payrolls, might be 0
      * @throws BusinessException DOES NOT
@@ -45,9 +46,8 @@ public interface PayrollService {
     int deleteLastGenetaredPayrolls() throws BusinessException;
 
     /**
-     * Generates the payrolls for all the active contracts and for those
-     * which have been extinguished the month for which the payrolls are
-     * being generated:
+     * Generates the payrolls for all the active contracts and for those which have
+     * been extinguished the month for which the payrolls are being generated:
      * month(contract.endDate) == month of the payroll generation
      *
      * @return the number of payrolls generated, might be 0

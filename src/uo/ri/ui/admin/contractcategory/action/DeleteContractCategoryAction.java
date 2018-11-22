@@ -8,16 +8,17 @@ import uo.ri.conf.Factory;
 
 public class DeleteContractCategoryAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		Long id = Console.readLong("Id de categoría"); 
-		
-		ContractCategoryCrudService as = Factory.service.forContractCategoryCrud();
-		as.deleteContractCategory( id );
-		
-		Console.println("Se ha eliminado la categoría");
+	Long id = Console.readLong("Id de categoría");
 
-	}
+	ContractCategoryCrudService as = Factory.service
+		.forContractCategoryCrud();
+	as.deleteContractCategory(id);
+
+	Console.println("Se ha eliminado la categoría");
+
+    }
 
 }

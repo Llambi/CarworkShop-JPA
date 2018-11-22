@@ -17,50 +17,48 @@ import uo.ri.ui.admin.tipovehiculo.TiposVehiculoMenu;
 
 public class AdminMain {
 
-	private static class MainMenu extends BaseMenu {
-		MainMenu() {
-			menuOptions = new Object[][] { 
-				{ "Administrador", null },
-				
-				{ "Gestión de mecánicos", 			MecanicosMenu.class },
-				{ "Gestión de contratos", 			ContratosMenu.class },
-				{ "Gestión de tipos de contrato", 	TiposContratoMenu.class },
-				{ "Gestión de categorias de contrato", CategoriasContratoMenu.class },
-				{ "Gestión de nóminas", 			NominasMenu.class },
-				{ "", 								null },
-				{ "Gestión de repuestos", 			RepuestosMenu.class },
-				{ "Gestión de tipos de vehículo", 	TiposVehiculoMenu.class }, 
-			};
-		}
+    private static class MainMenu extends BaseMenu {
+	MainMenu() {
+	    menuOptions = new Object[][] { { "Administrador", null },
+
+		    { "Gestión de mecánicos", MecanicosMenu.class },
+		    { "Gestión de contratos", ContratosMenu.class },
+		    { "Gestión de tipos de contrato",
+			    TiposContratoMenu.class },
+		    { "Gestión de categorias de contrato",
+			    CategoriasContratoMenu.class },
+		    { "Gestión de nóminas", NominasMenu.class },
+		    { "", null },
+		    { "Gestión de repuestos", RepuestosMenu.class },
+		    { "Gestión de tipos de vehículo",
+			    TiposVehiculoMenu.class }, };
 	}
+    }
 
-	public static void main(String[] args) {
-		new AdminMain()
-			.configure()
-			.run()
-			.close();
+    public static void main(String[] args) {
+	new AdminMain().configure().run().close();
+    }
+
+    private AdminMain configure() {
+	Factory.service = new BusinessFactory();
+	Factory.repository = new JpaRepositoryFactory();
+	Factory.executor = new JpaExecutorFactory();
+
+	return this;
+    }
+
+    private AdminMain run() {
+	try {
+	    new MainMenu().execute();
+
+	} catch (RuntimeException rte) {
+	    Printer.printRuntimeException(rte);
 	}
+	return this;
+    }
 
-	private AdminMain configure() {
-		Factory.service = new BusinessFactory();
-		Factory.repository = new JpaRepositoryFactory();
-		Factory.executor = new JpaExecutorFactory();
-
-		return this;
-	}
-
-	private AdminMain run() {
-		try {
-			new MainMenu().execute();
-
-		} catch (RuntimeException rte) {
-			Printer.printRuntimeException(rte);
-		}
-		return this;
-	}
-
-	private void close() {
-		Jpa.close();
-	}
+    private void close() {
+	Jpa.close();
+    }
 
 }

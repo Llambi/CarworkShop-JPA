@@ -1,8 +1,8 @@
 package uo.ri.business.repository;
 
-import uo.ri.model.MedioPago;
-
 import java.util.List;
+
+import uo.ri.model.MedioPago;
 
 public interface MedioPagoRepository extends Repository<MedioPago> {
 
@@ -18,4 +18,3 @@ public interface MedioPagoRepository extends Repository<MedioPago> {
      */
     List<MedioPago> findPaymentMeansByInvoiceId(Long id);
 }
-

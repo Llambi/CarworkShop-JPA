@@ -7,13 +7,13 @@ import uo.ri.conf.Factory;
 
 public class GeneratePayrollsAction implements Action {
 
-	@Override
-	public void execute() throws Exception {
-		
-		PayrollService ps = Factory.service.forPayroll();
-		int qty = ps.generatePayrolls();
-		
-		Console.printf("Se han generado %d nóminas%n", qty);
-	}
+    @Override
+    public void execute() throws Exception {
+
+	PayrollService ps = Factory.service.forPayroll();
+	int qty = ps.generatePayrolls();
+
+	Console.printf("Se han generado %d nóminas%n", qty);
+    }
 
 }

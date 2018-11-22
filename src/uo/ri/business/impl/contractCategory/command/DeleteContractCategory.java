@@ -9,25 +9,25 @@ import uo.ri.model.ContractCategory;
 
 public class DeleteContractCategory implements Command<Void> {
     private Long id;
-    private ContractCategoryRepository repo =
-            Factory.repository.forContractCategory();
+    private ContractCategoryRepository repo = Factory.repository
+	    .forContractCategory();
 
     public DeleteContractCategory(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     @Override
     public Void execute() throws BusinessException {
-        ContractCategory c = repo.findById(this.id);
-        check(c);
-        repo.remove(c);
-        return null;
+	ContractCategory c = repo.findById(this.id);
+	check(c);
+	repo.remove(c);
+	return null;
     }
 
     private void check(ContractCategory c) throws BusinessException {
-        BusinessCheck.isNotNull(c,
-                "La categoria de contrato no existe.");
-        BusinessCheck.isTrue(c.getContracts().isEmpty(),
-                "No puede haber contratos de la categoria.");
+	BusinessCheck.isNotNull(c,
+		"La categoria de contrato no existe.");
+	BusinessCheck.isTrue(c.getContracts().isEmpty(),
+		"No puede haber contratos de la categoria.");
     }
 }

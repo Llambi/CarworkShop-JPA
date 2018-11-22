@@ -9,17 +9,19 @@ import uo.ri.conf.Factory;
 
 public class AddContractTypeAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		ContractTypeDto dto = new ContractTypeDto();
-		dto.name = Console.readString("Nombre del tipo");
-		dto.compensationDays = Console.readInt("Días de compensación");
-		
-		ContractTypeCrudService service = Factory.service.forContractTypeCrud();
-		service.addContractType( dto );
-		
-		Console.println("Nuevo tipo de contrato añadido");
-	}
+	ContractTypeDto dto = new ContractTypeDto();
+	dto.name = Console.readString("Nombre del tipo");
+	dto.compensationDays = Console
+		.readInt("Días de compensación");
+
+	ContractTypeCrudService service = Factory.service
+		.forContractTypeCrud();
+	service.addContractType(dto);
+
+	Console.println("Nuevo tipo de contrato añadido");
+    }
 
 }

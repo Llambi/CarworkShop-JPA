@@ -9,21 +9,23 @@ import uo.ri.business.exception.BusinessException;
 import uo.ri.conf.Factory;
 
 public class UpdateContractTypeAction implements Action {
-	
-	@Override
-	public void execute() throws BusinessException {
 
-		Long id = Console.readLong("Id del tipo de contrato");
-		
-		ContractTypeCrudService service = Factory.service.forContractTypeCrud();
-		ContractTypeDto dto = service.findContractTypeById( id );
-		BusinessCheck.isNotNull( dto, "No existe el tipo de contrato");
-		
-		dto.compensationDays = Console.readInt("Días de compensación");		
-		service.updateContractType( dto );
-		
-		Console.println("Tipo de contrato actualizado");
+    @Override
+    public void execute() throws BusinessException {
 
-	}
+	Long id = Console.readLong("Id del tipo de contrato");
+
+	ContractTypeCrudService service = Factory.service
+		.forContractTypeCrud();
+	ContractTypeDto dto = service.findContractTypeById(id);
+	BusinessCheck.isNotNull(dto, "No existe el tipo de contrato");
+
+	dto.compensationDays = Console
+		.readInt("Días de compensación");
+	service.updateContractType(dto);
+
+	Console.println("Tipo de contrato actualizado");
+
+    }
 
 }

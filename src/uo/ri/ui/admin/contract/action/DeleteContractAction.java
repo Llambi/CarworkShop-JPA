@@ -8,16 +8,17 @@ import uo.ri.conf.Factory;
 
 public class DeleteContractAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		Long id = Console.readLong("Id del contrato");
-		
-		ContractCrudService service = Factory.service.forContractCrud();
-		service.deleteContract(id);
-		
-		Console.println("El contrato ha sido eliminado");
+	Long id = Console.readLong("Id del contrato");
 
-	}
+	ContractCrudService service = Factory.service
+		.forContractCrud();
+	service.deleteContract(id);
+
+	Console.println("El contrato ha sido eliminado");
+
+    }
 
 }

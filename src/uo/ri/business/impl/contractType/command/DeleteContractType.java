@@ -9,23 +9,24 @@ import uo.ri.model.ContractType;
 
 public class DeleteContractType implements Command<Void> {
     private Long id;
-    private ContractTypeRepository repo = Factory.repository.forContractType();
+    private ContractTypeRepository repo = Factory.repository
+	    .forContractType();
 
     public DeleteContractType(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     @Override
     public Void execute() throws BusinessException {
-        ContractType c = repo.findById(this.id);
-        check(c);
-        repo.remove(c);
-        return null;
+	ContractType c = repo.findById(this.id);
+	check(c);
+	repo.remove(c);
+	return null;
     }
 
     private void check(ContractType c) throws BusinessException {
-        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
-        BusinessCheck.isTrue(c.getContracts().isEmpty(),
-                "No puede haber contratos del tipo.");
+	BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
+	BusinessCheck.isTrue(c.getContracts().isEmpty(),
+		"No puede haber contratos del tipo.");
     }
 }

@@ -10,24 +10,25 @@ import uo.ri.model.ContractType;
 
 public class UpdateContractType implements Command<Void> {
     private ContractTypeDto dto;
-    private ContractTypeRepository repo = Factory.repository.forContractType();
+    private ContractTypeRepository repo = Factory.repository
+	    .forContractType();
 
     public UpdateContractType(ContractTypeDto dto) {
-        this.dto = dto;
+	this.dto = dto;
     }
 
     @Override
     public Void execute() throws BusinessException {
-        ContractType c = repo.findById(this.dto.id);
-        check(c);
-        c.setCompensationDays(this.dto.compensationDays);
-        return null;
+	ContractType c = repo.findById(this.dto.id);
+	check(c);
+	c.setCompensationDays(this.dto.compensationDays);
+	return null;
     }
 
     private void check(ContractType c) throws BusinessException {
-        BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
-        BusinessCheck.isTrue(this.dto.compensationDays>0,
-                "El tipo de contrato tiene una compensacion por dias" +
-                        " menor que 0.");
+	BusinessCheck.isNotNull(c, "El tipo de contrato no existe.");
+	BusinessCheck.isTrue(this.dto.compensationDays > 0,
+		"El tipo de contrato tiene una compensacion por dias"
+			+ " menor que 0.");
     }
 }

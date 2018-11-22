@@ -11,15 +11,16 @@ import uo.ri.ui.util.Printer;
 
 public class ListActiveMechanicsAction implements Action {
 
-	@Override
-	public void execute() throws Exception {
-		MechanicCrudService as = Factory.service.forMechanicCrudService();
-		List<MechanicDto> mechanics = as.findActiveMechanics();
-		
-		Console.println("\nListado de mecánicos en activo\n");  
-		for(MechanicDto m : mechanics) {
-			Printer.printMechanic( m );
-		}
+    @Override
+    public void execute() throws Exception {
+	MechanicCrudService as = Factory.service
+		.forMechanicCrudService();
+	List<MechanicDto> mechanics = as.findActiveMechanics();
+
+	Console.println("\nListado de mecánicos en activo\n");
+	for (MechanicDto m : mechanics) {
+	    Printer.printMechanic(m);
 	}
+    }
 
 }

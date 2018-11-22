@@ -8,15 +8,15 @@ import uo.ri.ui.admin.contractcategory.action.UpdateContractCategoryAction;
 
 public class CategoriasContratoMenu extends BaseMenu {
 
-	public CategoriasContratoMenu() {
-		menuOptions = new Object[][] { 
-			{"Administrador > Gestión de categorias de contrato", null},
-			
-			{ "Añadir", 	AddContractCategoryAction.class }, 
-			{ "Modificar", 	UpdateContractCategoryAction.class }, 
-			{ "Eliminar", 	DeleteContractCategoryAction.class }, 
-			{ "Listar", 	ListContractCategoriesAction.class },
-		};
-	}
+    public CategoriasContratoMenu() {
+	menuOptions = new Object[][] {
+		{ "Administrador > Gestión de categorias de contrato",
+			null },
+
+		{ "Añadir", AddContractCategoryAction.class },
+		{ "Modificar", UpdateContractCategoryAction.class },
+		{ "Eliminar", DeleteContractCategoryAction.class },
+		{ "Listar", ListContractCategoriesAction.class }, };
+    }
 
 }

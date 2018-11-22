@@ -11,15 +11,16 @@ import uo.ri.ui.util.Printer;
 
 public class ListContractTypesAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		ContractTypeCrudService service = Factory.service.forContractTypeCrud();
-		List<ContractTypeDto> cts = service.findAllContractTypes();
-		
-		for(ContractTypeDto t: cts) {
-			Printer.printContractType( t );
-		}
+	ContractTypeCrudService service = Factory.service
+		.forContractTypeCrud();
+	List<ContractTypeDto> cts = service.findAllContractTypes();
+
+	for (ContractTypeDto t : cts) {
+	    Printer.printContractType(t);
 	}
+    }
 
 }

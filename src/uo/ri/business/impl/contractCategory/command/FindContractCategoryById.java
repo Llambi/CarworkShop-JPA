@@ -8,18 +8,19 @@ import uo.ri.business.repository.ContractCategoryRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.ContractCategory;
 
-public class FindContractCategoryById implements Command<ContractCategoryDto> {
+public class FindContractCategoryById
+	implements Command<ContractCategoryDto> {
     private Long id;
-    private ContractCategoryRepository repo =
-            Factory.repository.forContractCategory();
+    private ContractCategoryRepository repo = Factory.repository
+	    .forContractCategory();
 
     public FindContractCategoryById(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     @Override
     public ContractCategoryDto execute() throws BusinessException {
-        ContractCategory cc = repo.findById(this.id);
-        return cc == null ? null : DtoAssembler.toDto(cc);
+	ContractCategory cc = repo.findById(this.id);
+	return cc == null ? null : DtoAssembler.toDto(cc);
     }
 }

@@ -1,9 +1,9 @@
 package uo.ri.business.repository;
 
-import uo.ri.model.Payroll;
-
 import java.util.Date;
 import java.util.List;
+
+import uo.ri.model.Payroll;
 
 public interface PayrollRepository extends Repository<Payroll> {
     /**

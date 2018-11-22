@@ -11,17 +11,17 @@ import uo.ri.ui.util.Printer;
 
 public class ListMechanicPayrollsAction implements Action {
 
-	@Override
-	public void execute() throws Exception {
-		Long id = Console.readLong("Id del mecánico");
-		
-		PayrollService ps = Factory.service.forPayroll();
-		List<PayrollDto> payrolls = ps.findPayrollsByMechanicId( id );
-		
-		for(PayrollDto p: payrolls) {
-			Printer.printPayrollSummary( p );
-		}
-		Console.printf("%d nóminas %n", payrolls.size());
+    @Override
+    public void execute() throws Exception {
+	Long id = Console.readLong("Id del mecánico");
+
+	PayrollService ps = Factory.service.forPayroll();
+	List<PayrollDto> payrolls = ps.findPayrollsByMechanicId(id);
+
+	for (PayrollDto p : payrolls) {
+	    Printer.printPayrollSummary(p);
 	}
+	Console.printf("%d nóminas %n", payrolls.size());
+    }
 
 }

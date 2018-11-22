@@ -9,18 +9,18 @@ import uo.ri.ui.util.Printer;
 
 public class ViewPayrollDetailAction implements Action {
 
-	@Override
-	public void execute() throws Exception {
-		Long id = Console.readLong("Id de la nómina");
+    @Override
+    public void execute() throws Exception {
+	Long id = Console.readLong("Id de la nómina");
 
-		PayrollService ps = Factory.service.forPayroll();
-		PayrollDto payroll = ps.findPayrollById(id);
+	PayrollService ps = Factory.service.forPayroll();
+	PayrollDto payroll = ps.findPayrollById(id);
 
-		if (payroll != null) {
-			Printer.printPayrollDetail(payroll);
-		} else {
-			Console.println("No existe la nómina");
-		}
+	if (payroll != null) {
+	    Printer.printPayrollDetail(payroll);
+	} else {
+	    Console.println("No existe la nómina");
 	}
+    }
 
 }

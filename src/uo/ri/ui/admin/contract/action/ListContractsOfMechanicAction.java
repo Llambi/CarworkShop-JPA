@@ -12,16 +12,17 @@ import uo.ri.ui.util.Printer;
 
 public class ListContractsOfMechanicAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
-	
-		Long id = Console.readLong("Id de mecánico"); 
-		
-		ContractCrudService as = Factory.service.forContractCrud();
-		List<ContractDto> contracts = as.findContractsByMechanicId( id );
-		
-		for(ContractDto c: contracts) {
-			Printer.printContract( c );
-		}
+    @Override
+    public void execute() throws BusinessException {
+
+	Long id = Console.readLong("Id de mecánico");
+
+	ContractCrudService as = Factory.service.forContractCrud();
+	List<ContractDto> contracts = as
+		.findContractsByMechanicId(id);
+
+	for (ContractDto c : contracts) {
+	    Printer.printContract(c);
 	}
+    }
 }

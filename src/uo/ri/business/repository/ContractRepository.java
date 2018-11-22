@@ -1,8 +1,8 @@
 package uo.ri.business.repository;
 
-import uo.ri.model.Contract;
-
 import java.util.List;
+
+import uo.ri.model.Contract;
 
 public interface ContractRepository extends Repository<Contract> {
     List<Contract> getContractsforPayroll();
