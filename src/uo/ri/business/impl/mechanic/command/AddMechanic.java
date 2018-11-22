@@ -20,7 +20,8 @@ public class AddMechanic implements Command<Void> {
     }
 
     public Void execute() throws BusinessException {
-        BusinessCheck.isNull(repo.findByDni(this.dto.dni));
+        BusinessCheck.isNull(repo.findByDni(this.dto.dni),
+                "El mecanico ya existe.");
         Mecanico m = EntityAssembler.toEntity(this.dto);
         repo.add(m);
         return null;

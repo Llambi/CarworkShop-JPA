@@ -6,6 +6,7 @@ import uo.ri.business.impl.Command;
 import uo.ri.business.impl.util.DtoAssembler;
 import uo.ri.business.repository.ContractCategoryRepository;
 import uo.ri.conf.Factory;
+import uo.ri.model.ContractCategory;
 
 public class FindContractCategoryById implements Command<ContractCategoryDto> {
     private Long id;
@@ -18,6 +19,7 @@ public class FindContractCategoryById implements Command<ContractCategoryDto> {
 
     @Override
     public ContractCategoryDto execute() throws BusinessException {
-        return DtoAssembler.toDto(repo.findById(this.id));
+        ContractCategory cc = repo.findById(this.id);
+        return cc == null ? null : DtoAssembler.toDto(cc);
     }
 }

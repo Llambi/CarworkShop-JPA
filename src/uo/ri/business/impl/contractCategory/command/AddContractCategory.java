@@ -7,6 +7,7 @@ import uo.ri.business.impl.Command;
 import uo.ri.business.impl.util.EntityAssembler;
 import uo.ri.business.repository.ContractCategoryRepository;
 import uo.ri.conf.Factory;
+import uo.ri.model.Contract;
 import uo.ri.model.ContractCategory;
 
 public class AddContractCategory implements Command<Void> {
@@ -27,7 +28,7 @@ public class AddContractCategory implements Command<Void> {
     }
 
     private void check() throws BusinessException {
-        BusinessCheck.isNotNull(repo.findById(this.dto.id),
+        BusinessCheck.isNull(repo.findByName(this.dto.name),
                 "La categoria ya existe.");
         BusinessCheck.isTrue(this.dto.trieniumSalary>0D,
                 "Trienium salary menor que 0");
