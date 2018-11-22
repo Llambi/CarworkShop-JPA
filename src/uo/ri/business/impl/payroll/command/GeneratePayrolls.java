@@ -8,6 +8,8 @@ import uo.ri.business.repository.PayrollRepository;
 import uo.ri.conf.Factory;
 import uo.ri.model.Payroll;
 
+import java.util.Objects;
+
 import static java.lang.Math.toIntExact;
 
 public class GeneratePayrolls implements Command<Integer> {
@@ -16,13 +18,14 @@ public class GeneratePayrolls implements Command<Integer> {
 
     @Override
     public Integer execute() throws BusinessException {
-        return toIntExact(contractRepo.getContractsforPayroll().stream()
-                .map(contract -> {
-                    Payroll payroll = new Payroll(contract, Dates.today(),
-                            contract.calculateProductivityTime());
-                    payrollRepo.add(payroll);
-                    return payroll;
-                }).count());
+        return toIntExact(contractRepo.getContractsforPayroll().stream().map(contract -> {
+            if (Dates.isAfter(Dates.firstDayOfMonth(Dates.today()), contract.getStartDate())) {
+                Payroll payroll = new Payroll(contract, Dates.today(), contract.calculateProductivityTime());
+                payrollRepo.add(payroll);
+                return payroll;
+            }
+            return null;
+        }).filter(Objects::nonNull).count());
 
     }
 }

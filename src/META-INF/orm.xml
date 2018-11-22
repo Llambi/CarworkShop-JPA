@@ -390,7 +390,7 @@
     </named-query>
 
     <!--Contract queries-->
-    <named-query name="Contract.getActiveContracts">
+    <named-query name="Contract.getContractsforPayroll">
         <query>
             select c
             from Contract c
