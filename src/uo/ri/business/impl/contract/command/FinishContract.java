@@ -1,5 +1,6 @@
 package uo.ri.business.impl.contract.command;
 
+import alb.util.date.Dates;
 import uo.ri.business.exception.BusinessCheck;
 import uo.ri.business.exception.BusinessException;
 import uo.ri.business.impl.Command;
@@ -35,5 +36,8 @@ public class FinishContract implements Command<Void> {
                 "Debe haber un fecha de finalizacion.");
         BusinessCheck.isTrue(!c.isFinished(),
                 "El contrato no esta activo");
+        if(this.endDate!=null )
+            BusinessCheck.isTrue(Dates.isAfter(this.endDate,c.getStartDate()),
+                    "La fecha de fin de contrato debe ser posterior a la de inicio.");
     }
 }

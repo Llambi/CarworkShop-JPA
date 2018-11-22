@@ -47,7 +47,7 @@ public class Payroll {
                 .getContractCategory().getProductivityPlus();
 
         this.trieniums = (monthsWorked() / 3) * this.contract
-                .getContractCategory().getTrienniumSalary();
+                .getContractCategory().getTrieniumSalary();
 
         this.irpf = contract.getIrpfPercent() * getGrossTotal();
 

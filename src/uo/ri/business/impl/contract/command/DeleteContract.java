@@ -26,6 +26,8 @@ public class DeleteContract implements Command<Void> {
 
     private void check(Contract c) throws BusinessException {
         BusinessCheck.isNotNull(c, "El contrato no existe.");
+        BusinessCheck.isFalse(c.isFinished(),
+                "El contrato debe estar activo");
         BusinessCheck.isTrue(!c.getMechanic()
                         .isContributionsOnDate(c.getStartDate(), c.getEndDate()),
                 "El mecanico ha tenido intervenciones durante el contrato");

@@ -17,8 +17,8 @@ public class UpdateContractAction implements Action {
 		ContractCrudService as = Factory.service.forContractCrud();
 		
 		// Pedir datos
-		Long id = Console.readLong("Id del contarto");
-		ContractDto c = as.findContractById( id );
+		ContractDto c = new ContractDto();
+		c.id = Console.readLong("Id del contarto");
 
 		c.endDate = askOptionalForDate("Fecha de fin");
 		c.yearBaseSalary = Console.readLong("Salario base anual");

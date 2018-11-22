@@ -135,7 +135,7 @@ public class DtoAssembler {
         ContractCategoryDto dto = new ContractCategoryDto();
         dto.id = contractCategory.getId();
         dto.name = contractCategory.getName();
-        dto.trieniumSalary = contractCategory.getTrienniumSalary();
+        dto.trieniumSalary = contractCategory.getTrieniumSalary();
         dto.productivityPlus = contractCategory.getProductivityPlus();
         return dto;
     }

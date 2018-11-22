@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class ContractCategory {
     private String name;
-    private double trienniumSalary;
+    private double trieniumSalary;
     private double productivityPlus;
 
     //Atributos accidentales
@@ -20,10 +20,10 @@ public class ContractCategory {
         this.name = name;
     }
 
-    public ContractCategory(String name, double trienniumSalary,
+    public ContractCategory(String name, double trieniumSalary,
                             double productivityPlus) {
         this(name);
-        this.setTrienniumSalary(trienniumSalary);
+        this.setTrieniumSalary(trieniumSalary);
         this.setProductivityPlus(productivityPlus);
     }
 
@@ -39,12 +39,12 @@ public class ContractCategory {
         return name;
     }
 
-    public double getTrienniumSalary() {
-        return trienniumSalary;
+    public double getTrieniumSalary() {
+        return trieniumSalary;
     }
 
-    public void setTrienniumSalary(double trienniumSalary) {
-        this.trienniumSalary = trienniumSalary;
+    public void setTrieniumSalary(double trieniumSalary) {
+        this.trieniumSalary = trieniumSalary;
     }
 
     public double getProductivityPlus() {
@@ -63,7 +63,7 @@ public class ContractCategory {
     public String toString() {
         return "ContractCategory{" +
                 "name='" + name + '\'' +
-                ", trienniumSalary=" + trienniumSalary +
+                ", trieniumSalary=" + trieniumSalary +
                 ", productivityPlus=" + productivityPlus +
                 '}';
     }

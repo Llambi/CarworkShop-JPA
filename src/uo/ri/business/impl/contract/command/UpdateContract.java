@@ -37,5 +37,8 @@ public class UpdateContract implements Command<Void> {
                 Dates.isBefore(this.dto.endDate, c.getStartDate()),
                         "La fecha de fin de contrato no es null o " +
                                 "no es despues de la fecha de comienzo.");
+        if(this.dto.endDate!=null )
+            BusinessCheck.isTrue(Dates.isAfter(this.dto.endDate,c.getStartDate()),
+                    "La fecha de fin de contrato debe ser posterior a la de inicio.");
     }
 }

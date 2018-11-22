@@ -28,8 +28,7 @@ public class Contract {
 
     public Contract(Mecanico mecanico, Date startDate, double baseSalary) {
         if (baseSalary <= 0) {
-            throw new IllegalArgumentException
-                    ("el salario base debe ser positivo.");
+            throw new IllegalArgumentException("el salario base debe ser positivo.");
         }
         this.setStartDate(startDate);
         this.setBaseSalaryPerYear(baseSalary);
@@ -38,14 +37,12 @@ public class Contract {
         Association.Contratar.link(mecanico, this);
     }
 
-    public Contract(Mecanico mecanico, Date startDate,
-                    double baseSalary, ContractType contractType) {
+    public Contract(Mecanico mecanico, Date startDate, double baseSalary, ContractType contractType) {
         this(mecanico, startDate, baseSalary);
         Association.Typefy.link(this, contractType);
     }
 
-    public Contract(Mecanico mechanic, Date startDate,
-                    Date endDate, double baseSalary) {
+    public Contract(Mecanico mechanic, Date startDate, Date endDate, double baseSalary) {
         this(mechanic, startDate, baseSalary);
         this.setEndDate(endDate);
     }
@@ -87,12 +84,11 @@ public class Contract {
     }
 
     public Date getEndDate() {
-        return new Date(endDate.getTime());
+        return endDate == null ? null : new Date(endDate.getTime());
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate == null ?
-                null : new Date(Dates.lastDayOfMonth(endDate).getTime());
+        this.endDate = endDate == null ? null : new Date(Dates.lastDayOfMonth(endDate).getTime());
     }
 
     public double getBaseSalaryPerYear() {
@@ -129,16 +125,7 @@ public class Contract {
 
     @Override
     public String toString() {
-        return "Contract{" +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", baseSalaryPerYear=" + baseSalaryPerYear +
-                ", compensation=" + compensation +
-                ", status=" + status +
-                ", mecanico=" + mecanico +
-                ", contractType=" + contractType +
-                ", contractCategory=" + contractCategory +
-                '}';
+        return "Contract{" + "startDate=" + startDate + ", endDate=" + endDate + ", baseSalaryPerYear=" + baseSalaryPerYear + ", compensation=" + compensation + ", status=" + status + ", mecanico=" + mecanico + ", contractType=" + contractType + ", contractCategory=" + contractCategory + '}';
     }
 
     @Override
@@ -146,8 +133,7 @@ public class Contract {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contract contract = (Contract) o;
-        return Objects.equals(startDate, contract.startDate) &&
-                Objects.equals(mecanico, contract.mecanico);
+        return Objects.equals(startDate, contract.startDate) && Objects.equals(mecanico, contract.mecanico);
     }
 
     @Override
@@ -167,21 +153,17 @@ public class Contract {
      */
     public void markAsFinished(Date endDate) {
         if (Dates.isBefore(endDate, this.startDate)) {
-            throw new IllegalArgumentException
-                    ("La fecha de finalizacion del contrato debe ser " +
-                            "posterior a las del comienzo de este.");
+            throw new IllegalArgumentException("La fecha de finalizacion del contrato debe ser " + "posterior a las del comienzo de este.");
         }
         if (this.status.equals(ContractStatus.FINISHED)) {
-            throw new IllegalStateException
-                    ("Un contrato ya finalizado no puede volver a finalizarse");
+            throw new IllegalStateException("Un contrato ya finalizado no puede volver a finalizarse");
         }
         this.status = ContractStatus.FINISHED;
 
         this.endDate = Dates.lastDayOfMonth(endDate);
 
         if (monthsWorked() >= 12) {
-            this.compensation = this.baseSalaryPerYear / 365
-                    * getContractType().getCompensationDays();
+            this.compensation = this.baseSalaryPerYear / 365 * getContractType().getCompensationDays();
         }
 
     }
@@ -210,8 +192,7 @@ public class Contract {
     public Payroll getLastPayroll() {
         Payroll selectedPayroll = null;
         for (Payroll payroll : payrolls)
-            if (selectedPayroll == null || Dates.isAfter(payroll.getDate(),
-                    selectedPayroll.getDate()))
+            if (selectedPayroll == null || Dates.isAfter(payroll.getDate(), selectedPayroll.getDate()))
                 selectedPayroll = payroll;
         return selectedPayroll;
     }
@@ -234,12 +215,6 @@ public class Contract {
     }
 
     public double calculateProductivityTime() {
-        return this.getMechanic().getIntervenciones().stream()
-                .filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(),
-                        Dates.today())
-                        && inter.getAveria().getStatus()
-                        .equals(AveriaStatus.ABIERTA))
-                .mapToDouble(Intervencion::getImporte)
-                .sum();
+        return this.getMechanic().getIntervenciones().stream().filter(inter -> Dates.isSameMonth(inter.getAveria().getFecha(), Dates.today()) && inter.getAveria().getStatus().equals(AveriaStatus.ABIERTA)).mapToDouble(Intervencion::getImporte).sum();
     }
 }

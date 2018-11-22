@@ -20,7 +20,7 @@ public class UdateContractCategory implements Command<Void> {
     public Void execute() throws BusinessException {
         ContractCategory c = repo.findById(this.dto.id);
         check(c);
-        c.setTrienniumSalary(this.dto.trieniumSalary);
+        c.setTrieniumSalary(this.dto.trieniumSalary);
         c.setProductivityPlus(this.dto.productivityPlus);
         return null;
     }
