@@ -3,6 +3,10 @@ package uo.ri.ui.foreman;
 import alb.util.console.Printer;
 import alb.util.menu.BaseMenu;
 import alb.util.menu.NotYetImplementedAction;
+import uo.ri.business.impl.BusinessFactory;
+import uo.ri.conf.Factory;
+import uo.ri.persistence.jpa.JpaRepositoryFactory;
+import uo.ri.persistence.jpa.executor.JpaExecutorFactory;
 import uo.ri.persistence.jpa.util.Jpa;
 import uo.ri.ui.foreman.cliente.ClientesMenu;
 import uo.ri.ui.foreman.recepcion.RecepcionMenu;
@@ -30,6 +34,10 @@ public class ForemanMain {
 	}
 
 	private ForemanMain config() {
+		Factory.service = new BusinessFactory();
+		Factory.repository = new JpaRepositoryFactory();
+		Factory.executor = new JpaExecutorFactory();
+
 		return this;
 	}
 
