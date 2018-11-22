@@ -9,28 +9,29 @@ import uo.ri.conf.Factory;
 
 public class UpdateMechanicAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
-		
-		// Pedir datos
-		Long id = Console.readLong("Id del mecánico"); 
-		String nombre = Console.readString("Nombre"); 
-		String apellidos = Console.readString("Apellidos");
-		
-		// Procesar
-		MechanicCrudService as = Factory.service.forMechanicCrudService();
+    @Override
+    public void execute() throws BusinessException {
 
-		MechanicDto m = as.findMechanicById(id);
-		if ( m == null) {
-			throw new BusinessException("No existe el mecánico");
-		}
-		m.name = nombre;
-		m.surname = apellidos;  // el dni es la identidad, no se puede cambiar
-		
-		as.updateMechanic( m );
-		
-		// Mostrar resultado
-		Console.println("Mecánico actualizado");
+	// Pedir datos
+	Long id = Console.readLong("Id del mecánico");
+	String nombre = Console.readString("Nombre");
+	String apellidos = Console.readString("Apellidos");
+
+	// Procesar
+	MechanicCrudService as = Factory.service
+		.forMechanicCrudService();
+
+	MechanicDto m = as.findMechanicById(id);
+	if (m == null) {
+	    throw new BusinessException("No existe el mecánico");
 	}
+	m.name = nombre;
+	m.surname = apellidos; // el dni es la identidad, no se puede cambiar
+
+	as.updateMechanic(m);
+
+	// Mostrar resultado
+	Console.println("Mecánico actualizado");
+    }
 
 }

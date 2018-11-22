@@ -10,7 +10,7 @@ public class Repuesto {
     private String descripcion;
     private double precio;
 
-    //Atributos accidentales
+    // Atributos accidentales
     private Long id;
     private Set<Sustitucion> sustituciones = new HashSet<>();
 
@@ -18,54 +18,67 @@ public class Repuesto {
     }
 
     public Repuesto(String codigo) {
-        this.codigo = codigo;
+	this.codigo = codigo;
     }
 
-    public Repuesto(String codigo, String descripcion, double precio) {
-        this(codigo);
-        this.descripcion = descripcion;
-        this.precio = precio;
+    public Repuesto(String codigo, String descripcion,
+	    double precio) {
+	this(codigo);
+	this.setDescripcion(descripcion);
+	this.setPrecio(precio);
+    }
+
+    public Long getId() {
+	return id;
     }
 
     protected Set<Sustitucion> _getSustituciones() {
-        return sustituciones;
+	return sustituciones;
     }
 
     public Set<Sustitucion> getSustituciones() {
-        return new HashSet<>(sustituciones);
+	return new HashSet<>(sustituciones);
     }
 
     public String getCodigo() {
-        return codigo;
+	return codigo;
     }
 
     public String getDescripcion() {
-        return descripcion;
+	return descripcion;
     }
 
     public double getPrecio() {
-        return precio;
+	return precio;
+    }
+
+    public void setDescripcion(String descripcion) {
+	this.descripcion = descripcion;
+    }
+
+    public void setPrecio(double precio) {
+	this.precio = precio;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Repuesto repuesto = (Repuesto) o;
-        return Objects.equals(codigo, repuesto.codigo);
+	if (this == o)
+	    return true;
+	if (o == null || getClass() != o.getClass())
+	    return false;
+	Repuesto repuesto = (Repuesto) o;
+	return Objects.equals(codigo, repuesto.codigo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codigo);
+	return Objects.hash(codigo);
     }
 
     @Override
     public String toString() {
-        return "Repuesto{" +
-                "codigo='" + codigo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
-                '}';
+	return "Repuesto{" + "codigo='" + codigo + '\''
+		+ ", descripcion='" + descripcion + '\'' + ", precio="
+		+ precio + '}';
     }
 }

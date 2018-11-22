@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings
-        xmlns="http://java.sun.com/xml/ns/persistence/orm"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
         version="2.0">
 
@@ -65,6 +65,62 @@
         </attributes>
     </entity>
 
+    <!--CONTRATO-->
+    <entity class="Contract">
+        <table name="TContratos">
+            <unique-constraint>
+                <column-name>STARTDATE</column-name>
+                <column-name>MECANICO_ID</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="startDate">
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <basic name="endDate">
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <basic name="status">
+                <enumerated>STRING</enumerated>
+            </basic>
+            <many-to-one name="mecanico"/>
+            <many-to-one name="contractType"/>
+            <many-to-one name="contractCategory"/>
+            <one-to-many name="payrolls" mapped-by="contract"/>
+        </attributes>
+    </entity>
+
+    <!--CONTRACT_CATEGORY-->
+    <entity class="ContractCategory">
+        <table name="TCategoriasContrato"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="name">
+                <column unique="true"/>
+            </basic>
+            <one-to-many name="contracts" mapped-by="contractCategory"/>
+        </attributes>
+    </entity>
+
+    <!--CONTRACT_TYPE-->
+    <entity class="ContractType">
+        <table name="TTiposContrato"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="name">
+                <column unique="true"/>
+            </basic>
+            <one-to-many name="contracts" mapped-by="contractType"/>
+        </attributes>
+    </entity>
+
     <!--FACTURA-->
     <entity class="Factura">
         <table name="TFacturas"/>
@@ -116,6 +172,7 @@
             </basic>
             <one-to-many name="averias" mapped-by="mecanico"/>
             <one-to-many name="intervenciones" mapped-by="mecanico"/>
+            <one-to-many name="contracts" mapped-by="mecanico"/>
         </attributes>
     </entity>
 
@@ -135,16 +192,12 @@
     <!--METALICO-->
     <entity class="Metalico">
         <table name="TMetalicos"/>
-        <attributes>
-            <id name="id"/>
-        </attributes>
     </entity>
 
     <!--TAJETA_CREDITO-->
     <entity class="TarjetaCredito">
         <table name="TTarjetasCredito"/>
         <attributes>
-            <id name="id"/>
             <basic name="numero">
                 <column unique="true"/>
             </basic>
@@ -155,10 +208,28 @@
     <entity class="Bono">
         <table name="TBonos"/>
         <attributes>
-            <id name="id"/>
             <basic name="codigo">
                 <column unique="true"/>
             </basic>
+        </attributes>
+    </entity>
+
+    <!--NOMINA-->
+    <entity class="Payroll">
+        <table name="TNominas">
+            <unique-constraint>
+                <column-name>FECHA</column-name>
+                <column-name>CONTRATO_ID</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="date">
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <many-to-one name="contract"/>
         </attributes>
     </entity>
 
@@ -183,14 +254,18 @@
             <id name="id">
                 <generated-value strategy="IDENTITY"/>
             </id>
-            <many-to-one name="repuesto"/>
-            <many-to-one name="intervencion"/>
+            <many-to-one name="repuesto">
+                <join-column name="repuesto_id"/>
+            </many-to-one>
+            <many-to-one name="intervencion">
+                <join-column name="intervencion_id"/>
+            </many-to-one>
         </attributes>
     </entity>
 
     <!--TIPO_VEHICULO-->
     <entity class="TipoVehiculo">
-        <table name="TTipoVehiculo"/>
+        <table name="TTiposVehiculo"/>
         <attributes>
             <id name="id">
                 <generated-value strategy="IDENTITY"/>
@@ -227,12 +302,9 @@
     <embeddable class="uo.ri.model.types.Address"/>
 
     <!--QUERIES-->
-
-    <!-- Averia quieries -->
     <named-query name="Averia.findByIds">
         <query>select a from Averia a where a.id in ?1</query>
     </named-query>
-
     <named-query name="Averia.findNoFacturadasByDni">
         <query>
             select a
@@ -255,9 +327,9 @@
     </named-query>
     <named-query name="MedioPago.findByClientId">
         <query>
-            select m
+            select mp
             from MedioPago mp
-            where mp.cliente_id = ?1
+            where mp.cliente.id = ?1
         </query>
     </named-query>
 
@@ -277,29 +349,81 @@
         </query>
     </named-query>
 
+    <named-query name="Mecanico.findActive">
+        <query>
+            select c.mecanico
+            from Contract c
+            where c.status = uo.ri.model.types.ContractStatus.ACTIVE
+        </query>
+    </named-query>
+
     <!-- Factura queries -->
     <named-query name="Factura.findByNumber">
-        <query>select f from Factura f where f.numero = ?1</query>
+        <query>
+            select f
+            from Factura f
+            where f.numero = ?1
+        </query>
     </named-query>
 
     <named-query name="Factura.getNextInvoiceNumber">
-        <query>select max(f.numero) + 1 from Factura f</query>
+        <query>
+            select max(f.numero) + 1
+            from Factura f
+        </query>
     </named-query>
 
-    <!--
-        Use this format if your query has
-        numeric comparisons as the one in this example
+    <!--Payrolls queries-->
+    <named-query name="Nomina.getLastDatePayroll">
+        <query>
+            select max(p.date)
+            from Payroll p
+        </query>
+    </named-query>
 
-        <named-query name="findItemsOnSaleByCategoryId">
-            <query>
-                <![CDATA[
-                select i
-                    from Item i join i.categories c
-                    where c.id = ?2
-                        and i.startDate <= ?1
-                        and i.endDate >= ?1
-                ]]>
-            </query>
-        </named-query>
-     -->
+    <named-query name="Nomina.getNominaByMecanicoId">
+        <query>
+            select p
+            from Payroll p
+            where p.contract.mecanico.id = ?1
+        </query>
+    </named-query>
+
+    <!--Contract queries-->
+    <named-query name="Contract.getContractsforPayroll">
+        <query>
+            select c
+            from Contract c
+            where c.status = uo.ri.model.types.ContractStatus.ACTIVE
+            or (c.status = uo.ri.model.types.ContractStatus.FINISHED and
+            c.endDate=?1)
+        </query>
+    </named-query>
+
+    <named-query name="Contract.getContractsByMechanicId">
+        <query>
+            select c
+            from Contract c
+            where c.mecanico.id = ?1
+        </query>
+    </named-query>
+
+    <!--ContractType queries-->
+    <named-query name="ContractType.findByName">
+        <query>
+            select ct
+            from ContractType ct
+            where ct.name = ?1
+        </query>
+    </named-query>
+
+    <!--ContractCategory queries-->
+    <named-query name="ContractCategory.findByName">
+        <query>
+            select cc
+            from ContractCategory cc
+            where cc.name = ?1
+        </query>
+    </named-query>
+
 </entity-mappings>

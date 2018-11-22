@@ -13,24 +13,25 @@ import uo.ri.ui.util.Printer;
 
 public class FacturarReparacionesAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
-		List<Long> idsAveria = new ArrayList<Long>();
-		
-		// pedir las averias a incluir en la factura
-		do {
-			Long id = Console.readLong("ID de averia");
-			idsAveria.add(id);
-		} while ( masAverias() );
-		
-		InvoiceService cs = Factory.service.forInvoice();
-		InvoiceDto factura = cs.createInvoiceFor(idsAveria);
-		
-		Printer.printInvoice( factura );
-	}
+    @Override
+    public void execute() throws BusinessException {
+	List<Long> idsAveria = new ArrayList<Long>();
 
-	private boolean masAverias() {
-		return Console.readString("¿Añadir más averias? (s/n) ").equalsIgnoreCase("s");
-	}
+	// pedir las averias a incluir en la factura
+	do {
+	    Long id = Console.readLong("ID de averia");
+	    idsAveria.add(id);
+	} while (masAverias());
+
+	InvoiceService cs = Factory.service.forInvoice();
+	InvoiceDto factura = cs.createInvoiceFor(idsAveria);
+
+	Printer.printInvoice(factura);
+    }
+
+    private boolean masAverias() {
+	return Console.readString("¿Añadir más averias? (s/n) ")
+		.equalsIgnoreCase("s");
+    }
 
 }

@@ -2,17 +2,24 @@ package uo.ri.business;
 
 public interface ServiceFactory {
 
-	// Admin services
-	MechanicCrudService forMechanicCrudService();
+    // Admin services
+    MechanicCrudService forMechanicCrudService();
 
-	// Cash use cases
-	InvoiceService forInvoice();
-	
-	// Foreman use cases
-	VehicleReceptionService forVehicleReception();
+    ContractCrudService forContractCrud();
 
+    ContractTypeCrudService forContractTypeCrud();
 
-	// Mechanic services
-	CloseBreakdownService forClosingBreakdown();
+    ContractCategoryCrudService forContractCategoryCrud();
+
+    PayrollService forPayroll();
+
+    // Cash use cases
+    InvoiceService forInvoice();
+
+    // Foreman use cases
+    VehicleReceptionService forVehicleReception();
+
+    // Mechanic services
+    CloseBreakdownService forClosingBreakdown();
 
 }

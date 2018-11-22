@@ -4,46 +4,45 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public class BaseRepository<T> {
-	
-	public void add(T t) {
-		Jpa.getManager().persist( t );
-	}
 
-	public void remove(T t) {
-		Jpa.getManager().remove( t );
-	}
+    /**
+     * As find() and the query "select x from X x" needs the type of the entity here
+     * there is a reflective way of getting it
+     */
+    private Class<T> type;
 
-	public T findById(Long id) {
-		return Jpa.getManager().find(type, id);
-	}
+    public BaseRepository() {
+	this.type = hackTheTypeOfGenericParameter();
+    }
 
-	public List<T> findAll() {
-		String entity = type.getName();
-		String query = "select o from " + entity + " o";
-		
-		return Jpa.getManager()
-				.createQuery(query, type)
-				.getResultList();
-	}
+    public void add(T t) {
+	Jpa.getManager().persist(t);
+    }
 
-	/**
-	 * As find() and the query "select x from X x" needs the type of the entity
-	 * here there is a reflective way of getting it
-	 */
-	private Class<T> type;
+    public void remove(T t) {
+	Jpa.getManager().remove(t);
+    }
 
-	public BaseRepository() {
-		this.type = hackTheTypeOfGenericParameter();
-	 }
+    public T findById(Long id) {
+	return Jpa.getManager().find(type, id);
+    }
 
-	/**
-	 * This is a hack to recover the runtime reflective type of <T>
-	 */
-	@SuppressWarnings("unchecked")
-	private Class<T> hackTheTypeOfGenericParameter() {
-		ParameterizedType superType = 
-			(ParameterizedType)	getClass().getGenericSuperclass();
-	    return (Class<T>) superType.getActualTypeArguments()[0];
-	}
-	
+    public List<T> findAll() {
+	String entity = type.getName();
+	String query = "select o from " + entity + " o";
+
+	return Jpa.getManager().createQuery(query, type)
+		.getResultList();
+    }
+
+    /**
+     * This is a hack to recover the runtime reflective type of <T>
+     */
+    @SuppressWarnings("unchecked")
+    private Class<T> hackTheTypeOfGenericParameter() {
+	ParameterizedType superType = (ParameterizedType) getClass()
+		.getGenericSuperclass();
+	return (Class<T>) superType.getActualTypeArguments()[0];
+    }
+
 }

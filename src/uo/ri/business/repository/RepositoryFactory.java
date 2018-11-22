@@ -2,12 +2,28 @@ package uo.ri.business.repository;
 
 public interface RepositoryFactory {
 
-	MecanicoRepository forMechanic();
-	AveriaRepository forAveria();
-	MedioPagoRepository forMedioPago();
-	FacturaRepository forFactura();
-	ClienteRepository forCliente();
-	RepuestoRepository forRepuesto();
-	IntervencionRepository forIntervencion();
+    MecanicoRepository forMechanic();
 
+    AveriaRepository forAveria();
+
+    MedioPagoRepository forMedioPago();
+
+    FacturaRepository forFactura();
+
+    ClienteRepository forCliente();
+
+    RepuestoRepository forRepuesto();
+
+    IntervencionRepository forIntervencion();
+
+    // Repositorios de la ampliacion.
+    ContractCategoryRepository forContractCategory();
+
+    ContractTypeRepository forContractType();
+
+    ContractRepository forContract();
+
+    PayrollRepository forPayroll();
+
+    VehiculoReceptionRepository forVehiculoReception();
 }
